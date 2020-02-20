@@ -17,32 +17,33 @@ namespace Demo
         {
             InitializeComponent();
             Variables.InitCasedata();
-        }
 
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+            tbExportfolder.Text = Variables.tmpExportDir.ToString();
+            tbtempWorkDir.Text = Variables.tmpWorkDir.ToString();
+            Refresh();
         }
 
 
         public void btnCancel_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Settings closed without saving on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\n");
+            Form1._Form1.txtConsole.AppendText("Settings closed without saving on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + Environment.NewLine);
             this.Close();
             Refresh();
         }
-        
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Settings saved on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\n");
+            Properties.Settings.Default.tmpExportDir = tbExportfolder.Text;
+            Properties.Settings.Default.tmpWorkDir = tbtempWorkDir.Text;
+            Properties.Settings.Default.Save();
+            Variables.tmpExportDir = tbExportfolder.Text;
+            Variables.tmpWorkDir = tbtempWorkDir.Text;
             this.Close();
             Refresh();
-        }
 
-        private void settings_Load(object sender, EventArgs e)
-        {
-
+            Form1._Form1.txtConsole.AppendText("Settings saved on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + Environment.NewLine);
+            Form1._Form1.txtConsole.AppendText("Temporary work folder changed to : " + Properties.Settings.Default.tmpWorkDir.ToString() + Environment.NewLine);
+            Form1._Form1.txtConsole.AppendText("Temporary export folder changed to : " + Properties.Settings.Default.tmpExportDir.ToString() + Environment.NewLine);
         }
     }
 }

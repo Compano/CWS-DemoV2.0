@@ -61,7 +61,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to testcase 1.
+        ///   Looks up a localized string similar to Open basketURL voor het selecteren van artikelen en het ophalen van de XML resultaten.
         /// </summary>
         internal static string Case_01 {
             get {
@@ -70,7 +70,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to testcase 2.
+        ///   Looks up a localized string similar to Voorbeeld van het downloaden van diverse gereedstaande items.
         /// </summary>
         internal static string Case_02 {
             get {
@@ -79,7 +79,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tedtcase 3.
+        ///   Looks up a localized string similar to Ophalen van de beschikbare artikel downloads.
         /// </summary>
         internal static string Case_03 {
             get {
@@ -88,7 +88,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to testcase 4.
+        ///   Looks up a localized string similar to Aanmaken / toevoegen calculatie onderdelen / regels.
         /// </summary>
         internal static string Case_04 {
             get {
@@ -97,22 +97,11 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to In en uitloggen webservice.
         /// </summary>
-        internal static System.Drawing.Bitmap logoCompano {
+        internal static string Case_05 {
             get {
-                object obj = ResourceManager.GetObject("logoCompano", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap start_button_icon_png_27 {
-            get {
-                object obj = ResourceManager.GetObject("start-button-icon-png-27", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("Case 05", resourceCulture);
             }
         }
     }

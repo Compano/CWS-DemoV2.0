@@ -12,13 +12,11 @@ namespace Demo
         public static void SetApplication(string app)
         {
             application = app;
-
             _Form1.update(application);
         }
 
         static void ShowResult(string text)
         {
-
             _Form1.txtConsole.AppendText(Environment.NewLine + DateTime.Now.ToShortTimeString().PadLeft(5) + " => " + text + Environment.NewLine);
         }
 
@@ -39,7 +37,6 @@ namespace Demo
             ShowResult(testDescription.PadRight(60, '.') + (result.Length == 0 && testResult ? "Ok" : result.Length == 0 ? "Fail" : result));
         }
 
-        [Obsolete]
         public static void ShowResult(string result, string testDescription, string xml)
         {
             string warning = "";

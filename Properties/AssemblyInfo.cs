@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Compano BV")]
 [assembly: AssemblyProduct("TestWS")]
-[assembly: AssemblyCopyright("Copyright © Compano BV 2009")]
+[assembly: AssemblyCopyright("Copyright © Compano BV 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -37,6 +37,9 @@ namespace Demo
             AddToCombo(caseArray, comboBox1);           
             comboBox1.ValueMember = "Key";
             comboBox1.DisplayMember = "Key";
+
+            txtConsole.AppendText("Temporary work folder is: " + Properties.Settings.Default.tmpWorkDir.ToString() + Environment.NewLine);
+            txtConsole.AppendText("Temporary export folder is: " + Properties.Settings.Default.tmpExportDir.ToString() + Environment.NewLine);
             txtConsole.AppendText("Starting application on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + Environment.NewLine);
         }
 
@@ -46,7 +49,6 @@ namespace Demo
         {
             txtConsole.Text = message;
         }
-
 
         public void btnStart_Click(object sender, EventArgs e)
         {
@@ -64,14 +66,14 @@ namespace Demo
                 if (comboBox1.Text == "Case 03") { Cases.Case03.Execute(); }
                 if (comboBox1.Text == "Case 04") { Cases.Case04.Execute(); }
                 if (comboBox1.Text == "Case 05") { Cases.Case05.Execute(); }
-                if (comboBox1.Text == "Case 06") { Cases.Case06.Execute(); }
-                if (comboBox1.Text == "Case 07") { Cases.Case07.Execute(); }
-                if (comboBox1.Text == "Case 08") { Cases.Case08.Execute(); }
-                if (comboBox1.Text == "Case 09") { Cases.Case09.Execute(); }
-                if (comboBox1.Text == "Case 10") { Cases.Case10.Execute(); }
-                if (comboBox1.Text == "Case 11") { Cases.Case11.Execute(); }
-                if (comboBox1.Text == "Case 12") { Cases.Case12.Execute(); }
-                if (comboBox1.Text == "Case 13") { Cases.Case13.Execute(); }
+                //if (comboBox1.Text == "Case 06") { Cases.Case06.Execute(); }
+                //if (comboBox1.Text == "Case 07") { Cases.Case07.Execute(); }
+                //if (comboBox1.Text == "Case 08") { Cases.Case08.Execute(); }
+                //if (comboBox1.Text == "Case 09") { Cases.Case09.Execute(); }
+                //if (comboBox1.Text == "Case 10") { Cases.Case10.Execute(); }
+                //if (comboBox1.Text == "Case 11") { Cases.Case11.Execute(); }
+                //if (comboBox1.Text == "Case 12") { Cases.Case12.Execute(); }
+                //if (comboBox1.Text == "Case 13") { Cases.Case13.Execute(); }
                 //if (comboBox1.Text == "Case 14") { Cases.Case14.Execute(); }
                 //if (comboBox1.Text == "Case 15") { Cases.Case15.Execute(); }
                 //if (comboBox1.Text == "Case 16") { Cases.Case16.Execute(); }
@@ -142,12 +144,6 @@ namespace Demo
             }
         }
 
-        public string updateConsoleText
-        {
-            get { return txtConsole.Text; }
-            set { txtConsole.Text = value; }
-        }
-
         private void tbUsername_TextChanged(object sender, EventArgs e)
         {
             Variables.username = tbUsername.Text;
@@ -163,9 +159,6 @@ namespace Demo
             Variables.companyname = tbCompanyName.Text;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-                    }
     }
 
 }

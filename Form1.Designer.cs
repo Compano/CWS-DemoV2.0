@@ -249,7 +249,6 @@ namespace Demo
             // 
             // btnSettings
             // 
-            this.btnSettings.Enabled = false;
             this.btnSettings.Location = new System.Drawing.Point(1125, 651);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);

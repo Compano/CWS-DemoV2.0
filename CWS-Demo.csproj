@@ -117,19 +117,10 @@
     <Compile Include="Cases\Case03.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cases\Case04.cs" />
+    <Compile Include="Cases\Case04.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Cases\Case05.cs" />
-    <Compile Include="Cases\Case06.cs" />
-    <Compile Include="Cases\Case07.cs" />
-    <Compile Include="Cases\Case09.cs" />
-    <Compile Include="Cases\Case08.cs" />
-    <Compile Include="Cases\Case11.cs" />
-    <Compile Include="Cases\Case10.cs" />
-    <Compile Include="Cases\Case12.cs" />
-    <Compile Include="Cases\Case13.cs" />
-    <Compile Include="Cases\Case14.cs" />
-    <Compile Include="Cases\Case15.cs" />
-    <Compile Include="Cases\Case16.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -143,6 +134,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service References\ClientApplication\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -315,6 +311,7 @@
     <Compile Include="settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings1.cs" />
     <Compile Include="TestCase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +323,10 @@
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Service References\ClientApplication\application1.wsdl" />
     <None Include="Service References\ClientApplication\Demo.ClientApplication.Facet.datasource">
@@ -1168,12 +1169,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\cases_new.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Resources\start-button-icon-png-27.jpg" />
     <None Include="Resources\Logo Compano-315.jpg" />
     <None Include="Service References\tstRensaMessageService\Reference.svcmap">

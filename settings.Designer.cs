@@ -105,9 +105,7 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Export folder";
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+         
             // 
             // settings
             // 
@@ -119,7 +117,6 @@
             this.Controls.Add(this.btnSave);
             this.Name = "settings";
             this.Text = "CWS settings";
-            this.Load += new System.EventHandler(this.settings_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);

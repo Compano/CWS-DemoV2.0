@@ -21,17 +21,8 @@ namespace Demo
 
         public static void InitCasedata()
         {
-            #pragma warning disable CS0618 // Type or member is obsolete
-            Variables.tmpWorkDir = ConfigurationSettings.AppSettings["tempWorkDir"].ToString();
-            #pragma warning restore CS0618 // Type or member is obsolete
-
-            #pragma warning disable CS0618 // Type or member is obsolete
-            Variables.tmpExportDir = ConfigurationSettings.AppSettings["tempExportDir"].ToString();
-            #pragma warning restore CS0618 // Type or member is obsolete
-
-
-
-
+            Variables.tmpWorkDir = Properties.Settings.Default.tmpWorkDir.ToString();
+            Variables.tmpExportDir = Properties.Settings.Default.tmpExportDir.ToString(); ;
         }
 
    
