@@ -43,8 +43,8 @@ namespace Demo
 
             if (result.Length == 0)
             {
-                //var directory = Properties.Resources.tempDir + application;
-                var directory = ConfigurationSettings.AppSettings["tempWorkDir"].ToString();
+
+                var directory = Variables.tmpWorkDir;
 
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);

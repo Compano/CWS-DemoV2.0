@@ -18,6 +18,7 @@ namespace Demo
         public static string username = "";
         public static string password = "";
         public static string companyname = "";
+        public static bool showXMLdata;
 
         public static void InitCasedata()
         {

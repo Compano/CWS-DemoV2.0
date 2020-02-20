@@ -56,6 +56,7 @@ namespace Demo
             this.btRefresh = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbParam1 = new System.Windows.Forms.ComboBox();
+            this.chkShowXML = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -279,25 +280,35 @@ namespace Demo
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkShowXML);
             this.groupBox3.Controls.Add(this.cbParam1);
-            this.groupBox3.Enabled = false;
             this.groupBox3.Location = new System.Drawing.Point(18, 203);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 100);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Parameters";
-            this.groupBox3.Visible = false;
+            this.groupBox3.Text = "Parameters/options";
             // 
             // cbParam1
             // 
             this.cbParam1.Enabled = false;
             this.cbParam1.FormattingEnabled = true;
-            this.cbParam1.Location = new System.Drawing.Point(72, 20);
+            this.cbParam1.Location = new System.Drawing.Point(69, 73);
             this.cbParam1.Name = "cbParam1";
             this.cbParam1.Size = new System.Drawing.Size(121, 21);
             this.cbParam1.TabIndex = 0;
             this.cbParam1.Visible = false;
+            // 
+            // chkShowXML
+            // 
+            this.chkShowXML.AutoSize = true;
+            this.chkShowXML.Location = new System.Drawing.Point(9, 20);
+            this.chkShowXML.Name = "chkShowXML";
+            this.chkShowXML.Size = new System.Drawing.Size(111, 17);
+            this.chkShowXML.TabIndex = 1;
+            this.chkShowXML.Text = "Show XML output";
+            this.chkShowXML.UseVisualStyleBackColor = true;
+            this.chkShowXML.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -325,6 +336,7 @@ namespace Demo
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,5 +368,6 @@ namespace Demo
         private System.Windows.Forms.Button btRefresh;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cbParam1;
+        private System.Windows.Forms.CheckBox chkShowXML;
     }
 }

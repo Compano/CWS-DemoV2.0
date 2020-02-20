@@ -42,7 +42,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(419, 101);
+            this.btnSave.Location = new System.Drawing.Point(429, 152);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(338, 101);
+            this.btnCancel.Location = new System.Drawing.Point(348, 152);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(482, 83);
+            this.groupBox2.Size = new System.Drawing.Size(482, 114);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "General settings";
@@ -105,13 +105,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Export folder";
             // 
-         
-            // 
             // settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 146);
+            this.ClientSize = new System.Drawing.Size(512, 187);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);

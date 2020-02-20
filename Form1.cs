@@ -159,6 +159,12 @@ namespace Demo
             Variables.companyname = tbCompanyName.Text;
         }
 
-    }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkShowXML.Checked == true) { Variables.showXMLdata = true; }
+            if (chkShowXML.Checked == false) { Variables.showXMLdata = false; }
+        }
+            
 
+    }
 }

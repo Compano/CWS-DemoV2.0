@@ -85,31 +85,37 @@ namespace Demo.Cases
                 }
 
                 TestCase.ShowResult(result, "Item select multiple records (array) ", xml);
-                //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                if (Variables.showXMLdata == true)
+                { 
+                    TestCase.ShowResult(result, "Result XML: " + Environment.NewLine + XDocument.Parse(xml).ToString() + Environment.NewLine);
+                }
 
 
-                //// Convert xml result in ProductKeys
-                //var element = XElement.Parse(xml);
-                //var productKeys = element.Elements().Take(10)
-                //    .Select(e => new ClientPRDProduct.ProductKey() { ManufacturerCode = e.Element("productmanufacturercode").Value, Code = e.Element("productcode").Value }).ToArray();
+                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
 
-                //var fields = new[] { ClientPRDProduct.ItemXmlField.Description, ClientPRDProduct.ItemXmlField.GrossPricePerUtilizationUnit, ClientPRDProduct.ItemXmlField.Availability, ClientPRDProduct.ItemXmlField.ProductManufacturerGLNCode };
 
-                //result = Client.PRDProduct.GetItems(sessionHandle, productKeys[0], null, fields, out xml);
-                //TestCase.ShowResult(result, "GetItems", xml);
-                //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                    //// Convert xml result in ProductKeys
+                    //var element = XElement.Parse(xml);
+                    //var productKeys = element.Elements().Take(10)
+                    //    .Select(e => new ClientPRDProduct.ProductKey() { ManufacturerCode = e.Element("productmanufacturercode").Value, Code = e.Element("productcode").Value }).ToArray();
 
-                //result = Client.PRDProduct.GetItems(sessionHandle, null, new ClientPRDProduct.ProductKeyGTIN() { GTIN = "5710626495740" }, fields, out xml);
-                //TestCase.ShowResult(result, "GetItems by GTIN", xml);
-                //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                    //var fields = new[] { ClientPRDProduct.ItemXmlField.Description, ClientPRDProduct.ItemXmlField.GrossPricePerUtilizationUnit, ClientPRDProduct.ItemXmlField.Availability, ClientPRDProduct.ItemXmlField.ProductManufacturerGLNCode };
 
-                //var productkey = new ClientPRDProduct.ProductKey() { ManufacturerCode = "8712423008724", Code = "97924496" };
-                //result = Client.PRDProduct.GetItems(sessionHandle, productkey, null, fields, out xml);
-                ////result = Client.PRDProduct.GetItems(sessionHandle, null, new ProductKeyGTIN() { GTIN = "8711962101477" }, fields, out xml);
-                //TestCase.ShowResult(result, "GetItems by GLN and Code", xml);
-                //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                    //result = Client.PRDProduct.GetItems(sessionHandle, productKeys[0], null, fields, out xml);
+                    //TestCase.ShowResult(result, "GetItems", xml);
+                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
 
-                result = Client.Application.Logout(sessionHandle);
+                    //result = Client.PRDProduct.GetItems(sessionHandle, null, new ClientPRDProduct.ProductKeyGTIN() { GTIN = "5710626495740" }, fields, out xml);
+                    //TestCase.ShowResult(result, "GetItems by GTIN", xml);
+                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+
+                    //var productkey = new ClientPRDProduct.ProductKey() { ManufacturerCode = "8712423008724", Code = "97924496" };
+                    //result = Client.PRDProduct.GetItems(sessionHandle, productkey, null, fields, out xml);
+                    ////result = Client.PRDProduct.GetItems(sessionHandle, null, new ProductKeyGTIN() { GTIN = "8711962101477" }, fields, out xml);
+                    //TestCase.ShowResult(result, "GetItems by GLN and Code", xml);
+                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+
+                    result = Client.Application.Logout(sessionHandle);
                 TestCase.ShowResult(result, "Logout");
 
             }
