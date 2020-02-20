@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Case 02" xml:space="preserve">
+  <data name="Case 03" xml:space="preserve">
     <value>Voorbeeld van het downloaden van diverse gereedstaande items</value>
   </data>
-  <data name="Case 04" xml:space="preserve">
+  <data name="Case 05" xml:space="preserve">
     <value>Aanmaken / toevoegen calculatie onderdelen / regels</value>
   </data>
   <data name="Case 01" xml:space="preserve">
-    <value>Open basketURL voor het selecteren van artikelen en het ophalen van de XML resultaten</value>
+    <value>In en uitloggen webservice</value>
   </data>
-  <data name="Case 03" xml:space="preserve">
+  <data name="Case 04" xml:space="preserve">
     <value>Ophalen van de beschikbare artikel downloads</value>
   </data>
-  <data name="Case 05" xml:space="preserve">
-    <value>In en uitloggen webservice</value>
+  <data name="Case 02" xml:space="preserve">
+    <value>Open basketURL voor het selecteren van artikelen en het ophalen van de XML resultaten</value>
   </data>
 </root>

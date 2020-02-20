@@ -1,123 +1,101 @@
-﻿using Demo.ClientPRDItem;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+using System.Threading;
+using System.Drawing;
 
 namespace Demo.Cases
 {
     /// <summary>
-    /// Examples for download items
+    /// Open basket voor het selecteren van artikelen
     /// </summary>
     public class Case02 : Form1
     {
-
+      
         internal static void Execute()
         {
 
             var sessionHandle = "";
             var result = "";
-            var process = new Process();
 
-            Variables.url = "http://online.compano.nl/";
-            _Form1.Refresh();
+            var process = new Process();
 
             try
             {
+
+                _Form1.txtConsole.AppendText("BasketURL changed to http://online.compano.nl/" + Environment.NewLine);
+                Variables.url = "http://online.compano.nl/";
+
                 Client.Init(Variables.url);
-
-                string xml;
-
+      
                 result = Client.Application.Login(Variables.username.ToString(), Variables.password.ToString(), Variables.companyname.ToString(), out sessionHandle);
+
                 TestCase.ShowResult(result, "Login");
 
-                //// Pak de key velden van artikel
-                //var keyFields = new[]
-                //{
-                //        ClientPRDItem.ItemXmlField.ProductManufacturerCode,
-                //        ClientPRDItem.ItemXmlField.ProductCode,
-                //        ClientPRDItem.ItemXmlField.ProductGTIN,
-                //        ClientPRDItem.ItemXmlField.Code,
-                //        ClientPRDItem.ItemXmlField.DeepLink,
-                //        ClientPRDItem.ItemXmlField.ItemSetCode,
-                //        ClientPRDItem.ItemXmlField.ConditionGroupCode,
-                //        ClientPRDItem.ItemXmlField.ConditionGroupDescription,
-                //        ClientPRDItem.ItemXmlField.PriceDate,
-                //        ClientPRDItem.ItemXmlField.PriceUnitCode,
-                //        ClientPRDItem.ItemXmlField.GrossPriceInfoPrice,
-                //        ClientPRDItem.ItemXmlField.OrderPrice,
-                //        ClientPRDItem.ItemXmlField.PriceQuantity
-                //    };
+                // Determine basket URL
+                var basketUrl = "";
+                Client.PRDItem.GetBasketUrl(sessionHandle, "", "", null, null, out basketUrl);
 
-                //result = Client.PRDItem.Select(sessionHandle, null, null, "8711962101477", keyFields, out xml); 
+                _Form1.txtConsole.AppendText("BasketURL " + basketUrl.ToString() + Environment.NewLine);
+         
+                // Open item basket in browser
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.FileName = basketUrl;
+                process.Start();
 
-                //if (xml == "")
-                //    {
-                //        TestCase.ShowResult(result, "XML had no data", false);
-                //    return;
-                //    }
+                // Max 1 minute polling for filled basket!
+                var pollTimeoutTime = DateTime.Now.AddMinutes(1);
 
-                //TestCase.ShowResult(result, "Item Select", xml);
-                //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                var selectedQuantities = new ClientPRDItem.ArrayOfDouble();
+                var selectedItems = new ClientPRDItem.ItemKey[0];
 
-
-                // meerder resultaten ophalen op basis van assortimentscode en conditiegroepcode
-                var filterFields = new[] { ItemFilterField.ItemSetCode, ItemFilterField.ConditionGroupCode };
-                var filterValues = new ArrayOfString { "SOL", "750031" };
-
-
-                result = Client.PRDItem.Select(sessionHandle, filterFields, filterValues, "", new[]
-                       {
-                        ItemXmlField.Code,
-                        ItemXmlField.SalesOrganizationCode,
-                        ItemXmlField.ItemSetCode,
-                        ItemXmlField.ConditionGroupCode,
-                        ItemXmlField.Description,
-                        ItemXmlField.GrossPricePerUtilizationUnit
-                        }, out xml);
-
-                if (xml == "")
+                do
                 {
-                    TestCase.ShowResult(result, "XML had no data", false);
-                    return;
+                    if (DateTime.Compare(DateTime.Now, pollTimeoutTime) <= 0) //AANPASSEN! of scherm gesloten door gebruker zonder items te selecterem
+                    {
+                        // Wait twenty seconds!
+                        Thread.Sleep(30000);
+
+                        result = Client.PRDItem.GetBasketAsArray(sessionHandle, out selectedQuantities, out selectedItems);
+                    }
+                    else
+                        throw new Exception("Time-out error. Basket is empty" + Environment.NewLine);
+                        _Form1.txtConsole.AppendText("Time-out error. Basket is empty" + Environment.NewLine);
                 }
+                while (selectedItems.Length == 0);
 
-                TestCase.ShowResult(result, "Item select multiple records (array) ", xml);
-                if (Variables.showXMLdata == true)
-                { 
-                    TestCase.ShowResult(result, "Result XML: " + Environment.NewLine + XDocument.Parse(xml).ToString() + Environment.NewLine);
-                }
+                // GetBasketAsArray
+                result = Client.PRDItem.GetBasketAsArray(sessionHandle, out selectedQuantities, out selectedItems);
+                TestCase.ShowResult(result, "GetBasketAsArray");
+
+                _Form1.txtConsole.AppendText("Basketcount " + selectedItems.Length + Environment.NewLine);
+
+                var index = 0;
+                foreach (var selectedItem in selectedItems)
+                    _Form1.txtConsole.AppendText("Quantity: " + selectedQuantities[index++] + string.Format(" Item: {0}-{1}", selectedItem.SalesOrganizationCode, selectedItem.Code));
+
+                // GetBasketAsXml
+                var xml = "";
+                var itemFields = new ClientPRDItem.ItemXmlField[] { ClientPRDItem.ItemXmlField.SalesOrganizationCode, ClientPRDItem.ItemXmlField.Code, ClientPRDItem.ItemXmlField.GrossPricePerUtilizationUnit, ClientPRDItem.ItemXmlField.PurchasePricePerUtilizationUnit };
+
+                result = Client.PRDItem.GetInfo(sessionHandle, selectedItems, itemFields, out xml);
+                _Form1.txtConsole.AppendText(xml + Environment.NewLine);
 
 
-                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                TestCase.ShowResult(result, "GetBasketAsXml");
 
+                // Get actualize info for all selected items modified since 01-01-2010
+                result = Client.PRDItem.GetModifiedInfo(sessionHandle, selectedItems, itemFields, new DateTime(2010, 1, 1), out xml);
+                _Form1.txtConsole.AppendText(xml + Environment.NewLine);
 
-                    //// Convert xml result in ProductKeys
-                    //var element = XElement.Parse(xml);
-                    //var productKeys = element.Elements().Take(10)
-                    //    .Select(e => new ClientPRDProduct.ProductKey() { ManufacturerCode = e.Element("productmanufacturercode").Value, Code = e.Element("productcode").Value }).ToArray();
+                // Clear current basket
+                Client.PRDItem.ClearBasket(sessionHandle);
 
-                    //var fields = new[] { ClientPRDProduct.ItemXmlField.Description, ClientPRDProduct.ItemXmlField.GrossPricePerUtilizationUnit, ClientPRDProduct.ItemXmlField.Availability, ClientPRDProduct.ItemXmlField.ProductManufacturerGLNCode };
+                _Form1.txtConsole.AppendText("ClearBasket" + Environment.NewLine);
 
-                    //result = Client.PRDProduct.GetItems(sessionHandle, productKeys[0], null, fields, out xml);
-                    //TestCase.ShowResult(result, "GetItems", xml);
-                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
+                result = Client.PRDItem.GetBasketAsArray(sessionHandle, out selectedQuantities, out selectedItems);
 
-                    //result = Client.PRDProduct.GetItems(sessionHandle, null, new ClientPRDProduct.ProductKeyGTIN() { GTIN = "5710626495740" }, fields, out xml);
-                    //TestCase.ShowResult(result, "GetItems by GTIN", xml);
-                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
-
-                    //var productkey = new ClientPRDProduct.ProductKey() { ManufacturerCode = "8712423008724", Code = "97924496" };
-                    //result = Client.PRDProduct.GetItems(sessionHandle, productkey, null, fields, out xml);
-                    ////result = Client.PRDProduct.GetItems(sessionHandle, null, new ProductKeyGTIN() { GTIN = "8711962101477" }, fields, out xml);
-                    //TestCase.ShowResult(result, "GetItems by GLN and Code", xml);
-                    //TestCase.ShowResult(result, "Result XML: \n" + XDocument.Parse(xml).ToString() + "\n\n");
-
-                    result = Client.Application.Logout(sessionHandle);
-                TestCase.ShowResult(result, "Logout");
-
+                _Form1.txtConsole.AppendText("Basketcount after clear " + selectedItems.Length + Environment.NewLine);
+                TestCase.ShowResult(result, "GetBasketAsArray");
             }
 
             catch (Exception ex)
@@ -125,7 +103,7 @@ namespace Demo.Cases
                 //_Form1.txtConsole.Font = new Font("Times New Roman", 20);
                 _Form1.txtConsole.AppendText("Er is een foutmelding opgetreden:");
                 _Form1.txtConsole.AppendText(ex.Message);
-                process.Close();
+                 process.Close();
             }
 
             finally

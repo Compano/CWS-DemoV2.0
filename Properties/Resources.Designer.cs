@@ -61,7 +61,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open basketURL voor het selecteren van artikelen en het ophalen van de XML resultaten.
+        ///   Looks up a localized string similar to In en uitloggen webservice.
         /// </summary>
         internal static string Case_01 {
             get {
@@ -70,7 +70,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voorbeeld van het downloaden van diverse gereedstaande items.
+        ///   Looks up a localized string similar to Open basketURL voor het selecteren van artikelen en het ophalen van de XML resultaten.
         /// </summary>
         internal static string Case_02 {
             get {
@@ -79,7 +79,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ophalen van de beschikbare artikel downloads.
+        ///   Looks up a localized string similar to Voorbeeld van het downloaden van diverse gereedstaande items.
         /// </summary>
         internal static string Case_03 {
             get {
@@ -88,7 +88,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aanmaken / toevoegen calculatie onderdelen / regels.
+        ///   Looks up a localized string similar to Ophalen van de beschikbare artikel downloads.
         /// </summary>
         internal static string Case_04 {
             get {
@@ -97,7 +97,7 @@ namespace Demo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In en uitloggen webservice.
+        ///   Looks up a localized string similar to Aanmaken / toevoegen calculatie onderdelen / regels.
         /// </summary>
         internal static string Case_05 {
             get {

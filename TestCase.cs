@@ -44,7 +44,7 @@ namespace Demo
             if (result.Length == 0)
             {
 
-                var directory = Variables.tmpWorkDir;
+                var directory = Variables.tmpExportDir;
 
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);

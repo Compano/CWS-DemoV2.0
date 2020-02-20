@@ -61,11 +61,11 @@ namespace Demo
             {
                 txtConsole.AppendText("Starting " + comboBox1.Text + " on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:tt") + Environment.NewLine + "===================START===================" + Environment.NewLine);
 
-                if (comboBox1.Text == "Case 01") { Cases.Case01.Execute(); }
-                if (comboBox1.Text == "Case 02") { Cases.Case02.Execute(); }
-                if (comboBox1.Text == "Case 03") { Cases.Case03.Execute(); }
-                if (comboBox1.Text == "Case 04") { Cases.Case04.Execute(); }
-                if (comboBox1.Text == "Case 05") { Cases.Case05.Execute(); }
+                if (comboBox1.Text == "Case 01") { Cases.Case02.Execute(); }
+                if (comboBox1.Text == "Case 02") { Cases.Case03.Execute(); }
+                if (comboBox1.Text == "Case 03") { Cases.Case04.Execute(); }
+                if (comboBox1.Text == "Case 04") { Cases.Case05.Execute(); }
+                if (comboBox1.Text == "Case 05") { Cases.Case01.Execute(); }
                 //if (comboBox1.Text == "Case 06") { Cases.Case06.Execute(); }
                 //if (comboBox1.Text == "Case 07") { Cases.Case07.Execute(); }
                 //if (comboBox1.Text == "Case 08") { Cases.Case08.Execute(); }
