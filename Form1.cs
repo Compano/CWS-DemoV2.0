@@ -8,6 +8,7 @@ using System.Xml;
 using System.Configuration;
 using System.Linq;
 using System.Collections;
+using System.Reflection;
 
 namespace Demo
 {
@@ -21,6 +22,8 @@ namespace Demo
 
             //Setting default settings
             Variables.InitCasedata();
+
+            lbVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             // Initial caseID set to 'case01'
             Variables.caseID = "case01";
@@ -96,9 +99,7 @@ namespace Demo
             tbPassword.Text = Variables.password;
             tbCompanyName.Text = Variables.companyname;
 
-            //tbCaseDesc.Text = comboBox1.SelectedItem.ToString();
             tbCaseDesc.Text = (comboBox1.SelectedItem).ToString();
-
             RefreshForm();
         }
 
@@ -164,7 +165,6 @@ namespace Demo
             if (chkShowXML.Checked == true) { Variables.showXMLdata = true; }
             if (chkShowXML.Checked == false) { Variables.showXMLdata = false; }
         }
-            
 
     }
 }

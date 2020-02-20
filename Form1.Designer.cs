@@ -55,8 +55,9 @@ namespace Demo
             this.btnAbout = new System.Windows.Forms.Button();
             this.btRefresh = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbParam1 = new System.Windows.Forms.ComboBox();
             this.chkShowXML = new System.Windows.Forms.CheckBox();
+            this.cbParam1 = new System.Windows.Forms.ComboBox();
+            this.lbVersion = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -289,16 +290,6 @@ namespace Demo
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Parameters/options";
             // 
-            // cbParam1
-            // 
-            this.cbParam1.Enabled = false;
-            this.cbParam1.FormattingEnabled = true;
-            this.cbParam1.Location = new System.Drawing.Point(69, 73);
-            this.cbParam1.Name = "cbParam1";
-            this.cbParam1.Size = new System.Drawing.Size(121, 21);
-            this.cbParam1.TabIndex = 0;
-            this.cbParam1.Visible = false;
-            // 
             // chkShowXML
             // 
             this.chkShowXML.AutoSize = true;
@@ -310,11 +301,31 @@ namespace Demo
             this.chkShowXML.UseVisualStyleBackColor = true;
             this.chkShowXML.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // cbParam1
+            // 
+            this.cbParam1.Enabled = false;
+            this.cbParam1.FormattingEnabled = true;
+            this.cbParam1.Location = new System.Drawing.Point(69, 73);
+            this.cbParam1.Name = "cbParam1";
+            this.cbParam1.Size = new System.Drawing.Size(121, 21);
+            this.cbParam1.TabIndex = 0;
+            this.cbParam1.Visible = false;
+            // 
+            // lbVersion
+            // 
+            this.lbVersion.AutoSize = true;
+            this.lbVersion.Location = new System.Drawing.Point(21, 40);
+            this.lbVersion.Name = "lbVersion";
+            this.lbVersion.Size = new System.Drawing.Size(60, 13);
+            this.lbVersion.TabIndex = 15;
+            this.lbVersion.Text = "VersionInfo";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 715);
+            this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btRefresh);
             this.Controls.Add(this.btnAbout);
@@ -369,5 +380,6 @@ namespace Demo
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cbParam1;
         private System.Windows.Forms.CheckBox chkShowXML;
+        private System.Windows.Forms.Label lbVersion;
     }
 }
