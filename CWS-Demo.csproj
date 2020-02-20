@@ -1,0 +1,1216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Demo</RootNamespace>
+    <AssemblyName>CWS-Demo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Demo.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\NuGet\Dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cases\Case01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cases\Case02.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cases\Case03.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cases\Case04.cs" />
+    <Compile Include="Cases\Case05.cs" />
+    <Compile Include="Cases\Case06.cs" />
+    <Compile Include="Cases\Case07.cs" />
+    <Compile Include="Cases\Case09.cs" />
+    <Compile Include="Cases\Case08.cs" />
+    <Compile Include="Cases\Case11.cs" />
+    <Compile Include="Cases\Case10.cs" />
+    <Compile Include="Cases\Case12.cs" />
+    <Compile Include="Cases\Case13.cs" />
+    <Compile Include="Cases\Case14.cs" />
+    <Compile Include="Cases\Case15.cs" />
+    <Compile Include="Cases\Case16.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientApplication\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientArtConnect\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientCATTreeNode\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientCRMContact\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientCTMCategory\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientGDBAttachment\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientGDBUserDefFieldOption\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientICSModellingClass\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientICSClass\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientICSSynonym\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientMessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDAddOnItem\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDAddOnProduct\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDItemGroup\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDItemSet\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDItem\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDPackaging\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDProductGroup\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDProduct\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDSalesCondition\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDSupplier\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDSupportAgreement\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRDUnit\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRJEstimate\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientPRJOrder\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientSUPCall\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientSUPContract\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientUSRDataArea\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientUSRUser\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MessageService240TestCompano\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PRDWascoCustomerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\tstGalvanoMessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\tstRensaMessageService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="settings.Designer.cs">
+      <DependentUpon>settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="variables.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientApplication\application1.wsdl" />
+    <None Include="Service References\ClientApplication\Demo.ClientApplication.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientArtConnect\ArtConnect1.wsdl" />
+    <None Include="Service References\ClientArtConnect\ArtConnectV301.wsdl" />
+    <None Include="Service References\ClientArtConnect\ArtConnectV301.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientArtConnect\Demo.ClientArtConnect.MessagePropertiesType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientArtConnect\Demo.ClientArtConnect.MessageRequestResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientArtConnect\Demo.ClientArtConnect.MessageResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCATTreeNode\cattreenode1.wsdl" />
+    <None Include="Service References\ClientCATTreeNode\Demo.ClientCATTreeNode.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCATTreeNode\Demo.ClientCATTreeNode.TreeNodeKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCRMContact\crmcontact.wsdl" />
+    <None Include="Service References\ClientCRMContact\Demo.ClientCRMContact.ArrayOfDouble.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCRMContact\Demo.ClientCRMContact.ContactKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCRMContact\Demo.ClientCRMContact.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCTMCategory\ctmcategory1.wsdl" />
+    <None Include="Service References\ClientCTMCategory\Demo.ClientCTMCategory.CategoryKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientCTMCategory\Demo.ClientCTMCategory.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientGDBAttachment\Demo.ClientGDBAttachment.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientGDBAttachment\gdbattachment1.wsdl" />
+    <None Include="Service References\ClientGDBUserDefFieldOption\Demo.ClientGDBUserDefFieldOption.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientGDBUserDefFieldOption\Demo.ClientGDBUserDefFieldOption.UserDefFieldOptionKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientGDBUserDefFieldOption\gdbuserdeffieldoption1.wsdl" />
+    <None Include="Service References\ClientICSModellingClass\Demo.ClientICSModellingClass.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientICSModellingClass\Demo.ClientICSModellingClass.ModellingClassKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientICSModellingClass\icsmodellingclass.wsdl" />
+    <None Include="Service References\ClientICSClass\Demo.ClientICSClass.ClassKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientICSClass\Demo.ClientICSClass.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientICSClass\icsclass1.wsdl" />
+    <None Include="Service References\ClientICSSynonym\Demo.ClientICSSynonym.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientICSSynonym\icssynonym1.wsdl" />
+    <None Include="Service References\ClientMessageService\Demo.ClientMessageService.MessageList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientMessageService\Demo.ClientMessageService.MessageRequestResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientMessageService\Demo.ClientMessageService.MessageResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\MessageServiceSoap.wsdl" />
+    <None Include="Service References\ClientMessageService\MessageServiceTypes_MessageService30.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientMessageService\messageservice_3.wsdl" />
+    <None Include="Service References\ClientPRDAddOnItem\Demo.ClientPRDAddOnItem.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDAddOnItem\prdaddonitem1.wsdl" />
+    <None Include="Service References\ClientPRDAddOnProduct\Demo.ClientPRDAddOnProduct.AddOnProductKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDAddOnProduct\Demo.ClientPRDAddOnProduct.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDAddOnProduct\prdaddonproduct1.wsdl" />
+    <None Include="Service References\ClientPRDItemGroup\Demo.ClientPRDItemGroup.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemGroup\Demo.ClientPRDItemGroup.ItemGroupKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemGroup\prditemgroup1.wsdl" />
+    <None Include="Service References\ClientPRDItemSet\Demo.ClientPRDItemSet.ArrayOfDouble.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemSet\Demo.ClientPRDItemSet.DownloadInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemSet\Demo.ClientPRDItemSet.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemSet\Demo.ClientPRDItemSet.ItemSetKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItemSet\prditemset.wsdl" />
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.ArrayOfDouble.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.ArrayOfString.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.ItemKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.NormKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientPRDItem\Demo.ClientPRDItem.ServerResponseOption.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDItem\prditem.wsdl" />
+    <None Include="Service References\ClientPRDPackaging\Demo.ClientPRDPackaging.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDPackaging\Demo.ClientPRDPackaging.PackagingKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDPackaging\prdpackaging1.wsdl" />
+    <None Include="Service References\ClientPRDProductGroup\Demo.ClientPRDProductGroup.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDProductGroup\Demo.ClientPRDProductGroup.ProductGroupKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDProductGroup\prdproductgroup1.wsdl" />
+    <None Include="Service References\ClientPRDProduct\Demo.ClientPRDProduct.ArrayOfDouble.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDProduct\Demo.ClientPRDProduct.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDProduct\Demo.ClientPRDProduct.ProductKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDProduct\prdproduct.wsdl" />
+    <None Include="Service References\ClientPRDSalesCondition\Demo.ClientPRDSalesCondition.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDSalesCondition\Demo.ClientPRDSalesCondition.SalesConditionKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDSalesCondition\prdsalescondition1.wsdl" />
+    <None Include="Service References\ClientPRDSupplier\Demo.ClientPRDSupplier.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDSupplier\prdsupplier.wsdl" />
+    <None Include="Service References\ClientPRDSupportAgreement\Demo.ClientPRDSupportAgreement.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDSupportAgreement\Demo.ClientPRDSupportAgreement.SupportAgreementKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDSupportAgreement\prdsupportagreement1.wsdl" />
+    <None Include="Service References\ClientPRDUnit\Demo.ClientPRDUnit.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDUnit\Demo.ClientPRDUnit.UnitKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRDUnit\prdunit1.wsdl" />
+    <None Include="Service References\ClientPRJEstimate\Demo.ClientPRJEstimate.ArrayOfInt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRJEstimate\Demo.ClientPRJEstimate.EstimateKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRJEstimate\Demo.ClientPRJEstimate.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRJEstimate\prjestimate1.wsdl" />
+    <None Include="Service References\ClientPRJEstimate\prjestimate11.wsdl" />
+    <None Include="Service References\ClientPRJOrder\Demo.ClientPRJOrder.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRJOrder\Demo.ClientPRJOrder.OrderKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientPRJOrder\prjorder.wsdl" />
+    <None Include="Service References\ClientSUPCall\Demo.ClientSUPCall.CallKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientSUPCall\Demo.ClientSUPCall.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRUser\Demo.ClientUSRUser.ArrayOfDouble.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRUser\Demo.ClientUSRUser.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRUser\Demo.ClientUSRUser.UserKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRUser\usruser.wsdl" />
+    <None Include="Service References\MessageService240TestCompano\Demo.MessageService240TestCompano.AvailableMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MessageService240TestCompano\Demo.MessageService240TestCompano.Message.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MessageService240TestCompano\MessageService.wsdl" />
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.ArticleStockList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.Branch.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.Cust_ArticleInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.Cust_ArticleSearch.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.Cust_StockInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.ExptDeliveryorTrackandTrace.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.GS1_Order_Struct.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\Demo.PRDWascoCustomerService.Wasco_ShoppingCart.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\WascoCustomerServices.wsdl" />
+    <None Include="Service References\tstGalvanoMessageService\Demo.tstGalvanoMessageService.Fault.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\Demo.tstGalvanoMessageService.SendOrderResponseModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService.wsdl" />
+    <None Include="Service References\tstGalvanoMessageService\MessageService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\MessageService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstRensaMessageService\Demo.tstRensaMessageService.MessagePropertiesType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\tstRensaMessageService\Demo.tstRensaMessageService.MessageRequestResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\tstRensaMessageService\Demo.tstRensaMessageService.MessageResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\tstRensaMessageService\MessageService.wsdl" />
+    <None Include="Service References\tstRensaMessageService\MessageService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\tstRensaMessageService\MessageService1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientApplication\" />
+    <WCFMetadataStorage Include="Service References\ClientArtConnect\" />
+    <WCFMetadataStorage Include="Service References\ClientCATTreeNode\" />
+    <WCFMetadataStorage Include="Service References\ClientCRMContact\" />
+    <WCFMetadataStorage Include="Service References\ClientCTMCategory\" />
+    <WCFMetadataStorage Include="Service References\ClientGDBAttachment\" />
+    <WCFMetadataStorage Include="Service References\ClientGDBUserDefFieldOption\" />
+    <WCFMetadataStorage Include="Service References\ClientICSModellingClass\" />
+    <WCFMetadataStorage Include="Service References\ClientICSClass\" />
+    <WCFMetadataStorage Include="Service References\ClientICSSynonym\" />
+    <WCFMetadataStorage Include="Service References\ClientMessageService\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDAddOnItem\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDAddOnProduct\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDItemGroup\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDItemSet\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDItem\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDPackaging\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDProductGroup\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDProduct\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDSalesCondition\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDSupplier\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDSupportAgreement\" />
+    <WCFMetadataStorage Include="Service References\ClientPRDUnit\" />
+    <WCFMetadataStorage Include="Service References\ClientPRJEstimate\" />
+    <WCFMetadataStorage Include="Service References\ClientPRJOrder\" />
+    <WCFMetadataStorage Include="Service References\ClientSUPCall\" />
+    <WCFMetadataStorage Include="Service References\ClientSUPContract\" />
+    <WCFMetadataStorage Include="Service References\ClientUSRDataArea\" />
+    <WCFMetadataStorage Include="Service References\ClientUSRUser\" />
+    <WCFMetadataStorage Include="Service References\MessageService240TestCompano\" />
+    <WCFMetadataStorage Include="Service References\PRDWascoCustomerService\" />
+    <WCFMetadataStorage Include="Service References\tstGalvanoMessageService\" />
+    <WCFMetadataStorage Include="Service References\tstRensaMessageService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientApplication\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientApplication\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientApplication\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemSet\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemSet\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemSet\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPCall\supcall1.wsdl" />
+    <None Include="Service References\ClientSUPContract\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPContract\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPContract\Demo.ClientSUPContract.ContractKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientSUPContract\Demo.ClientSUPContract.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientSUPContract\Demo.ClientSUPContract.LicenseInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientSUPContract\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCTMCategory\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCTMCategory\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCTMCategory\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPCall\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPCall\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPCall\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPContract\supcontract1.wsdl" />
+    <None Include="Service References\ClientUSRDataArea\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRDataArea\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRDataArea\Demo.ClientUSRDataArea.DataAreaKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRDataArea\Demo.ClientUSRDataArea.Facet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientUSRDataArea\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBUserDefFieldOption\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBUserDefFieldOption\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBUserDefFieldOption\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemGroup\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemGroup\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemGroup\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupplier\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupplier\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupplier\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDPackaging\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDPackaging\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDPackaging\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDUnit\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDUnit\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDUnit\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSClass\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSClass\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSClass\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCRMContact\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCRMContact\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCRMContact\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJOrder\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJOrder\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJOrder\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItem\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItem\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItem\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnItem\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnItem\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnItem\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnProduct\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnProduct\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnProduct\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSModellingClass\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSModellingClass\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSModellingClass\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProduct\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProduct\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProduct\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProductGroup\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProductGroup\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProductGroup\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBAttachment\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBAttachment\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBAttachment\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRDataArea\usrdataarea1.wsdl" />
+    <None Include="Service References\ClientUSRUser\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRUser\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRUser\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSSynonym\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSSynonym\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSSynonym\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCATTreeNode\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCATTreeNode\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCATTreeNode\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJEstimate\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJEstimate\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJEstimate\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSalesCondition\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSalesCondition\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSalesCondition\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupportAgreement\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupportAgreement\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupportAgreement\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJEstimate\prjestimate1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCATTreeNode\cattreenode1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCRMContact\crmcontact.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientCTMCategory\ctmcategory1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBAttachment\gdbattachment1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientGDBUserDefFieldOption\gdbuserdeffieldoption1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSClass\icsclass1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSModellingClass\icsmodellingclass.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientICSSynonym\icssynonym1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnItem\prdaddonitem1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDAddOnProduct\prdaddonproduct1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemGroup\prditemgroup1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItemSet\prditemset.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDPackaging\prdpackaging1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProduct\prdproduct.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDProductGroup\prdproductgroup1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSalesCondition\prdsalescondition1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupplier\prdsupplier.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDSupportAgreement\prdsupportagreement1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDUnit\prdunit1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJEstimate\prjestimate11.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRJOrder\prjorder.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPCall\supcall1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientSUPContract\supcontract1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRDataArea\usrdataarea1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientUSRUser\usruser.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientPRDItem\prditem.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientApplication\application1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientArtConnect\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientArtConnect\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientArtConnect\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientMessageService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientMessageService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientMessageService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientMessageService\MessageService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="settings.resx">
+      <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\cases_new.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Resources\start-button-icon-png-27.jpg" />
+    <None Include="Resources\Logo Compano-315.jpg" />
+    <None Include="Service References\tstRensaMessageService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\tstRensaMessageService\configuration.svcinfo" />
+    <None Include="Service References\tstRensaMessageService\configuration91.svcinfo" />
+    <None Include="Service References\tstRensaMessageService\MessageService.disco" />
+    <None Include="Service References\tstGalvanoMessageService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\tstGalvanoMessageService\configuration.svcinfo" />
+    <None Include="Service References\tstGalvanoMessageService\configuration91.svcinfo" />
+    <None Include="Service References\tstGalvanoMessageService\MessageService.disco" />
+    <None Include="Service References\MessageService240TestCompano\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\MessageService240TestCompano\configuration.svcinfo" />
+    <None Include="Service References\MessageService240TestCompano\configuration91.svcinfo" />
+    <None Include="Service References\MessageService240TestCompano\MessageService.disco" />
+    <None Include="Service References\PRDWascoCustomerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\PRDWascoCustomerService\configuration.svcinfo" />
+    <None Include="Service References\PRDWascoCustomerService\configuration91.svcinfo" />
+    <None Include="Service References\PRDWascoCustomerService\WascoCustomerServices.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="54bb125d-709b-4c47-afc1-62b3c4d0fccd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://ttt.artconnectplieger.compano.com//ArtConnectV30.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ArtConnectV301.wsdl" MetadataType="Wsdl" ID="33957311-1de4-4523-9901-38bf0f36041e" SourceId="1" SourceUrl="https://ttt.artconnectplieger.compano.com/ArtConnectV30.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ArtConnect1.wsdl" MetadataType="Wsdl" ID="094c32e6-be53-402c-ae46-b881e1227fdb" SourceId="1" SourceUrl="https://ttt.artconnectplieger.compano.com//ArtConnectV30.svc?wsdl" />
+    <MetadataFile FileName="ArtConnectV301.xsd" MetadataType="Schema" ID="9e0aff56-8cb0-4386-95ec-d235ca514aac" SourceId="1" SourceUrl="https://ttt.artconnectplieger.compano.com/ArtConnectV30.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

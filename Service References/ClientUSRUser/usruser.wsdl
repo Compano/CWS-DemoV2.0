@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Compano.com/Modules/USR" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Compano.com/Modules/USR" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+UserService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing User information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting User records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving User information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating User information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Compano.com/Modules/USR">
+      <s:element name="ClearBasket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearBasketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClearBasketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserXmlField" type="tns:UserXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="UserXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AllowedIPAddresses" />
+          <s:enumeration value="ArchivedDateTime" />
+          <s:enumeration value="ArchivedDateTimeAsMonth" />
+          <s:enumeration value="ArchivedDateTimeAsQuarter" />
+          <s:enumeration value="ArchivedDateTimeAsWeek" />
+          <s:enumeration value="ArchivedDateTimeAsYear" />
+          <s:enumeration value="BlockLoginDate" />
+          <s:enumeration value="BlockLoginDateAsMonth" />
+          <s:enumeration value="BlockLoginDateAsQuarter" />
+          <s:enumeration value="BlockLoginDateAsWeek" />
+          <s:enumeration value="BlockLoginDateAsYear" />
+          <s:enumeration value="ChangePassword" />
+          <s:enumeration value="ConditionContactCustomerGroupCode" />
+          <s:enumeration value="ConditionContactNo" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ContactEmployeeCode" />
+          <s:enumeration value="ContactEmployeeContactPersonContactEmail" />
+          <s:enumeration value="ContactEmployeeContactPersonContactLongName" />
+          <s:enumeration value="ContactEmployeeContactPersonContactNo" />
+          <s:enumeration value="ContactEmployeeContactPersonContactTelNo" />
+          <s:enumeration value="ContactEmployeeContactPersonOrganizationName" />
+          <s:enumeration value="ContactEmployeeContactPersonOrganizationShortName" />
+          <s:enumeration value="ContactEmployeeContactPersonPersonBSN" />
+          <s:enumeration value="ContactEmployeeContactPersonPersonFullName" />
+          <s:enumeration value="ContactEmployeeFunctionDescription" />
+          <s:enumeration value="ContactEmployeeIsActive" />
+          <s:enumeration value="ContactInitials" />
+          <s:enumeration value="ContactMobileNo" />
+          <s:enumeration value="ContactNo" />
+          <s:enumeration value="ContactOfficeContactNo" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCity" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCountryCode" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCountryDescription" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressHouseNumber" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressProvince" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressStreet" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressStreetAndHouseNumber" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressZipCode" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressZipCodeAndCity" />
+          <s:enumeration value="ContactOrganization" />
+          <s:enumeration value="ContactOrganizationName" />
+          <s:enumeration value="CreationDateTime" />
+          <s:enumeration value="CreationDateTimeAsMonth" />
+          <s:enumeration value="CreationDateTimeAsQuarter" />
+          <s:enumeration value="CreationDateTimeAsWeek" />
+          <s:enumeration value="CreationDateTimeAsYear" />
+          <s:enumeration value="CreatorFriendlyName" />
+          <s:enumeration value="DataAreaApplicationInstanceNo" />
+          <s:enumeration value="DataAreaCode" />
+          <s:enumeration value="DataAreaCompanyName" />
+          <s:enumeration value="DataAreaNumber" />
+          <s:enumeration value="DataAreaParentContactNo" />
+          <s:enumeration value="DataAreaParentContactOrganizationLogo" />
+          <s:enumeration value="DataAreaParentContactOrganizationName" />
+          <s:enumeration value="Email" />
+          <s:enumeration value="FormalName" />
+          <s:enumeration value="FriendlyName" />
+          <s:enumeration value="Function" />
+          <s:enumeration value="GoogleMail" />
+          <s:enumeration value="GoogleRefreshToken" />
+          <s:enumeration value="GroupsCodes" />
+          <s:enumeration value="GroupsDescriptions" />
+          <s:enumeration value="IsActive" />
+          <s:enumeration value="IsAdministrator" />
+          <s:enumeration value="IsArchived" />
+          <s:enumeration value="IsDemo" />
+          <s:enumeration value="LastLoginDate" />
+          <s:enumeration value="LastLoginDateAsMonth" />
+          <s:enumeration value="LastLoginDateAsQuarter" />
+          <s:enumeration value="LastLoginDateAsWeek" />
+          <s:enumeration value="LastLoginDateAsYear" />
+          <s:enumeration value="LastOrNewMemo" />
+          <s:enumeration value="LetterSalutation" />
+          <s:enumeration value="LicenseType" />
+          <s:enumeration value="LocalContactInitials" />
+          <s:enumeration value="LocalContactJobTitle" />
+          <s:enumeration value="LocalContactNo" />
+          <s:enumeration value="LocalContactPersonFacebookAccount" />
+          <s:enumeration value="LocalContactPersonFacebookLink" />
+          <s:enumeration value="LocalContactPersonLinkedinAccount" />
+          <s:enumeration value="LocalContactPersonLinkedinLink" />
+          <s:enumeration value="LocalContactPersonTwitterAccount" />
+          <s:enumeration value="LocalContactPersonTwitterLink" />
+          <s:enumeration value="ManagerEMail" />
+          <s:enumeration value="ManagerLetterSalutation" />
+          <s:enumeration value="ParentContactId" />
+          <s:enumeration value="ParentContactLongName" />
+          <s:enumeration value="ParentContactNo" />
+          <s:enumeration value="ParentContactOrganizationName" />
+          <s:enumeration value="PasswordExpirationPeriod" />
+          <s:enumeration value="PasswordFailureTime" />
+          <s:enumeration value="PasswordFailureTimeAsMonth" />
+          <s:enumeration value="PasswordFailureTimeAsQuarter" />
+          <s:enumeration value="PasswordFailureTimeAsWeek" />
+          <s:enumeration value="PasswordFailureTimeAsYear" />
+          <s:enumeration value="PasswordTimeStamp" />
+          <s:enumeration value="PasswordTimeStampAsMonth" />
+          <s:enumeration value="PasswordTimeStampAsQuarter" />
+          <s:enumeration value="PasswordTimeStampAsWeek" />
+          <s:enumeration value="PasswordTimeStampAsYear" />
+          <s:enumeration value="ReadOnly" />
+          <s:enumeration value="ShowPopupOnNextLogin" />
+          <s:enumeration value="SummaryOfAllMemos" />
+          <s:enumeration value="UserInterface" />
+          <s:enumeration value="VisitorIsInternal" />
+          <s:enumeration value="VisitorLanguage" />
+          <s:enumeration value="VisitorLanguageCode" />
+          <s:enumeration value="VisitorName" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetBasketAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketAsArrayResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedQuantities" type="tns:ArrayOfDouble" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedRecords" type="tns:ArrayOfUserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDouble">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="double" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserKey" type="tns:UserKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VisitorName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBasketUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="redirectUrlOk" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="redirectUrlCancel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfUserFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserFilterField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserFilterField" type="tns:UserFilterField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="UserFilterField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AccountEntries" />
+          <s:enumeration value="AddOnSelectors" />
+          <s:enumeration value="AdministratorDataAreas" />
+          <s:enumeration value="ArchivedDateTime" />
+          <s:enumeration value="ArchivedDateTimeAsMonth" />
+          <s:enumeration value="ArchivedDateTimeAsQuarter" />
+          <s:enumeration value="ArchivedDateTimeAsWeek" />
+          <s:enumeration value="ArchivedDateTimeAsYear" />
+          <s:enumeration value="BlockLoginDate" />
+          <s:enumeration value="BlockLoginDateAsMonth" />
+          <s:enumeration value="BlockLoginDateAsQuarter" />
+          <s:enumeration value="BlockLoginDateAsWeek" />
+          <s:enumeration value="BlockLoginDateAsYear" />
+          <s:enumeration value="Calls" />
+          <s:enumeration value="ChangePassword" />
+          <s:enumeration value="Comments" />
+          <s:enumeration value="ConditionAgreements" />
+          <s:enumeration value="ConditionContact" />
+          <s:enumeration value="ConditionContactCustomerGroupCode" />
+          <s:enumeration value="ConditionContactNo" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ConstructionParts" />
+          <s:enumeration value="Contact" />
+          <s:enumeration value="ContactEmployeeCode" />
+          <s:enumeration value="ContactEmployeeContactPersonContactEmail" />
+          <s:enumeration value="ContactEmployeeContactPersonContactLongName" />
+          <s:enumeration value="ContactEmployeeContactPersonContactNo" />
+          <s:enumeration value="ContactEmployeeContactPersonOrganizationName" />
+          <s:enumeration value="ContactEmployeeContactPersonOrganizationShortName" />
+          <s:enumeration value="ContactEmployeeContactPersonPersonBSN" />
+          <s:enumeration value="ContactEmployeeContactPersonPersonFullName" />
+          <s:enumeration value="ContactEmployeeFunctionDescription" />
+          <s:enumeration value="ContactEmployeeIsActive" />
+          <s:enumeration value="ContactInitials" />
+          <s:enumeration value="ContactNo" />
+          <s:enumeration value="ContactOfficeContactNo" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCity" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCountryCode" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressCountryDescription" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressHouseNumber" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressProvince" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressStreet" />
+          <s:enumeration value="ContactOfficeContactVisitingAddressZipCode" />
+          <s:enumeration value="ContactOrganization" />
+          <s:enumeration value="ContactOrganizationName" />
+          <s:enumeration value="Contracts" />
+          <s:enumeration value="CostRegistrations" />
+          <s:enumeration value="CreatedUsers" />
+          <s:enumeration value="CreationDateTime" />
+          <s:enumeration value="CreationDateTimeAsMonth" />
+          <s:enumeration value="CreationDateTimeAsQuarter" />
+          <s:enumeration value="CreationDateTimeAsWeek" />
+          <s:enumeration value="CreationDateTimeAsYear" />
+          <s:enumeration value="Creator" />
+          <s:enumeration value="CreatorFriendlyName" />
+          <s:enumeration value="DataArea" />
+          <s:enumeration value="DataAreaApplicationInstanceNo" />
+          <s:enumeration value="DataAreaCode" />
+          <s:enumeration value="DataAreaNumber" />
+          <s:enumeration value="DataAreaParentContactNo" />
+          <s:enumeration value="DataAreaParentContactOrganizationName" />
+          <s:enumeration value="Declarations" />
+          <s:enumeration value="DefaultFinancialAccounting" />
+          <s:enumeration value="DefaultProjectAccounting" />
+          <s:enumeration value="Documents" />
+          <s:enumeration value="DocumentVersions" />
+          <s:enumeration value="Elements" />
+          <s:enumeration value="Email" />
+          <s:enumeration value="EquipmentRegistrations" />
+          <s:enumeration value="EstimateObjects" />
+          <s:enumeration value="EstimateParts" />
+          <s:enumeration value="Estimates" />
+          <s:enumeration value="FormalName" />
+          <s:enumeration value="Forms" />
+          <s:enumeration value="FriendlyName" />
+          <s:enumeration value="Function" />
+          <s:enumeration value="GoogleMail" />
+          <s:enumeration value="Groups" />
+          <s:enumeration value="InventoryLists" />
+          <s:enumeration value="IsActive" />
+          <s:enumeration value="IsAdministrator" />
+          <s:enumeration value="IsArchived" />
+          <s:enumeration value="IsDemo" />
+          <s:enumeration value="Jobs" />
+          <s:enumeration value="LastLoginDate" />
+          <s:enumeration value="LastLoginDateAsMonth" />
+          <s:enumeration value="LastLoginDateAsQuarter" />
+          <s:enumeration value="LastLoginDateAsWeek" />
+          <s:enumeration value="LastLoginDateAsYear" />
+          <s:enumeration value="Letters" />
+          <s:enumeration value="LetterSalutation" />
+          <s:enumeration value="LicenseType" />
+          <s:enumeration value="LocalContact" />
+          <s:enumeration value="LocalContactInitials" />
+          <s:enumeration value="LocalContactJobTitle" />
+          <s:enumeration value="LocalContactNo" />
+          <s:enumeration value="Logs" />
+          <s:enumeration value="ManagerEMail" />
+          <s:enumeration value="ManagerLetterSalutation" />
+          <s:enumeration value="MemosOfAuthor" />
+          <s:enumeration value="Notes" />
+          <s:enumeration value="OfferParts" />
+          <s:enumeration value="Offers" />
+          <s:enumeration value="Orders" />
+          <s:enumeration value="Packings" />
+          <s:enumeration value="ParentContact" />
+          <s:enumeration value="ParentContactId" />
+          <s:enumeration value="ParentContactLongName" />
+          <s:enumeration value="ParentContactNo" />
+          <s:enumeration value="ParentContactOrganizationName" />
+          <s:enumeration value="PasswordExpirationPeriod" />
+          <s:enumeration value="PasswordFailureTime" />
+          <s:enumeration value="PasswordFailureTimeAsMonth" />
+          <s:enumeration value="PasswordFailureTimeAsQuarter" />
+          <s:enumeration value="PasswordFailureTimeAsWeek" />
+          <s:enumeration value="PasswordFailureTimeAsYear" />
+          <s:enumeration value="PasswordTimeStamp" />
+          <s:enumeration value="PasswordTimeStampAsMonth" />
+          <s:enumeration value="PasswordTimeStampAsQuarter" />
+          <s:enumeration value="PasswordTimeStampAsWeek" />
+          <s:enumeration value="PasswordTimeStampAsYear" />
+          <s:enumeration value="ProductLists" />
+          <s:enumeration value="Projects" />
+          <s:enumeration value="PurchaseOrders" />
+          <s:enumeration value="ReadOnly" />
+          <s:enumeration value="SalesConditionAgreements" />
+          <s:enumeration value="SalesConditionDiscounts" />
+          <s:enumeration value="ShowPopupOnNextLogin" />
+          <s:enumeration value="StockItemRegistrations" />
+          <s:enumeration value="StockLists" />
+          <s:enumeration value="SupportAgreements" />
+          <s:enumeration value="TaskRegistrations" />
+          <s:enumeration value="Tasks" />
+          <s:enumeration value="TradeOrders" />
+          <s:enumeration value="UserInterface" />
+          <s:enumeration value="UserPermissions" />
+          <s:enumeration value="VisitorIsInternal" />
+          <s:enumeration value="VisitorLanguage" />
+          <s:enumeration value="VisitorLanguageCode" />
+          <s:enumeration value="VisitorName" />
+          <s:enumeration value="WorkSheets" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBasketUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="basketCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:UserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDetailUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfUserKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfUserFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfUserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDefaultView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="view" type="tns:UserViewOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="UserViewOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="CurrentUser" />
+          <s:enumeration value="User" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetDefaultViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetDefaultViewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFilterElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FilterElement" nillable="true" type="tns:FilterElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FilterElement">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ConditionType" type="tns:ConditionTypeOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value1" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value2" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConditionTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="EqualsField" />
+          <s:enumeration value="GreaterThan" />
+          <s:enumeration value="GreaterThanField" />
+          <s:enumeration value="GreaterThanOrEquals" />
+          <s:enumeration value="GreaterThanOrEqualsField" />
+          <s:enumeration value="LesserThan" />
+          <s:enumeration value="LesserThanField" />
+          <s:enumeration value="LesserThanOrEquals" />
+          <s:enumeration value="LesserThanOrEqualsField" />
+          <s:enumeration value="Between" />
+          <s:enumeration value="Outside" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="NotContains" />
+          <s:enumeration value="EqualsNoCase" />
+          <s:enumeration value="ItemInSet" />
+          <s:enumeration value="StartsWith" />
+          <s:enumeration value="EndsWith" />
+          <s:enumeration value="InRange" />
+          <s:enumeration value="NotNull" />
+          <s:enumeration value="Null" />
+          <s:enumeration value="HasChilds" />
+          <s:enumeration value="HasNoChilds" />
+          <s:enumeration value="InAudience" />
+          <s:enumeration value="Approximately" />
+          <s:enumeration value="ApproximatelyField" />
+          <s:enumeration value="InRangeField" />
+          <s:enumeration value="LastWeek" />
+          <s:enumeration value="LastMonth" />
+          <s:enumeration value="NextWeek" />
+          <s:enumeration value="NextMonth" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="NotEqualsField" />
+          <s:enumeration value="ItemNotInSet" />
+          <s:enumeration value="HasUnarchivedChilds" />
+          <s:enumeration value="HasNoUnarchivedChilds" />
+          <s:enumeration value="All" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SelectAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAsJSONResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfUserFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfUserFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGridUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsArrayResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserKeys" type="tns:ArrayOfUserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfUserFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sortExpression" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSortOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfUserXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentUserInfoResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateSupportUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="supportUserInfo" type="tns:SupportUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SupportUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactPersonRecord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContractNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateSupportUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateSupportUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewAdvancedFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSearchTextResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFacet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedFacetItem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Facet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSelected" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfFacetItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedItem" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacetItem" nillable="true" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Facet" nillable="true" type="tns:Facet" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetViewFacetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFacetResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="facets" type="tns:ArrayOfFacet" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ClearBasketSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearBasket" />
+  </wsdl:message>
+  <wsdl:message name="ClearBasketSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearBasketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketAsArray" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketAsArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketCount" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDetailUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDetailUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDefaultView" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDefaultViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Select" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGridUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGridUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsArray" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrder" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSupportUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateSupportUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateSupportUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateSupportUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewCount" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSearchText" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSearchTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFacet" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFacetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UserServiceSoap">
+    <wsdl:operation name="ClearBasket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Clears the basket&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ClearBasketSoapIn" />
+      <wsdl:output message="tns:ClearBasketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all selected records in the basket as an xml. Does not clear the basket!&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in UserXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=USR.User"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketAsXmlSoapIn" />
+      <wsdl:output message="tns:GetBasketAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all selected records in the basket as an xml. Does not clear the basket!&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out double[] selectedQuantities; The selected quantities as an array.&lt;/li&gt;
+&lt;li&gt;out UserKey[] selectedRecords; The keys of the selected records.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketAsArraySoapIn" />
+      <wsdl:output message="tns:GetBasketAsArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage for searching and selecting User records.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string redirectUrlOk; The url to which the basket returns when the user is finished with selecting items. When null no Ok button will be visible.&lt;/li&gt;
+&lt;li&gt;in string redirectUrlCancel; The url to which the basket returns when the user cancels this session. When null no Cancel button will be visible.&lt;/li&gt;
+&lt;li&gt;in FilterField[] filterFields; The fields to filter on (or null = no filter).&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filter values to use (or null = no filter)&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketUrlSoapIn" />
+      <wsdl:output message="tns:GetBasketUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the number of records in the basket.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out int basketCount; The number of records in the basket.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketCountSoapIn" />
+      <wsdl:output message="tns:GetBasketCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage with information about the requested User record.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in UserKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetDetailUrlSoapIn" />
+      <wsdl:output message="tns:GetDetailUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all records with given keys as an xml.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in UserKey[] keys; An array of alternative keys of the requested records.&lt;/li&gt;
+&lt;li&gt;in UserXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=USR.User"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoSoapIn" />
+      <wsdl:output message="tns:GetInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a list of Userkeys that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;out UserKey[] keys; The requested UserKeys or null when not found.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SearchSoapIn" />
+      <wsdl:output message="tns:SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets the default view for this session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in UserViewOption view; The select view.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetDefaultViewSoapIn" />
+      <wsdl:output message="tns:SetDefaultViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a JSON string that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;in UserXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=USR.User"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string json; The requested information as a json string.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectAsJSONSoapIn" />
+      <wsdl:output message="tns:SelectAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a xml that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;in UserXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=USR.User"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectSoapIn" />
+      <wsdl:output message="tns:SelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage for searching User records.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterField[] filterFields; The fields to filter on (or null = no filter).&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filter values to use (or null = no filter)&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetGridUrlSoapIn" />
+      <wsdl:output message="tns:GetGridUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current UserView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in UserXmlField[] fields; Fields to use.&lt;/li&gt;
+&lt;li&gt;out string xml; xml containing given fields of all records of current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsXmlSoapIn" />
+      <wsdl:output message="tns:GetViewAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current ProductView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out ProductKey[] productsKeys; array of keys of the records in the current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsArraySoapIn" />
+      <wsdl:output message="tns:GetViewAsArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a viewfilter on 1 or more fields eg on Userset&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in UserFilterField[] filterFields; Fields to filter on.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; Fieldvalues of the fields to filter.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFilterSoapIn" />
+      <wsdl:output message="tns:SetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Set the sort order for this view&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in sortExpression; sort expression for example: code asc, name desc&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSortOrderSoapIn" />
+      <wsdl:output message="tns:SetViewSortOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserInfo">
+      <wsdl:input message="tns:GetCurrentUserInfoSoapIn" />
+      <wsdl:output message="tns:GetCurrentUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSupportUser">
+      <wsdl:input message="tns:CreateSupportUserSoapIn" />
+      <wsdl:output message="tns:CreateSupportUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of records in current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewCountSoapIn" />
+      <wsdl:output message="tns:GetViewCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ResetViewFilterSoapIn" />
+      <wsdl:output message="tns:ResetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets an advanced viewfilter on 1 or more fields.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewAdvancedFilterSoapIn" />
+      <wsdl:output message="tns:SetViewAdvancedFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a search text for this view.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string searchText; Text to search on all relevant fields.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSearchTextSoapIn" />
+      <wsdl:output message="tns:SetViewSearchTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Given the selected facetvalue or null to start and returns the meaningfull facets with their values, as well as the number of items fullfilling these facetvalues&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in string selectedFacetItem; facetItem to start with.&lt;/li&gt;
+&lt;li&gt;out Facet[] facets; relevant facets based on selectedFacetItem.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of items fullfilling the given facets.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFacetSoapIn" />
+      <wsdl:output message="tns:SetViewFacetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoap" type="tns:UserServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClearBasket">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/ClearBasket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetBasketAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetBasketAsArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetBasketUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetBasketCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserInfo">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetCurrentUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSupportUser">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/CreateSupportUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap:operation soapAction="http://Compano.com/Modules/USR/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceSoap12" type="tns:UserServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClearBasket">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/ClearBasket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetBasketAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetBasketAsArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetBasketUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetBasketCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/Select" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserInfo">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetCurrentUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSupportUser">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/CreateSupportUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap12:operation soapAction="http://Compano.com/Modules/USR/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+UserService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing User information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting User records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving User information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating User information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+    <wsdl:port name="UserServiceSoap" binding="tns:UserServiceSoap">
+      <soap:address location="http://ttt.online.compano.nl/usruser.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceSoap12" binding="tns:UserServiceSoap12">
+      <soap12:address location="http://ttt.online.compano.nl/usruser.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

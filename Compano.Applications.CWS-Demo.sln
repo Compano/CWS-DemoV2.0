@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWS-Demo_backup", "CWS-Demo_backup.csproj", "{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{058E6DAE-5A67-4FCA-AAA3-5B99D2712922}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5106D9F-BAFE-4CD3-80E1-0AA9AB9A29AB}
+	EndGlobalSection
+EndGlobal

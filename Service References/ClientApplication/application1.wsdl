@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://compano.com/system.data" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://compano.com/system.data" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+Below is a list of all available services within this namespace:&lt;br/&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errornumber (see list below) and a message or an empty string when function is completed succesfully.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+E001 InvalidUserAccountException, occurs when the user account is missing or not active anymore.&lt;br/&gt;
+E002 InvalidPasswordException, occurs when the password is invalid.&lt;br/&gt;
+E003 JobTimeoutException, occurs when a job is not ready. Probably the database is not completly loaded, please try again after 15 minutes&lt;br/&gt;
+E004 SendMailException, occurs when mail could not be send.&lt;br/&gt;
+E005 InsufficentRightsException, occurs when the user has insufficent rights to perform a specific function.&lt;br/&gt;
+E006 DataValidationException, occurs when a record has invalid data&lt;br/&gt;
+E007 CascadeRestrictException, occurs when childrecords exists and parent is deleted.&lt;br/&gt;
+E008 ReadOnlyException, occurs when column is changed and the record or column is readonly.&lt;br/&gt;
+E009 RecordLockedException, occurs when a record is locked.&lt;br/&gt;
+E010 Login not allowed, Occurs when the user is not allowed to login. In case of maintenance or license exceeded.&lt;br/&gt;
+E011 Generic exception.&lt;br/&gt;
+E012 No current user, login again.&lt;br/&gt;
+E013 ClipBoardException, pasting not allowed&lt;br/&gt;
+E014 RecordDeleteNotAllowedException, occurs when record may not be deleted.&lt;br/&gt;
+E015 OperationCanceledException, occurs when TimeLimitedJob takes too much time.&lt;br/&gt;
+E016 ConcurrencyLimitReachedException, occurs when user reaches his concurrency limit.&lt;br/&gt;
+E100 Unknown session handle, please login again.&lt;br/&gt;
+E101 No basket found.&lt;br/&gt;
+E999 SystemError; underlying error is send by mail to Compano&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;A href="http://www.compano.nl"&gt;Compano B.V.&lt;/A&gt; 2007-2008</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://compano.com/system.data">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passWord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginWithRedirect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passWord" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginWithRedirectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWithRedirectResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startPageUrl" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionHandleForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userDatabase" type="tns:UserDatabaseOption" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="UserDatabaseOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Primary" />
+          <s:enumeration value="InstalPartner" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetSessionHandleForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionHandleForUserResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionHandle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="dataAreaId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passWord" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="logonMode" type="tns:LogonModeOption" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowsIdentity" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="LogonModeOption">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="Default" />
+              <s:enumeration value="NoExceptions" />
+              <s:enumeration value="NoPasswordCheck" />
+              <s:enumeration value="NoCheckForMaintenance" />
+              <s:enumeration value="NoActivityLogging" />
+              <s:enumeration value="ForceLicenseUpdate" />
+              <s:enumeration value="KeepContext" />
+              <s:enumeration value="KeepUISession" />
+              <s:enumeration value="MobileUI" />
+              <s:enumeration value="LogoutExistingSessions" />
+              <s:enumeration value="AllRights" />
+              <s:enumeration value="NoIsActiveCheck" />
+              <s:enumeration value="CheckAllowLoginAs" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:element name="GetSessionHandleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionHandleResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionHandleForEnvironment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userDatabase" type="tns:UserDatabaseOption" />
+            <s:element minOccurs="1" maxOccurs="1" name="dataAreaId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionHandleForEnvironmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionHandleForEnvironmentResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginRemote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passWord" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userDatabase" type="tns:UserDatabaseOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginRemoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginRemoteResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Disconnect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisconnectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisconnectResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Reload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReloadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReloadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogoutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidSessionHandle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidSessionHandleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsValidSessionHandleResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="valid" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStartPageUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStartPageUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStartPageUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetOutputCulture">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cultureCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetOutputCultureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetOutputCultureResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFilterElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FilterElement" nillable="true" type="tns:FilterElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FilterElement">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ConditionType" type="tns:ConditionTypeOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value1" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value2" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConditionTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="EqualsField" />
+          <s:enumeration value="GreaterThan" />
+          <s:enumeration value="GreaterThanField" />
+          <s:enumeration value="GreaterThanOrEquals" />
+          <s:enumeration value="GreaterThanOrEqualsField" />
+          <s:enumeration value="LesserThan" />
+          <s:enumeration value="LesserThanField" />
+          <s:enumeration value="LesserThanOrEquals" />
+          <s:enumeration value="LesserThanOrEqualsField" />
+          <s:enumeration value="Between" />
+          <s:enumeration value="Outside" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="NotContains" />
+          <s:enumeration value="EqualsNoCase" />
+          <s:enumeration value="ItemInSet" />
+          <s:enumeration value="StartsWith" />
+          <s:enumeration value="EndsWith" />
+          <s:enumeration value="InRange" />
+          <s:enumeration value="NotNull" />
+          <s:enumeration value="Null" />
+          <s:enumeration value="HasChilds" />
+          <s:enumeration value="HasNoChilds" />
+          <s:enumeration value="InAudience" />
+          <s:enumeration value="Approximately" />
+          <s:enumeration value="ApproximatelyField" />
+          <s:enumeration value="InRangeField" />
+          <s:enumeration value="LastWeek" />
+          <s:enumeration value="LastMonth" />
+          <s:enumeration value="NextWeek" />
+          <s:enumeration value="NextMonth" />
+          <s:enumeration value="Past" />
+          <s:enumeration value="Future" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="NotEqualsField" />
+          <s:enumeration value="ItemNotInSet" />
+          <s:enumeration value="HasUnarchivedChilds" />
+          <s:enumeration value="HasNoUnarchivedChilds" />
+          <s:enumeration value="All" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetViewAdvancedFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewAdvancedFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSearchTextResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFacet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedFacetItem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Facet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSelected" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfFacetItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedItem" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacetItem" nillable="true" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Facet" nillable="true" type="tns:Facet" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetViewFacetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFacetResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="facets" type="tns:ArrayOfFacet" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginWithRedirectSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginWithRedirect" />
+  </wsdl:message>
+  <wsdl:message name="LoginWithRedirectSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginWithRedirectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionHandleForUser" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionHandleForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionHandle" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionHandleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleForEnvironmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionHandleForEnvironment" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionHandleForEnvironmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionHandleForEnvironmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginRemoteSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginRemote" />
+  </wsdl:message>
+  <wsdl:message name="LoginRemoteSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginRemoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DisconnectSoapIn">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="DisconnectSoapOut">
+    <wsdl:part name="parameters" element="tns:DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReloadSoapIn">
+    <wsdl:part name="parameters" element="tns:Reload" />
+  </wsdl:message>
+  <wsdl:message name="ReloadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsValidSessionHandleSoapIn">
+    <wsdl:part name="parameters" element="tns:IsValidSessionHandle" />
+  </wsdl:message>
+  <wsdl:message name="IsValidSessionHandleSoapOut">
+    <wsdl:part name="parameters" element="tns:IsValidSessionHandleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStartPageUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStartPageUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetStartPageUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStartPageUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetOutputCultureSoapIn">
+    <wsdl:part name="parameters" element="tns:SetOutputCulture" />
+  </wsdl:message>
+  <wsdl:message name="SetOutputCultureSoapOut">
+    <wsdl:part name="parameters" element="tns:SetOutputCultureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewCount" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSearchText" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSearchTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFacet" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFacetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ApplicationWebServiceSoap">
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Authenticates given user and starts a new session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string accountName; The account name of the user.&lt;/li&gt;
+&lt;li&gt;in string passWord; The password of given account name.&lt;/li&gt;
+&lt;li&gt;in string companyName; The company name of given user.&lt;/li&gt;
+&lt;li&gt;out string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithRedirect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Authenticates given user and starts a new session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string accountName; The account name of the user.&lt;/li&gt;
+&lt;li&gt;in string passWord; The password of given account name.&lt;/li&gt;
+&lt;li&gt;out string startPageUrl; The url to open the start page, this can be on another instance of the application for example www3.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginWithRedirectSoapIn" />
+      <wsdl:output message="tns:LoginWithRedirectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">INTERNAL!
+
+Gets a sessionhandle for given user database and dataarea id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in UserDatabaseOption userDatabase; The user database to use for authentication.&lt;/li&gt;
+&lt;li&gt;in string accountName; The account name of the user.&lt;/li&gt;
+&lt;li&gt;out string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetSessionHandleForUserSoapIn" />
+      <wsdl:output message="tns:GetSessionHandleForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandle">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">INTERNAL!</wsdl:documentation>
+      <wsdl:input message="tns:GetSessionHandleSoapIn" />
+      <wsdl:output message="tns:GetSessionHandleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForEnvironment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">INTERNAL!
+
+Gets a sessionhandle for given user database and dataarea id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in UserDatabaseOption userDatabase; The user database to use for authentication.&lt;/li&gt;
+&lt;li&gt;in int dataAreaId; The dataarea id to use use negative id to force license update.&lt;/li&gt;
+&lt;li&gt;out string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetSessionHandleForEnvironmentSoapIn" />
+      <wsdl:output message="tns:GetSessionHandleForEnvironmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginRemote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Authenticates given user on given (remote) UserDatabase and starts a new session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string accountName; The account name of the user.&lt;/li&gt;
+&lt;li&gt;in string passWord; The password of given account name.&lt;/li&gt;
+&lt;li&gt;in UserDatabaseOption userDatabase; The user database to use for authentication.&lt;/li&gt;
+&lt;li&gt;out string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginRemoteSoapIn" />
+      <wsdl:output message="tns:LoginRemoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Disconnects given session, but keeps the linked UI sessions logged on.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:DisconnectSoapIn" />
+      <wsdl:output message="tns:DisconnectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Reload">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">INTERNAL!
+
+Reloads current memory database from the sql database.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ReloadSoapIn" />
+      <wsdl:output message="tns:ReloadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Ends given session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSessionHandle">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns true when given sessionHandle is still valid.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out bool; True when given sessionHandle is still valid.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:IsValidSessionHandleSoapIn" />
+      <wsdl:output message="tns:IsValidSessionHandleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStartPageUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the url of the start page of this site.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out string; The url of the start page of this site.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetStartPageUrlSoapIn" />
+      <wsdl:output message="tns:GetStartPageUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetOutputCulture">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">INTERNAL!
+
+Sets the ouput culture for the current session&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string cultureCode; A cultureCode like nl-NL.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetOutputCultureSoapIn" />
+      <wsdl:output message="tns:SetOutputCultureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of records in current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewCountSoapIn" />
+      <wsdl:output message="tns:GetViewCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ResetViewFilterSoapIn" />
+      <wsdl:output message="tns:ResetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets an advanced viewfilter on 1 or more fields.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewAdvancedFilterSoapIn" />
+      <wsdl:output message="tns:SetViewAdvancedFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a search text for this view.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string searchText; Text to search on all relevant fields.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSearchTextSoapIn" />
+      <wsdl:output message="tns:SetViewSearchTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Given the selected facetvalue or null to start and returns the meaningfull facets with their values, as well as the number of items fullfilling these facetvalues&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in string selectedFacetItem; facetItem to start with.&lt;/li&gt;
+&lt;li&gt;out Facet[] facets; relevant facets based on selectedFacetItem.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of items fullfilling the given facets.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFacetSoapIn" />
+      <wsdl:output message="tns:SetViewFacetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApplicationWebServiceSoap" type="tns:ApplicationWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://compano.com/system.data/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithRedirect">
+      <soap:operation soapAction="http://compano.com/system.data/LoginWithRedirect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForUser">
+      <soap:operation soapAction="http://compano.com/system.data/GetSessionHandleForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandle">
+      <soap:operation soapAction="http://compano.com/system.data/GetSessionHandle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForEnvironment">
+      <soap:operation soapAction="http://compano.com/system.data/GetSessionHandleForEnvironment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginRemote">
+      <soap:operation soapAction="http://compano.com/system.data/LoginRemote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap:operation soapAction="http://compano.com/system.data/Disconnect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reload">
+      <soap:operation soapAction="http://compano.com/system.data/Reload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://compano.com/system.data/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSessionHandle">
+      <soap:operation soapAction="http://compano.com/system.data/IsValidSessionHandle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStartPageUrl">
+      <soap:operation soapAction="http://compano.com/system.data/GetStartPageUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutputCulture">
+      <soap:operation soapAction="http://compano.com/system.data/SetOutputCulture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap:operation soapAction="http://compano.com/system.data/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap:operation soapAction="http://compano.com/system.data/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap:operation soapAction="http://compano.com/system.data/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap:operation soapAction="http://compano.com/system.data/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap:operation soapAction="http://compano.com/system.data/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ApplicationWebServiceSoap12" type="tns:ApplicationWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://compano.com/system.data/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithRedirect">
+      <soap12:operation soapAction="http://compano.com/system.data/LoginWithRedirect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForUser">
+      <soap12:operation soapAction="http://compano.com/system.data/GetSessionHandleForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandle">
+      <soap12:operation soapAction="http://compano.com/system.data/GetSessionHandle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionHandleForEnvironment">
+      <soap12:operation soapAction="http://compano.com/system.data/GetSessionHandleForEnvironment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginRemote">
+      <soap12:operation soapAction="http://compano.com/system.data/LoginRemote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap12:operation soapAction="http://compano.com/system.data/Disconnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reload">
+      <soap12:operation soapAction="http://compano.com/system.data/Reload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://compano.com/system.data/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSessionHandle">
+      <soap12:operation soapAction="http://compano.com/system.data/IsValidSessionHandle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStartPageUrl">
+      <soap12:operation soapAction="http://compano.com/system.data/GetStartPageUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutputCulture">
+      <soap12:operation soapAction="http://compano.com/system.data/SetOutputCulture" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap12:operation soapAction="http://compano.com/system.data/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap12:operation soapAction="http://compano.com/system.data/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap12:operation soapAction="http://compano.com/system.data/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap12:operation soapAction="http://compano.com/system.data/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap12:operation soapAction="http://compano.com/system.data/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApplicationWebService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+Below is a list of all available services within this namespace:&lt;br/&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errornumber (see list below) and a message or an empty string when function is completed succesfully.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+E001 InvalidUserAccountException, occurs when the user account is missing or not active anymore.&lt;br/&gt;
+E002 InvalidPasswordException, occurs when the password is invalid.&lt;br/&gt;
+E003 JobTimeoutException, occurs when a job is not ready. Probably the database is not completly loaded, please try again after 15 minutes&lt;br/&gt;
+E004 SendMailException, occurs when mail could not be send.&lt;br/&gt;
+E005 InsufficentRightsException, occurs when the user has insufficent rights to perform a specific function.&lt;br/&gt;
+E006 DataValidationException, occurs when a record has invalid data&lt;br/&gt;
+E007 CascadeRestrictException, occurs when childrecords exists and parent is deleted.&lt;br/&gt;
+E008 ReadOnlyException, occurs when column is changed and the record or column is readonly.&lt;br/&gt;
+E009 RecordLockedException, occurs when a record is locked.&lt;br/&gt;
+E010 Login not allowed, Occurs when the user is not allowed to login. In case of maintenance or license exceeded.&lt;br/&gt;
+E011 Generic exception.&lt;br/&gt;
+E012 No current user, login again.&lt;br/&gt;
+E013 ClipBoardException, pasting not allowed&lt;br/&gt;
+E014 RecordDeleteNotAllowedException, occurs when record may not be deleted.&lt;br/&gt;
+E015 OperationCanceledException, occurs when TimeLimitedJob takes too much time.&lt;br/&gt;
+E016 ConcurrencyLimitReachedException, occurs when user reaches his concurrency limit.&lt;br/&gt;
+E100 Unknown session handle, please login again.&lt;br/&gt;
+E101 No basket found.&lt;br/&gt;
+E999 SystemError; underlying error is send by mail to Compano&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;A href="http://www.compano.nl"&gt;Compano B.V.&lt;/A&gt; 2007-2008</wsdl:documentation>
+    <wsdl:port name="ApplicationWebServiceSoap" binding="tns:ApplicationWebServiceSoap">
+      <soap:address location="https://ttt.online.compano.nl/application.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ApplicationWebServiceSoap12" binding="tns:ApplicationWebServiceSoap12">
+      <soap12:address location="https://ttt.online.compano.nl/application.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

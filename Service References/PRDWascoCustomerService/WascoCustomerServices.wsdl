@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WWC/WascoCustomerServices/" xmlns:s0="http://www.outsystems.com" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WWC/WascoCustomerServices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.outsystems.com">
+      <s:element name="MobileV3_LoginURL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MobileV3_LoginURL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outLoginURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_LoginURL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_LoginURL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outLoginURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Article_Simple_SEARCH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArtNr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inManufacturer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSuppliersCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inEANnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inArticleDescription" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="inOnlyStockArticleYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Article_Simple_SEARCHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outResultRL" type="s0:ArrayOfCust_ArticleSearch" />
+            <s:element minOccurs="1" maxOccurs="1" name="outEmptyListYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCust_ArticleSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cust_ArticleSearch" nillable="true" type="s0:Cust_ArticleSearch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cust_ArticleSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SuppliersCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EAN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitQuantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionShort" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArticleImage200_URL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArticelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleImage200_URL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outImageEmptyYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_SignON_BE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inCustomerCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inLoginCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_SignON_BEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outSessionCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outAuthenticatedYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="outEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outUserFullName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleImage80_URL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArticelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleImage80_URL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outImageEmptyYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleList_NettPrice_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inArticleRecList" type="s0:ArrayOfArticleList" />
+            <s:element minOccurs="1" maxOccurs="1" name="inShowExtendedInfoYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArticleList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArticleList" nillable="true" type="s0:ArticleList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArticleList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WascoArticleNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArticleList_NettPrice_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outArticleRecList" type="s0:ArrayOfWasco_ShoppingCart" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWasco_ShoppingCart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Wasco_ShoppingCart" nillable="true" type="s0:Wasco_ShoppingCart" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Wasco_ShoppingCart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ArticleNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArticleDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArticleDescription_Long" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EAN_Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SuppliersCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscountGroup" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="NettPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitQuantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasAssociatedYN" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasAlternativeYN" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Branches_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Branches_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchesRL" type="s0:ArrayOfBranch" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBranch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Branch" nillable="true" type="s0:Branch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Branch">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DC" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RouteCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryMethod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NonDeliveryPattern" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PartialDeliveries" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CostCentre" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DefaultSalesmanId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GS1_Order_SEND">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inOrderToBePlaced" type="s0:GS1_Order_Struct" />
+            <s:element minOccurs="1" maxOccurs="1" name="inTestYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GS1_Order_Struct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrderHeader" type="s0:GS1_OrderHeader_Struct" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderLines" type="s0:ArrayOfGS1_OrderLine_Struct" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_OrderHeader_Struct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrderVersion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderTypeCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderProcessIndicator" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IndicationOrderProposal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Document" type="s0:GS1_Document" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScenarioCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contract" type="s0:GS1_Contract" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Supplier" type="s0:GS1_Supplier" />
+          <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="s0:GS1_Buyer" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryParty" type="s0:GS1_DeliveryParty" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipFrom" type="s0:GS1_ShipFrom" />
+          <s:element minOccurs="0" maxOccurs="1" name="UltimateConsignee" type="s0:GS1_UltimateConsignee" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyersCombinedOffice" type="s0:GS1_BuyersCombinedOffice" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryDate" type="s0:GS1_DeliveryDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryStartDate" type="s0:GS1_DeliveryStartDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryEndDate" type="s0:GS1_DeliveryEndDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryInstructionCode" type="s0:ArrayOfGS1_DeliveryInstructionCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_Document">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:time" />
+          <s:element minOccurs="0" maxOccurs="1" name="FreeText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_Contract">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ContractNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_Supplier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_Buyer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s0:GS1_Contact" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_Contact">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ContactName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_DeliveryParty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_ShipFrom">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_UltimateConsignee">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_BuyersCombinedOffice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyName2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAndNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_DeliveryDate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:time" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_DeliveryStartDate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:time" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_DeliveryEndDate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:time" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGS1_DeliveryInstructionCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GS1_DeliveryInstructionCode" nillable="true" type="s0:GS1_DeliveryInstructionCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_DeliveryInstructionCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryInstructionCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGS1_OrderLine_Struct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GS1_OrderLine_Struct" nillable="true" type="s0:GS1_OrderLine_Struct" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_OrderLine_Struct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LineItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GTIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeItemId" type="s0:GS1_TradeItemId" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryDate" type="s0:GS1_DeliveryDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryStartDate" type="s0:GS1_DeliveryStartDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryEndDate" type="s0:GS1_DeliveryEndDate" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemSpecification" type="s0:ArrayOfGS1_ItemSpecification" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderedQuantity" type="s0:GS1_OrderedQuantity" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contract" type="s0:GS1_Contract" />
+          <s:element minOccurs="0" maxOccurs="1" name="FreeText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryInstructionCode" type="s0:ArrayOfGS1_DeliveryInstructionCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfirmedQuantity" type="s0:GS1_ConfirmedQuantity" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderStock" type="s0:wcs_OrderStock" />
+          <s:element minOccurs="0" maxOccurs="1" name="NetUnitPrice" type="s0:GS1_NetUnitPrice" />
+          <s:element minOccurs="0" maxOccurs="1" name="GrossUnitPrice" type="s0:GS1_GrossUnitPrice" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_TradeItemId">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TradeItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeItemNumberTypeCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGS1_ItemSpecification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GS1_ItemSpecification" nillable="true" type="s0:GS1_ItemSpecification" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_ItemSpecification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemSpecification" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_OrderedQuantity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasureUnitQualifier" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignificanceCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_ConfirmedQuantity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasureUnitQualifier" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="wcs_OrderStock">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StockYN" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="StockRemaining" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StockValue" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_NetUnitPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPriceBasis" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasureUnitQualifier" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GS1_GrossUnitPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPriceBasis" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasureUnitQualifier" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GS1_Order_SENDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outResultString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderDeliveryTimePlanned_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoOrderNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderDeliveryTimePlanned_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ErrorMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExptDeliveryorTrackandTrace" type="s0:ArrayOfExptDeliveryorTrackandTrace" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfExptDeliveryorTrackandTrace">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExptDeliveryorTrackandTrace" nillable="true" type="s0:ExptDeliveryorTrackandTrace" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExptDeliveryorTrackandTrace">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Method_Code" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpectedDeliveryDateTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DPDTrackAndTraceURL" type="s0:ArrayOfDPDTrackAndTraceURL" />
+          <s:element minOccurs="0" maxOccurs="1" name="TGPTrackAndTraceURL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDPDTrackAndTraceURL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DPDTrackAndTraceURL" nillable="true" type="s0:DPDTrackAndTraceURL" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DPDTrackAndTraceURL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DPDTrackAndTraceURL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Easy_Order_SEND">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inOrderStruct" type="s0:Wasco_Order_Struct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Wasco_Order_Struct">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CustomerNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference_Extra" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectNumber_FreeText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DesiredDeliveryDate" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="Address_ICMcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Address_DeliveryCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_name1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_name2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_Street" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Different_address_number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_zipcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Different_address_Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryInstructions1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryInstructions2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderLines" type="s0:ArrayOfWasco_OrderLines" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfWasco_OrderLines">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Wasco_OrderLines" nillable="true" type="s0:Wasco_OrderLines" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Wasco_OrderLines">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ArticleNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArticleDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TextLine1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TextLine2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Easy_Order_SENDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outResultString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GS1_Order_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoOrderNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GS1_Order_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outGS1_order" type="s0:GS1_Order_Struct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_ShoppingCart_DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_ShoppingCart_DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleImage100_URL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArticelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleImage100_URL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outImageEmptyYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleStock_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArticelNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="inQuantity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleStock_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outStockYN" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="outPrice_Gross" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="outPrice_Net" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="outStockRemaining" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outDCStockValue" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WascoBE_LoginURL_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WascoBE_LoginURL_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outLoginURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_ShoppingCart_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="inShowExtendedInfoYN" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Wasco_ShoppingCart_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outCartIsEmptyYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="outShoppingCartRL" type="s0:ArrayOfWasco_ShoppingCart" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleList_Stock_CHECK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inArticleRecList" type="s0:ArrayOfArticleList" />
+            <s:element minOccurs="1" maxOccurs="1" name="inDesiredDeliveryDate" type="s:date" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleList_Stock_CHECKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outArticleStockRecList" type="s0:ArrayOfArticleStockList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArticleStockList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArticleStockList" nillable="true" type="s0:ArticleStockList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArticleStockList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WascoArticleNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WascoArticleDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuantityOrdered" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StockYN" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuantityRemaining" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StockValue" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Invoice_PDF_GENERATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inInvoiceNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Invoice_PDF_GENERATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outPDF_BinData" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="outExistYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="outFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_SignON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inCustomerCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inLoginCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_SignONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outSessionCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="outAuthenticatedYN" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="outEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outUserFullName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GS1_Order_Stock_CHECK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inOrderToBePlaced" type="s0:GS1_Order_Struct" />
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GS1_Order_Stock_CHECKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outGS1_OrderWithStock" type="s0:GS1_Order_Struct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleInfoAndStock_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inSessionCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inWascoArticleNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArticleInfoAndStock_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="outError" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="outArticleInfoRec" type="s0:Cust_ArticleInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="outStockRL" type="s0:ArrayOfCust_StockInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Cust_ArticleInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NettPrice" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossPrice" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionLong" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCust_StockInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cust_StockInfo" nillable="true" type="s0:Cust_StockInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cust_StockInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Warehouse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StockAvailableYN" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="StockValue" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MobileV3_LoginURL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:MobileV3_LoginURL_GET" />
+  </wsdl:message>
+  <wsdl:message name="MobileV3_LoginURL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:MobileV3_LoginURL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_LoginURL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:Wasco_LoginURL_GET" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_LoginURL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:Wasco_LoginURL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Article_Simple_SEARCHSoapIn">
+    <wsdl:part name="parameters" element="s0:Article_Simple_SEARCH" />
+  </wsdl:message>
+  <wsdl:message name="Article_Simple_SEARCHSoapOut">
+    <wsdl:part name="parameters" element="s0:Article_Simple_SEARCHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage200_URL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleImage200_URL_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage200_URL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleImage200_URL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_SignON_BESoapIn">
+    <wsdl:part name="parameters" element="s0:User_SignON_BE" />
+  </wsdl:message>
+  <wsdl:message name="User_SignON_BESoapOut">
+    <wsdl:part name="parameters" element="s0:User_SignON_BEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage80_URL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleImage80_URL_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage80_URL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleImage80_URL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleList_NettPrice_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleList_NettPrice_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleList_NettPrice_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleList_NettPrice_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Branches_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:Branches_GET" />
+  </wsdl:message>
+  <wsdl:message name="Branches_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:Branches_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_SENDSoapIn">
+    <wsdl:part name="parameters" element="s0:GS1_Order_SEND" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_SENDSoapOut">
+    <wsdl:part name="parameters" element="s0:GS1_Order_SENDResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderDeliveryTimePlanned_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:OrderDeliveryTimePlanned_GET" />
+  </wsdl:message>
+  <wsdl:message name="OrderDeliveryTimePlanned_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:OrderDeliveryTimePlanned_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Easy_Order_SENDSoapIn">
+    <wsdl:part name="parameters" element="s0:Easy_Order_SEND" />
+  </wsdl:message>
+  <wsdl:message name="Easy_Order_SENDSoapOut">
+    <wsdl:part name="parameters" element="s0:Easy_Order_SENDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:GS1_Order_GET" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:GS1_Order_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_ShoppingCart_DELETESoapIn">
+    <wsdl:part name="parameters" element="s0:Wasco_ShoppingCart_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_ShoppingCart_DELETESoapOut">
+    <wsdl:part name="parameters" element="s0:Wasco_ShoppingCart_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage100_URL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleImage100_URL_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleImage100_URL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleImage100_URL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleStock_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleStock_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleStock_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleStock_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="WascoBE_LoginURL_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:WascoBE_LoginURL_GET" />
+  </wsdl:message>
+  <wsdl:message name="WascoBE_LoginURL_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:WascoBE_LoginURL_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_ShoppingCart_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:Wasco_ShoppingCart_GET" />
+  </wsdl:message>
+  <wsdl:message name="Wasco_ShoppingCart_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:Wasco_ShoppingCart_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleList_Stock_CHECKSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleList_Stock_CHECK" />
+  </wsdl:message>
+  <wsdl:message name="ArticleList_Stock_CHECKSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleList_Stock_CHECKResponse" />
+  </wsdl:message>
+  <wsdl:message name="Invoice_PDF_GENERATESoapIn">
+    <wsdl:part name="parameters" element="s0:Invoice_PDF_GENERATE" />
+  </wsdl:message>
+  <wsdl:message name="Invoice_PDF_GENERATESoapOut">
+    <wsdl:part name="parameters" element="s0:Invoice_PDF_GENERATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_SignONSoapIn">
+    <wsdl:part name="parameters" element="s0:User_SignON" />
+  </wsdl:message>
+  <wsdl:message name="User_SignONSoapOut">
+    <wsdl:part name="parameters" element="s0:User_SignONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_Stock_CHECKSoapIn">
+    <wsdl:part name="parameters" element="s0:GS1_Order_Stock_CHECK" />
+  </wsdl:message>
+  <wsdl:message name="GS1_Order_Stock_CHECKSoapOut">
+    <wsdl:part name="parameters" element="s0:GS1_Order_Stock_CHECKResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArticleInfoAndStock_GETSoapIn">
+    <wsdl:part name="parameters" element="s0:ArticleInfoAndStock_GET" />
+  </wsdl:message>
+  <wsdl:message name="ArticleInfoAndStock_GETSoapOut">
+    <wsdl:part name="parameters" element="s0:ArticleInfoAndStock_GETResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WascoCustomerServicesSoap">
+    <wsdl:operation name="MobileV3_LoginURL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the webselection URL for Mobile. This url is linked to m.wasco.nl</wsdl:documentation>
+      <wsdl:input message="tns:MobileV3_LoginURL_GETSoapIn" />
+      <wsdl:output message="tns:MobileV3_LoginURL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_LoginURL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the webselection URL for Wasco.nl. This URL is www.wasco.nl</wsdl:documentation>
+      <wsdl:input message="tns:Wasco_LoginURL_GETSoapIn" />
+      <wsdl:output message="tns:Wasco_LoginURL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Article_Simple_SEARCH">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers an article list based on the search criteria</wsdl:documentation>
+      <wsdl:input message="tns:Article_Simple_SEARCHSoapIn" />
+      <wsdl:output message="tns:Article_Simple_SEARCHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage200_URL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers a URL that can be used to get the 200px format image</wsdl:documentation>
+      <wsdl:input message="tns:ArticleImage200_URL_GETSoapIn" />
+      <wsdl:output message="tns:ArticleImage200_URL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON_BE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Login for the user and delivers a session code needed for the other services</wsdl:documentation>
+      <wsdl:input message="tns:User_SignON_BESoapIn" />
+      <wsdl:output message="tns:User_SignON_BESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage80_URL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers a URL that can be used to get the 80px format image</wsdl:documentation>
+      <wsdl:input message="tns:ArticleImage80_URL_GETSoapIn" />
+      <wsdl:output message="tns:ArticleImage80_URL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_NettPrice_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gives article list retour with nett prices based on input article list</wsdl:documentation>
+      <wsdl:input message="tns:ArticleList_NettPrice_GETSoapIn" />
+      <wsdl:output message="tns:ArticleList_NettPrice_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Branches_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers an overview of the Wasco branches</wsdl:documentation>
+      <wsdl:input message="tns:Branches_GETSoapIn" />
+      <wsdl:output message="tns:Branches_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_SEND">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Takes an order in the GS1 format and processes it</wsdl:documentation>
+      <wsdl:input message="tns:GS1_Order_SENDSoapIn" />
+      <wsdl:output message="tns:GS1_Order_SENDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderDeliveryTimePlanned_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers a list of all the deliveries per order number. A delivery will have a method code to indicate the type of the of the delivery. The delivery count indicates the number of the order.
+
+Method Code 0 = No information available
+Method Code 1 = Deliverydate + Routetime
+Method Code 2 = Pickup
+Method Code 3 = Track &amp; Trace Code of a  DPD delivery
+Method Code 4 = Track &amp; Trace Code van een TNT delivery</wsdl:documentation>
+      <wsdl:input message="tns:OrderDeliveryTimePlanned_GETSoapIn" />
+      <wsdl:output message="tns:OrderDeliveryTimePlanned_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Easy_Order_SEND">
+      <wsdl:input message="tns:Easy_Order_SENDSoapIn" />
+      <wsdl:output message="tns:Easy_Order_SENDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an order in the GS1 format</wsdl:documentation>
+      <wsdl:input message="tns:GS1_Order_GETSoapIn" />
+      <wsdl:output message="tns:GS1_Order_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_DELETE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes the current shopping cart contents of Wasco.nl</wsdl:documentation>
+      <wsdl:input message="tns:Wasco_ShoppingCart_DELETESoapIn" />
+      <wsdl:output message="tns:Wasco_ShoppingCart_DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage100_URL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers a URL that can be used to get the 100px format image</wsdl:documentation>
+      <wsdl:input message="tns:ArticleImage100_URL_GETSoapIn" />
+      <wsdl:output message="tns:ArticleImage100_URL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleStock_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delivers the stock info as 1 item instead of the standard Wasco stock list.</wsdl:documentation>
+      <wsdl:input message="tns:ArticleStock_GETSoapIn" />
+      <wsdl:output message="tns:ArticleStock_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WascoBE_LoginURL_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the webselection URL for wasco.be. This url is www.wasco.be</wsdl:documentation>
+      <wsdl:input message="tns:WascoBE_LoginURL_GETSoapIn" />
+      <wsdl:output message="tns:WascoBE_LoginURL_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the content of the current shopping cart of Wasco.nl</wsdl:documentation>
+      <wsdl:input message="tns:Wasco_ShoppingCart_GETSoapIn" />
+      <wsdl:output message="tns:Wasco_ShoppingCart_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_Stock_CHECK">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gives stock information based on an article list</wsdl:documentation>
+      <wsdl:input message="tns:ArticleList_Stock_CHECKSoapIn" />
+      <wsdl:output message="tns:ArticleList_Stock_CHECKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Invoice_PDF_GENERATE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a digital PDF (stream) based on the input invoice number.</wsdl:documentation>
+      <wsdl:input message="tns:Invoice_PDF_GENERATESoapIn" />
+      <wsdl:output message="tns:Invoice_PDF_GENERATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Login for the user and delivers a session code needed for the other services</wsdl:documentation>
+      <wsdl:input message="tns:User_SignONSoapIn" />
+      <wsdl:output message="tns:User_SignONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_Stock_CHECK">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks the stock of an order in GS1 format</wsdl:documentation>
+      <wsdl:input message="tns:GS1_Order_Stock_CHECKSoapIn" />
+      <wsdl:output message="tns:GS1_Order_Stock_CHECKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArticleInfoAndStock_GET">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the article info and related article stock info</wsdl:documentation>
+      <wsdl:input message="tns:ArticleInfoAndStock_GETSoapIn" />
+      <wsdl:output message="tns:ArticleInfoAndStock_GETSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WascoCustomerServicesSoap" type="tns:WascoCustomerServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MobileV3_LoginURL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/MobileV3_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_LoginURL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Wasco_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Article_Simple_SEARCH">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Article_Simple_SEARCH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage200_URL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage200_URL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON_BE">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/User_SignON_BE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage80_URL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage80_URL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_NettPrice_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleList_NettPrice_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Branches_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Branches_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_SEND">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_SEND" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderDeliveryTimePlanned_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/OrderDeliveryTimePlanned_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Easy_Order_SEND">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Easy_Order_SEND" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_DELETE">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Wasco_ShoppingCart_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage100_URL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage100_URL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleStock_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleStock_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WascoBE_LoginURL_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/WascoBE_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Wasco_ShoppingCart_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_Stock_CHECK">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleList_Stock_CHECK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invoice_PDF_GENERATE">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/Invoice_PDF_GENERATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/User_SignON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_Stock_CHECK">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_Stock_CHECK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleInfoAndStock_GET">
+      <soap:operation soapAction="http://WWC/WascoCustomerServices/ArticleInfoAndStock_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WascoCustomerServicesSoap12" type="tns:WascoCustomerServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MobileV3_LoginURL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/MobileV3_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_LoginURL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Wasco_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Article_Simple_SEARCH">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Article_Simple_SEARCH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage200_URL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage200_URL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON_BE">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/User_SignON_BE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage80_URL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage80_URL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_NettPrice_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleList_NettPrice_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Branches_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Branches_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_SEND">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_SEND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderDeliveryTimePlanned_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/OrderDeliveryTimePlanned_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Easy_Order_SEND">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Easy_Order_SEND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_DELETE">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Wasco_ShoppingCart_DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleImage100_URL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleImage100_URL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleStock_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleStock_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WascoBE_LoginURL_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/WascoBE_LoginURL_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Wasco_ShoppingCart_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Wasco_ShoppingCart_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleList_Stock_CHECK">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleList_Stock_CHECK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invoice_PDF_GENERATE">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/Invoice_PDF_GENERATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_SignON">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/User_SignON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GS1_Order_Stock_CHECK">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/GS1_Order_Stock_CHECK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArticleInfoAndStock_GET">
+      <soap12:operation soapAction="http://WWC/WascoCustomerServices/ArticleInfoAndStock_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WascoCustomerServices">
+    <wsdl:port name="WascoCustomerServicesSoap" binding="tns:WascoCustomerServicesSoap">
+      <soap:address location="http://www.wasco.nl/WWC/WascoCustomerServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WascoCustomerServicesSoap12" binding="tns:WascoCustomerServicesSoap12">
+      <soap12:address location="http://www.wasco.nl/WWC/WascoCustomerServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

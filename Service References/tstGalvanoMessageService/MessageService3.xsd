@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="https://www.ketenstandaard.nl/WS/MessageService/3.1" elementFormDefault="qualified" targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order" />
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Message.Contracts" />
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MsgProperties" nillable="true" type="tns:MessagePropertiesType" />
+        <xs:element minOccurs="0" name="MsgContent" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Attachment" nillable="true" type="tns:ArrayOfAttachment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="MessagePropertiesType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MsgId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MsgDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MsgFormat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MsgVersion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MsgType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessagePropertiesType" nillable="true" type="tns:MessagePropertiesType" />
+  <xs:complexType name="ArrayOfAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attachment" nillable="true" type="tns:Attachment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAttachment" nillable="true" type="tns:ArrayOfAttachment" />
+  <xs:complexType name="Attachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttachedData" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Attachment" nillable="true" type="tns:Attachment" />
+  <xs:complexType name="CustomInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsTestMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsContentCompressed" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ApplicationId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VersionId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelationId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomInfo" nillable="true" type="tns:CustomInfo" />
+  <xs:element name="OrderResponseModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order" minOccurs="0" name="SendOrderResponseModel" nillable="true" type="q1:SendOrderResponseModel" />
+        <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfFault" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Fault" nillable="true" type="tns:Fault" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFault" nillable="true" type="tns:ArrayOfFault" />
+  <xs:complexType name="Fault">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Message.Contracts" minOccurs="0" name="Code" type="q2:ErrorCode" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fault" nillable="true" type="tns:Fault" />
+</xs:schema>

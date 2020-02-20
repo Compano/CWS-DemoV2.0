@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="43e5f7c5-dc91-4b68-b598-2558692cb224" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://accmessageservice.galvano.nl/messageservice.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MessageService.xsd" MetadataType="Schema" ID="17a17873-ae49-4077-9f26-86d94960b4d4" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MessageService1.xsd" MetadataType="Schema" ID="5228a6a2-8244-4e9d-853d-93f7f84f36fc" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd4" />
+    <MetadataFile FileName="MessageService.disco" MetadataType="Disco" ID="861b900c-9ce7-4b1c-bd79-f9d9dc492286" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?disco" />
+    <MetadataFile FileName="MessageService2.xsd" MetadataType="Schema" ID="328bfb07-dfdd-49b8-8a6d-97b305884cd5" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd6" />
+    <MetadataFile FileName="MessageService3.xsd" MetadataType="Schema" ID="f43bef80-800e-4fc0-9551-cc6bee4036a5" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MessageService4.xsd" MetadataType="Schema" ID="93d862ab-b618-4aa3-a62b-b39ed3253abb" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd5" />
+    <MetadataFile FileName="MessageService5.xsd" MetadataType="Schema" ID="1f6c0246-9be7-4765-81ad-913103ecf64d" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MessageService6.xsd" MetadataType="Schema" ID="34e6459a-3fd1-4d33-bb8a-db8acf4b9d34" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MessageService.wsdl" MetadataType="Wsdl" ID="af6bc289-6db5-4969-8db5-23596a3f5cd2" SourceId="1" SourceUrl="https://accmessageservice.galvano.nl/MessageService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

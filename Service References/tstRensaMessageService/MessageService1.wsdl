@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://www.ketenstandaard.nl/WS/MessageService/3.0" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.0/Imports">
+      <xsd:import schemaLocation="https://rensa.viadeportal.nl/MessageService/v3.00/MessageService.svc?xsd=xsd0" namespace="https://www.ketenstandaard.nl/WS/MessageService/3.0" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAvailableMessagesRequest">
+    <wsdl:part name="AvailableMessagesRequest" element="tns:AvailableMessagesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableMessagesRequest_Headers">
+    <wsdl:part name="CustomInfo" element="tns:CustomInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableMessagesResponse">
+    <wsdl:part name="AvailableMessagesResponse" element="tns:AvailableMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageRequest">
+    <wsdl:part name="MessageRequest" element="tns:MessageRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageRequest_Headers">
+    <wsdl:part name="CustomInfo" element="tns:CustomInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageResponse">
+    <wsdl:part name="MessageRequestResponse" element="tns:MessageRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageRequest">
+    <wsdl:part name="MessageRequest" element="tns:MessageRequest" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageRequest_Headers">
+    <wsdl:part name="CustomInfo" element="tns:CustomInfo" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageResponse">
+    <wsdl:part name="MessageResponse" element="tns:MessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostMessageRequest">
+    <wsdl:part name="Message" element="tns:Message" />
+  </wsdl:message>
+  <wsdl:message name="PostMessageRequest_Headers">
+    <wsdl:part name="CustomInfo" element="tns:CustomInfo" />
+  </wsdl:message>
+  <wsdl:portType name="IMessageService30">
+    <wsdl:operation name="GetAvailableMessages">
+      <wsdl:input wsaw:Action="messageservice/GetAvailableMessages" name="GetAvailableMessagesRequest" message="tns:GetAvailableMessagesRequest" />
+      <wsdl:output wsaw:Action="https://www.ketenstandaard.nl/WS/MessageService/3.0/IMessageService30/GetAvailableMessagesResponse" name="GetAvailableMessagesResponse" message="tns:GetAvailableMessagesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <wsdl:input wsaw:Action="messageservice/GetMessage" name="GetMessageRequest" message="tns:GetMessageRequest" />
+      <wsdl:output wsaw:Action="https://www.ketenstandaard.nl/WS/MessageService/3.0/IMessageService30/GetMessageResponse" name="GetMessageResponse" message="tns:GetMessageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <wsdl:input wsaw:Action="messageservice/DeleteMessage" name="DeleteMessageRequest" message="tns:DeleteMessageRequest" />
+      <wsdl:output wsaw:Action="https://www.ketenstandaard.nl/WS/MessageService/3.0/IMessageService30/DeleteMessageResponse" name="DeleteMessageResponse" message="tns:DeleteMessageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="PostMessage">
+      <wsdl:input wsaw:Action="messageservice/PostMessage" name="PostMessageRequest" message="tns:PostMessageRequest" />
+      <wsdl:output wsaw:Action="https://www.ketenstandaard.nl/WS/MessageService/3.0/IMessageService30/PostMessageResponse" name="DeleteMessageResponse" message="tns:DeleteMessageResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

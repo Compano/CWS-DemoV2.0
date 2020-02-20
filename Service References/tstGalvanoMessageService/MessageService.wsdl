@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://www.ketenstandaard.nl/WS/MessageService/3.1" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MessageService" targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="secured_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Lax />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:WssUsernameToken10 />
+              </wsp:Policy>
+            </sp:UsernameToken>
+          </wsp:Policy>
+        </sp:SignedSupportingTokens>
+        <sp:Wss10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss10>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.1/Imports">
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd0" namespace="https://www.ketenstandaard.nl/WS/MessageService/3.1" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Message.Contracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MessageType">
+    <wsdl:part name="parameters" element="tns:Message" />
+  </wsdl:message>
+  <wsdl:message name="MessageType_Headers">
+    <wsdl:part name="CustomInfo" element="tns:CustomInfo" />
+  </wsdl:message>
+  <wsdl:message name="OrderResponseModel">
+    <wsdl:part name="parameters" element="tns:OrderResponseModel" />
+  </wsdl:message>
+  <wsdl:portType name="MessageServiceSoap">
+    <wsdl:operation name="Message">
+      <wsdl:input wsaw:Action="messageservice/PostMessage" name="MessageType" message="tns:MessageType" />
+      <wsdl:output wsaw:Action="messageservice/PostMessageResponse" name="OrderResponseModel" message="tns:OrderResponseModel" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="secured" type="tns:MessageServiceSoap">
+    <wsp:PolicyReference URI="#secured_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Message">
+      <soap:operation soapAction="messageservice/PostMessage" style="document" />
+      <wsdl:input name="MessageType">
+        <soap:header message="tns:MessageType_Headers" part="CustomInfo" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="OrderResponseModel">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageService">
+    <wsdl:port name="secured" binding="tns:secured">
+      <soap:address location="https://accmessageservice.galvano.nl/MessageService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://etim.nl/xmlschemas/messageservice/2.40" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://etim.nl/xmlschemas/messageservice/2.40" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;a href='http://www.compas.compano.nl/Data/Environments/000001/Images/WebSite/Technische%20handleiding%20MessageService%20Webservice%20V2.40.pdf'&gt; Technische documentatie MessageService V2.40&lt;/a&gt;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://etim.nl/xmlschemas/messageservice/2.40">
+      <s:element name="GetAvailableMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationInfo" type="tns:AuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="customInfo" type="tns:CustomInfo" />
+            <s:element minOccurs="1" maxOccurs="1" name="msgType" type="tns:MsgTypeOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AuthenticationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VersionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsTestMessage" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="LanguageCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsContentCompressed" nillable="true" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MsgTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="PRICAT" />
+          <s:enumeration value="PRODAT" />
+          <s:enumeration value="TRMMSG" />
+          <s:enumeration value="REQOTE" />
+          <s:enumeration value="QUOTES" />
+          <s:enumeration value="ORDERS" />
+          <s:enumeration value="ORDCHG" />
+          <s:enumeration value="ORDRSP" />
+          <s:enumeration value="ORSSTA" />
+          <s:enumeration value="ORDREP" />
+          <s:enumeration value="DESADV" />
+          <s:enumeration value="INVOIC" />
+          <s:enumeration value="COLINV" />
+          <s:enumeration value="INVRPT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetAvailableMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailableMessagesResult" type="tns:ArrayOfAvailableMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAvailableMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AvailableMessage" nillable="true" type="tns:AvailableMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AvailableMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MsgId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MsgDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvailableFormat" type="tns:ArrayOfAvailableFormat" />
+          <s:element minOccurs="1" maxOccurs="1" name="MsgType" type="tns:MsgTypeOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAvailableFormat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AvailableFormat" nillable="true" type="tns:AvailableFormat" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AvailableFormat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MsgFormat" type="tns:MsgFormatOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="MsgVersion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MsgFormatOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="INSBOU" />
+          <s:enumeration value="ETIM" />
+          <s:enumeration value="SALES" />
+          <s:enumeration value="D96A" />
+          <s:enumeration value="CUSTOM" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationInfo" type="tns:AuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="customInfo" type="tns:CustomInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="msgId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="msgFormat" type="tns:MsgFormatOption" />
+            <s:element minOccurs="0" maxOccurs="1" name="msgVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessageResult" type="tns:ArrayOfMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Message" nillable="true" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MsgId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MsgType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MsgFormat" type="tns:MsgFormatOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="MsgVersion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MsgDateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attachment" type="tns:ArrayOfAttachment" />
+          <s:element minOccurs="0" maxOccurs="1" name="MsgContent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAttachment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Attachment" nillable="true" type="tns:Attachment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Attachment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentType" type="tns:DocumentTypeOption" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileType" type="tns:FileTypeOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttachedData" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DocumentTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="DOC" />
+          <s:enumeration value="FAC" />
+          <s:enumeration value="OTH" />
+          <s:enumeration value="PIC" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="FileTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="DOC" />
+          <s:enumeration value="GIF" />
+          <s:enumeration value="JPG" />
+          <s:enumeration value="PDF" />
+          <s:enumeration value="PNG" />
+          <s:enumeration value="XLS" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationInfo" type="tns:AuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="customInfo" type="tns:CustomInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="msgId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteMessageResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationInfo" type="tns:AuthenticationInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="customInfo" type="tns:CustomInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="messageServiceMessage" type="tns:Message" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PostMessageResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="messageServiceMessage" type="tns:Message" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAvailableMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAvailableMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAvailableMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessage" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteMessage" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:PostMessage" />
+  </wsdl:message>
+  <wsdl:message name="PostMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:PostMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessageServiceSoap">
+    <wsdl:operation name="GetAvailableMessages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Geeft een lijst terug van alle berichten van het opgegeven MsgType. Indien geen MsgType
+wordt meegegeven dienen alle berichten (ongeacht berichttype) teruggegeven te worden. De
+return value van de functie is een array met MessageServiceAvailableMessage elementen. </wsdl:documentation>
+      <wsdl:input message="tns:GetAvailableMessagesSoapIn" />
+      <wsdl:output message="tns:GetAvailableMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deze functie wordt aangeroepen met een MsgId van het bericht dat men wil ophalen aangevuld
+met het MsgFormat en de MsgVersion waarin de klant het bericht wenst te ontvangen. Je kunt
+per aanroep dus maximaal 1 message opvragen. De functie geeft een
+MessageServiceMessage element terug met daarin het bericht.</wsdl:documentation>
+      <wsdl:input message="tns:GetMessageSoapIn" />
+      <wsdl:output message="tns:GetMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">De functie wordt aangeroepen met het MsgId dat moet worden verwijderd. Per aanroep kan
+maximaal 1 Message verwijderd worden. Deze functie moet worden aangeroepen nadat een
+bericht is opgehaald via de ‘GetMessage’ functie ongeacht of het bericht ook succesvol kan
+worden verwerkt. De service geeft een DeleteMessageResult terug waarin aangegeven is of
+het bericht succesvol verwijderd is. Wanneer een MsgId niet verwijderd kan worden wordt een
+foutmelding (Soap Fault) teruggegeven.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteMessageSoapIn" />
+      <wsdl:output message="tns:DeleteMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Biedt een bericht aan dat door de webservice moet worden opgeslagen en verwerkt. Dit wordt
+gedaan middels het MessageServiceMessage element met daarin het bericht. De service geeft
+middels PostMessageResult aan of het succesvol ontvangen is, optioneel kan direct een
+antwoord gegeven worden via het MessageServiceMessage element met daarin het bericht.
+Het MsgFormat en MsgVersion van de response is altijd gelijk aan die van de aanroep</wsdl:documentation>
+      <wsdl:input message="tns:PostMessageSoapIn" />
+      <wsdl:output message="tns:PostMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageServiceSoap" type="tns:MessageServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAvailableMessages">
+      <soap:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/GetAvailableMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <soap:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/GetMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostMessage">
+      <soap:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/PostMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageServiceSoap12" type="tns:MessageServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAvailableMessages">
+      <soap12:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/GetAvailableMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <soap12:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/GetMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap12:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostMessage">
+      <soap12:operation soapAction="http://etim.nl/xmlschemas/messageservice/2.40/PostMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;a href='http://www.compas.compano.nl/Data/Environments/000001/Images/WebSite/Technische%20handleiding%20MessageService%20Webservice%20V2.40.pdf'&gt; Technische documentatie MessageService V2.40&lt;/a&gt;</wsdl:documentation>
+    <wsdl:port name="MessageServiceSoap" binding="tns:MessageServiceSoap">
+      <soap:address location="https://test.online.compano.nl/MessageService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageServiceSoap12" binding="tns:MessageServiceSoap12">
+      <soap12:address location="https://test.online.compano.nl/MessageService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fed8dd16-ea9a-4faf-b263-158ea75ce5b7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://ws.oosterberg.nl/messageservice30/MessageService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MessageService.xsd" MetadataType="Schema" ID="49abda89-30cc-4d28-a2cc-1ea8625ea007" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd5" />
+    <MetadataFile FileName="MessageService1.xsd" MetadataType="Schema" ID="896e4339-30ff-4046-a2a1-42a1d54086f0" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd4" />
+    <MetadataFile FileName="MessageService2.xsd" MetadataType="Schema" ID="e8a428c1-1835-4afe-b367-c184e109d387" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd6" />
+    <MetadataFile FileName="MessageService3.xsd" MetadataType="Schema" ID="d0c0d818-f97f-4745-9d77-20c275e667ab" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MessageService4.xsd" MetadataType="Schema" ID="35a265c8-854a-4df3-9ff0-1ffd0e8bd4bc" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MessageService5.xsd" MetadataType="Schema" ID="059d8a52-fcbf-4e12-a007-fd900ca27348" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MessageService6.xsd" MetadataType="Schema" ID="e6fc9aed-33a4-49c2-830e-8935de343f0b" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MessageService.disco" MetadataType="Disco" ID="ae53d23d-7c6d-4a96-862d-8d61c898f2ff" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?disco" />
+    <MetadataFile FileName="MessageServiceSoap.wsdl" MetadataType="Wsdl" ID="ead713bd-5a33-4d4d-a945-60095e2ca144" SourceId="1" SourceUrl="https://ws.oosterberg.nl/messageservice30/MessageService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

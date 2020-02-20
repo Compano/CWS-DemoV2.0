@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MessageService.Models.Enum" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MessageService.Models.Enum" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="MsgFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INSBOU" />
+      <xs:enumeration value="D96A" />
+      <xs:enumeration value="KETENSTANDAARD" />
+      <xs:enumeration value="CUSTOM" />
+      <xs:enumeration value="SALES" />
+      <xs:enumeration value="ETIM" />
+      <xs:enumeration value="UNKNOWN" />
+      <xs:enumeration value="NONE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MsgFormatType" nillable="true" type="tns:MsgFormatType" />
+</xs:schema>

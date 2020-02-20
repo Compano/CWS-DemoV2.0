@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client" />
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" />
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="SendOrderResponseModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsOrderProposal" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client" minOccurs="0" name="Messages" nillable="true" type="q1:ArrayOfMessageModel" />
+      <xs:element minOccurs="0" name="Order" nillable="true" type="tns:OrderModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendOrderResponseModel" nillable="true" type="tns:SendOrderResponseModel" />
+  <xs:complexType name="OrderModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Addresses" nillable="true" type="tns:ArrayOfAddressModel" />
+      <xs:element minOccurs="0" name="AllowancesCharges" nillable="true" type="tns:ArrayOfAllowanceChargeModel" />
+      <xs:element minOccurs="0" name="AllowancesTotals" nillable="true" type="tns:PriceModel" />
+      <xs:element minOccurs="0" name="BlockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChargesTotals" nillable="true" type="tns:PriceModel" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="CheckStatus" type="q2:OrderCheckStatus" />
+      <xs:element minOccurs="0" name="CompleteDeliveryRequired" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Deliveries" nillable="true" type="tns:ArrayOfDeliveryModel" />
+      <xs:element minOccurs="0" name="DeliveryDatePlanned" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryRemark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeCustomer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDeletable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEditable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderHeaderChecks" nillable="true" type="tns:ArrayOfOrderCheckModel" />
+      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderReason" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="OrderStatus" type="q3:OrderStatus" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="OrderType" type="q4:OrderType" />
+      <xs:element minOccurs="0" name="OrganisationId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quotation" nillable="true" type="tns:QuotationModel" />
+      <xs:element minOccurs="0" name="ReferenceOrderNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="References" nillable="true" type="tns:ArrayOfReferenceModel" />
+      <xs:element minOccurs="0" name="RequestedDeliveryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RequestedDeliveryWeek" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SalesOrderRemark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SeparateOrder" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Totals" nillable="true" type="tns:PriceModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderModel" nillable="true" type="tns:OrderModel" />
+  <xs:complexType name="ArrayOfAddressModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AddressModel" nillable="true" type="tns:AddressModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAddressModel" nillable="true" type="tns:ArrayOfAddressModel" />
+  <xs:complexType name="AddressModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressId" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="AddressRole" type="q5:OrderAddressRole" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="AddressType" type="q6:OrderAddressType" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactTelephone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gln" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocationDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrganisationId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddressModel" nillable="true" type="tns:AddressModel" />
+  <xs:complexType name="ArrayOfAllowanceChargeModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AllowanceChargeModel" nillable="true" type="tns:AllowanceChargeModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAllowanceChargeModel" nillable="true" type="tns:ArrayOfAllowanceChargeModel" />
+  <xs:complexType name="AllowanceChargeModel">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="ConditionKind" type="q7:ConditionKind" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="Kind" type="q8:AllowanceChargeKind" />
+      <xs:element minOccurs="0" name="Percentage" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PositionNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxPercentage" type="xs:decimal" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="TaxRate" type="q9:TaxRate" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AllowanceChargeModel" nillable="true" type="tns:AllowanceChargeModel" />
+  <xs:complexType name="PriceModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalExTax" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalInTax" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalTax" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PriceModel" nillable="true" type="tns:PriceModel" />
+  <xs:complexType name="ArrayOfDeliveryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeliveryModel" nillable="true" type="tns:DeliveryModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeliveryModel" nillable="true" type="tns:ArrayOfDeliveryModel" />
+  <xs:complexType name="DeliveryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressModel" />
+      <xs:element minOccurs="0" name="ConfirmedTimeFrom" type="ser:duration" />
+      <xs:element minOccurs="0" name="ConfirmedTimeTo" type="ser:duration" />
+      <xs:element minOccurs="0" name="DeliveredBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeliveryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeliveryId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeliveryWeek" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FreeText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPostalDelivery" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LatestDeliveryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Lines" nillable="true" type="tns:ArrayOfDeliveryLineModel" />
+      <xs:element minOccurs="0" name="RequestedTime" nillable="true" type="ser:duration" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="Status" type="q10:DeliveryStatus" />
+      <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TrackAndTraceCodes" nillable="true" type="q11:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryModel" nillable="true" type="tns:DeliveryModel" />
+  <xs:complexType name="ArrayOfDeliveryLineModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeliveryLineModel" nillable="true" type="tns:DeliveryLineModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeliveryLineModel" nillable="true" type="tns:ArrayOfDeliveryLineModel" />
+  <xs:complexType name="DeliveryLineModel">
+    <xs:sequence>
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="CheckStatus" type="q12:OrderCheckStatus" />
+      <xs:element minOccurs="0" name="DeliveredQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+      <xs:element minOccurs="0" name="GrossPrice" nillable="true" type="tns:PricePerQuantityModel" />
+      <xs:element minOccurs="0" name="IsDeletable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsEditable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsService" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSpecialOrder" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NetPrice" nillable="true" type="tns:PricePerQuantityModel" />
+      <xs:element minOccurs="0" name="OpenQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+      <xs:element minOccurs="0" name="OrderLineChecks" nillable="true" type="tns:ArrayOfOrderCheckModel" />
+      <xs:element minOccurs="0" name="OrderLineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OriginalLineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuantityVariance" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="References" nillable="true" type="tns:ArrayOfReferenceModel" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="StockType" type="q13:StockType" />
+      <xs:element minOccurs="0" name="SupplierId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="tns:PriceModel" />
+      <xs:element minOccurs="0" name="TotalQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryLineModel" nillable="true" type="tns:DeliveryLineModel" />
+  <xs:complexType name="ArrayOfQuantityModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuantityModel" nillable="true" type="tns:QuantityModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuantityModel" nillable="true" type="tns:ArrayOfQuantityModel" />
+  <xs:complexType name="QuantityModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsDefaultUnit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UnitOfMeasurement" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuantityModel" nillable="true" type="tns:QuantityModel" />
+  <xs:complexType name="PricePerQuantityModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UnitOfMeasurement" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PricePerQuantityModel" nillable="true" type="tns:PricePerQuantityModel" />
+  <xs:complexType name="ArrayOfOrderCheckModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderCheckModel" nillable="true" type="tns:OrderCheckModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderCheckModel" nillable="true" type="tns:ArrayOfOrderCheckModel" />
+  <xs:complexType name="OrderCheckModel">
+    <xs:sequence>
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="CheckReason" nillable="true" type="q14:OrderCheckReason" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" minOccurs="0" name="CheckStatus" nillable="true" type="q15:OrderCheckStatus" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderCheckModel" nillable="true" type="tns:OrderCheckModel" />
+  <xs:complexType name="ArrayOfReferenceModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReferenceModel" nillable="true" type="tns:ReferenceModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReferenceModel" nillable="true" type="tns:ArrayOfReferenceModel" />
+  <xs:complexType name="ReferenceModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReferenceModel" nillable="true" type="tns:ReferenceModel" />
+  <xs:complexType name="QuotationModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProductCombinations" nillable="true" type="tns:ArrayOfProductCombinationModel" />
+      <xs:element minOccurs="0" name="QuotationId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuotationModel" nillable="true" type="tns:QuotationModel" />
+  <xs:complexType name="ArrayOfProductCombinationModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductCombinationModel" nillable="true" type="tns:ProductCombinationModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductCombinationModel" nillable="true" type="tns:ArrayOfProductCombinationModel" />
+  <xs:complexType name="ProductCombinationModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LineNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lines" nillable="true" type="tns:ArrayOfProductCombinationLineModel" />
+      <xs:element minOccurs="0" name="Totals" nillable="true" type="tns:PriceModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductCombinationModel" nillable="true" type="tns:ProductCombinationModel" />
+  <xs:complexType name="ArrayOfProductCombinationLineModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductCombinationLineModel" nillable="true" type="tns:ProductCombinationLineModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductCombinationLineModel" nillable="true" type="tns:ArrayOfProductCombinationLineModel" />
+  <xs:complexType name="ProductCombinationLineModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GrossPrice" nillable="true" type="tns:PricePerQuantityModel" />
+      <xs:element minOccurs="0" name="IsService" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSpecialOrder" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NetPrice" nillable="true" type="tns:PricePerQuantityModel" />
+      <xs:element minOccurs="0" name="OpenQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+      <xs:element minOccurs="0" name="OrderedQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="tns:PriceModel" />
+      <xs:element minOccurs="0" name="TotalQuantities" nillable="true" type="tns:ArrayOfQuantityModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductCombinationLineModel" nillable="true" type="tns:ProductCombinationLineModel" />
+</xs:schema>

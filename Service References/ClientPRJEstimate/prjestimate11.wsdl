@@ -1,0 +1,2881 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Compano.com/Modules/PRJ" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Compano.com/Modules/PRJ" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+EstimateService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing Estimate information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting Estimate records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving Estimate information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating Estimate information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Compano.com/Modules/PRJ">
+      <s:element name="GetDetailUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:EstimateKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EstimateKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDetailUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDetailUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfEstimateKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimateXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstimateKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstimateKey" type="tns:EstimateKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEstimateXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstimateXmlField" type="tns:EstimateXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstimateXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AccountManagerCode" />
+          <s:enumeration value="AccountManagerContactPersonContactEmail" />
+          <s:enumeration value="AccountManagerContactPersonContactLongName" />
+          <s:enumeration value="AccountManagerContactPersonContactNo" />
+          <s:enumeration value="AccountManagerContactPersonContactTelNo" />
+          <s:enumeration value="AccountManagerContactPersonOrganizationName" />
+          <s:enumeration value="AccountManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="AccountManagerContactPersonPersonBSN" />
+          <s:enumeration value="AccountManagerContactPersonPersonFullName" />
+          <s:enumeration value="AccountManagerFunctionDescription" />
+          <s:enumeration value="AccountManagerIsActive" />
+          <s:enumeration value="AccountManagerOfferAmountLead" />
+          <s:enumeration value="AccountManagerOfferAmountOffer" />
+          <s:enumeration value="AccountManagerOfferAmountSuccessfull" />
+          <s:enumeration value="AccountManagerOfferAmountUnsuccessfull" />
+          <s:enumeration value="AccountManagerOfferAvgAmountLead" />
+          <s:enumeration value="AccountManagerOfferAvgAmountOffer" />
+          <s:enumeration value="AccountManagerOfferAvgProbability" />
+          <s:enumeration value="AccountManagerOfferCountLead" />
+          <s:enumeration value="AccountManagerOfferCountSuccessfull" />
+          <s:enumeration value="AccountManagerOfferCountUnsuccessfull" />
+          <s:enumeration value="Address" />
+          <s:enumeration value="ArchivedDateTime" />
+          <s:enumeration value="ArchivedDateTimeAsMonth" />
+          <s:enumeration value="ArchivedDateTimeAsQuarter" />
+          <s:enumeration value="ArchivedDateTimeAsWeek" />
+          <s:enumeration value="ArchivedDateTimeAsYear" />
+          <s:enumeration value="AssignmentDate" />
+          <s:enumeration value="AssignmentDateAsMonth" />
+          <s:enumeration value="AssignmentDateAsQuarter" />
+          <s:enumeration value="AssignmentDateAsWeek" />
+          <s:enumeration value="AssignmentDateAsYear" />
+          <s:enumeration value="AuthorEmail" />
+          <s:enumeration value="AuthorFormalName" />
+          <s:enumeration value="AuthorFriendlyName" />
+          <s:enumeration value="AuthorFunction" />
+          <s:enumeration value="AverageHourRate" />
+          <s:enumeration value="BillingAddress" />
+          <s:enumeration value="BillingContactBillingAddressBlock" />
+          <s:enumeration value="BillingContactEmail" />
+          <s:enumeration value="BillingContactFaxNo" />
+          <s:enumeration value="BillingContactFormalName" />
+          <s:enumeration value="BillingContactLegalEntityName" />
+          <s:enumeration value="BillingContactLegalEntityNo" />
+          <s:enumeration value="BillingContactLegalEntityShortName" />
+          <s:enumeration value="BillingContactLetterSalutation" />
+          <s:enumeration value="BillingContactLongName" />
+          <s:enumeration value="BillingContactMobileNo" />
+          <s:enumeration value="BillingContactName" />
+          <s:enumeration value="BillingContactNo" />
+          <s:enumeration value="BillingContactShortName" />
+          <s:enumeration value="BillingContactTelNo" />
+          <s:enumeration value="ClosingText" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ContracteeNo" />
+          <s:enumeration value="ContracteeOrganizationBranche" />
+          <s:enumeration value="ContracteeOrganizationKvKNo" />
+          <s:enumeration value="ContracteeOrganizationName" />
+          <s:enumeration value="ContracteeOrganizationShortName" />
+          <s:enumeration value="ContracteeOrganizationWeb" />
+          <s:enumeration value="CreationDateTime" />
+          <s:enumeration value="CreationDateTimeAsMonth" />
+          <s:enumeration value="CreationDateTimeAsQuarter" />
+          <s:enumeration value="CreationDateTimeAsWeek" />
+          <s:enumeration value="CreationDateTimeAsYear" />
+          <s:enumeration value="CustomerContactEmail" />
+          <s:enumeration value="CustomerContactFaxNo" />
+          <s:enumeration value="CustomerContactFormalName" />
+          <s:enumeration value="CustomerContactInfoAsXml" />
+          <s:enumeration value="CustomerContactLegalEntityName" />
+          <s:enumeration value="CustomerContactLegalEntityNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactEmail" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactFaxNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactLongName" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactMobileNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCountryCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCountryDescription" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressProvince" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressStreet" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressStreetAndHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressZipCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressZipCodeAndCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactTelNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCountryCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCountryDescription" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressProvince" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressStreet" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressStreetAndHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressZipCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressZipCodeAndCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationLogo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationName" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationName2" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationWeb" />
+          <s:enumeration value="CustomerContactLegalEntityShortName" />
+          <s:enumeration value="CustomerContactLetterSalutation" />
+          <s:enumeration value="CustomerContactLongName" />
+          <s:enumeration value="CustomerContactMobileNo" />
+          <s:enumeration value="CustomerContactName" />
+          <s:enumeration value="CustomerContactNo" />
+          <s:enumeration value="CustomerContactShortName" />
+          <s:enumeration value="CustomerContactTelNo" />
+          <s:enumeration value="CustomerGroupCode" />
+          <s:enumeration value="CustomerGroupDescription" />
+          <s:enumeration value="CustomerGroupOrganizationContactEmail" />
+          <s:enumeration value="CustomerGroupOrganizationContactFaxNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactFormalName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityShortName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLetterSalutation" />
+          <s:enumeration value="CustomerGroupOrganizationContactLongName" />
+          <s:enumeration value="CustomerGroupOrganizationContactMobileNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactName" />
+          <s:enumeration value="CustomerGroupOrganizationContactNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactShortName" />
+          <s:enumeration value="CustomerGroupOrganizationContactTelNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactVisitingAddressCity" />
+          <s:enumeration value="CustomerReference" />
+          <s:enumeration value="DebtorBankAccountNo" />
+          <s:enumeration value="DebtorBIC" />
+          <s:enumeration value="DebtorContactName" />
+          <s:enumeration value="DebtorContactNo" />
+          <s:enumeration value="DebtorContactShortName" />
+          <s:enumeration value="DebtorCreditSqueeze" />
+          <s:enumeration value="DebtorFormattedIBAN" />
+          <s:enumeration value="DebtorIBAN" />
+          <s:enumeration value="DebtorNo" />
+          <s:enumeration value="DebtorPaymentMethod" />
+          <s:enumeration value="DebtorPaymentTerm" />
+          <s:enumeration value="DebtorStatus" />
+          <s:enumeration value="DebtorVATCode" />
+          <s:enumeration value="DefaultLabourCode" />
+          <s:enumeration value="DefaultLabourCostType" />
+          <s:enumeration value="DefaultLabourExternalRate" />
+          <s:enumeration value="DefaultLabourInternalRate" />
+          <s:enumeration value="DefaultLabourMonitoring" />
+          <s:enumeration value="DefaultMaterialCostTypeCode" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultDiscount" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultSurcharge" />
+          <s:enumeration value="DefaultMonitoringCode" />
+          <s:enumeration value="DefaultPricingMethod" />
+          <s:enumeration value="DefaultSalesPricingMethod" />
+          <s:enumeration value="DefaultTravelExpenseCode" />
+          <s:enumeration value="DefaultTravelExpenseCostType" />
+          <s:enumeration value="DefaultTravelExpenseExternalRate" />
+          <s:enumeration value="DefaultTravelExpenseInternalRate" />
+          <s:enumeration value="DefaultTravelExpenseMonitoring" />
+          <s:enumeration value="DeliveryAddress" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="EndUserContactEmail" />
+          <s:enumeration value="EndUserContactFaxNo" />
+          <s:enumeration value="EndUserContactFormalName" />
+          <s:enumeration value="EndUserContactLegalEntityName" />
+          <s:enumeration value="EndUserContactLegalEntityNo" />
+          <s:enumeration value="EndUserContactLegalEntityShortName" />
+          <s:enumeration value="EndUserContactLetterSalutation" />
+          <s:enumeration value="EndUserContactLongName" />
+          <s:enumeration value="EndUserContactMobileNo" />
+          <s:enumeration value="EndUserContactName" />
+          <s:enumeration value="EndUserContactNo" />
+          <s:enumeration value="EndUserContactShortName" />
+          <s:enumeration value="EndUserContactTelNo" />
+          <s:enumeration value="EndUserContactVisitingAddress" />
+          <s:enumeration value="EndUserContactVisitingAddressBlock" />
+          <s:enumeration value="EstimateObjectArchitectAddress" />
+          <s:enumeration value="EstimateObjectArchitectEmail" />
+          <s:enumeration value="EstimateObjectArchitectFaxNo" />
+          <s:enumeration value="EstimateObjectArchitectFormalName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityFaxNo" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityMobileNo" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityNo" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityTelNo" />
+          <s:enumeration value="EstimateObjectArchitectLetterSalutation" />
+          <s:enumeration value="EstimateObjectArchitectLongName" />
+          <s:enumeration value="EstimateObjectArchitectMobileNo" />
+          <s:enumeration value="EstimateObjectArchitectName" />
+          <s:enumeration value="EstimateObjectArchitectNo" />
+          <s:enumeration value="EstimateObjectArchitectShortName" />
+          <s:enumeration value="EstimateObjectArchitectTelNo" />
+          <s:enumeration value="EstimateObjectDescription" />
+          <s:enumeration value="EstimateObjectNo" />
+          <s:enumeration value="EstimateObjectPlannerAddress" />
+          <s:enumeration value="EstimateObjectPlannerEmail" />
+          <s:enumeration value="EstimateObjectPlannerFaxNo" />
+          <s:enumeration value="EstimateObjectPlannerFormalName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityFaxNo" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityMobileNo" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityNo" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityTelNo" />
+          <s:enumeration value="EstimateObjectPlannerLetterSalutation" />
+          <s:enumeration value="EstimateObjectPlannerLongName" />
+          <s:enumeration value="EstimateObjectPlannerMobileNo" />
+          <s:enumeration value="EstimateObjectPlannerName" />
+          <s:enumeration value="EstimateObjectPlannerNo" />
+          <s:enumeration value="EstimateObjectPlannerShortName" />
+          <s:enumeration value="EstimateObjectPlannerTelNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleEmail" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleFaxNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleFormalName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityFaxNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityMobileNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityTelNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLetterSalutation" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLongName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleMobileNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleShortName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleTelNo" />
+          <s:enumeration value="EstimateObjectReferenceCode" />
+          <s:enumeration value="EstimateObjectResponsibleAddress" />
+          <s:enumeration value="EstimateObjectWorkAddress" />
+          <s:enumeration value="EstimateObjectWorkAddressContactEmail" />
+          <s:enumeration value="EstimateObjectWorkAddressContactFaxNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactFormalName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityFaxNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityMobileNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityTelNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLetterSalutation" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLongName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactMobileNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactShortName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactTelNo" />
+          <s:enumeration value="ExternalNo" />
+          <s:enumeration value="FinalizedDate" />
+          <s:enumeration value="FinalizedDateAsMonth" />
+          <s:enumeration value="FinalizedDateAsQuarter" />
+          <s:enumeration value="FinalizedDateAsWeek" />
+          <s:enumeration value="FinalizedDateAsYear" />
+          <s:enumeration value="HasDifferentBillingContact" />
+          <s:enumeration value="HasOffers" />
+          <s:enumeration value="InternalAccountManagerCode" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactEmail" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactLongName" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactNo" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactTelNo" />
+          <s:enumeration value="InternalAccountManagerContactPersonOrganizationName" />
+          <s:enumeration value="InternalAccountManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="InternalAccountManagerContactPersonPersonBSN" />
+          <s:enumeration value="InternalAccountManagerContactPersonPersonFullName" />
+          <s:enumeration value="InternalAccountManagerFunctionDescription" />
+          <s:enumeration value="InternalAccountManagerIsActive" />
+          <s:enumeration value="InvoiceDate" />
+          <s:enumeration value="InvoiceDateAsMonth" />
+          <s:enumeration value="InvoiceDateAsQuarter" />
+          <s:enumeration value="InvoiceDateAsWeek" />
+          <s:enumeration value="InvoiceDateAsYear" />
+          <s:enumeration value="IsArchived" />
+          <s:enumeration value="IsCopiedFromEndUser" />
+          <s:enumeration value="IsCustomerCondition" />
+          <s:enumeration value="IsInDossier" />
+          <s:enumeration value="IsTemplate" />
+          <s:enumeration value="IsVATTransfer" />
+          <s:enumeration value="LanguageCode" />
+          <s:enumeration value="LastModificationDateTime" />
+          <s:enumeration value="LastModificationDateTimeAsMonth" />
+          <s:enumeration value="LastModificationDateTimeAsQuarter" />
+          <s:enumeration value="LastModificationDateTimeAsWeek" />
+          <s:enumeration value="LastModificationDateTimeAsYear" />
+          <s:enumeration value="LastModificationPersonEmail" />
+          <s:enumeration value="LastModificationPersonFaxNo" />
+          <s:enumeration value="LastModificationPersonFormalName" />
+          <s:enumeration value="LastModificationPersonLegalEntityName" />
+          <s:enumeration value="LastModificationPersonLegalEntityNo" />
+          <s:enumeration value="LastModificationPersonLegalEntityShortName" />
+          <s:enumeration value="LastModificationPersonLetterSalutation" />
+          <s:enumeration value="LastModificationPersonLongName" />
+          <s:enumeration value="LastModificationPersonMobileNo" />
+          <s:enumeration value="LastModificationPersonName" />
+          <s:enumeration value="LastModificationPersonNo" />
+          <s:enumeration value="LastModificationPersonShortName" />
+          <s:enumeration value="LastModificationPersonTelNo" />
+          <s:enumeration value="LastOrNewMemo" />
+          <s:enumeration value="MaxLevel" />
+          <s:enumeration value="No" />
+          <s:enumeration value="OfferDate" />
+          <s:enumeration value="OfferDateAsMonth" />
+          <s:enumeration value="OfferDateAsQuarter" />
+          <s:enumeration value="OfferDateAsWeek" />
+          <s:enumeration value="OfferDateAsYear" />
+          <s:enumeration value="PriceDate" />
+          <s:enumeration value="PriceDateAsMonth" />
+          <s:enumeration value="PriceDateAsQuarter" />
+          <s:enumeration value="PriceDateAsWeek" />
+          <s:enumeration value="PriceDateAsYear" />
+          <s:enumeration value="Probability" />
+          <s:enumeration value="ProjectAccountingCode" />
+          <s:enumeration value="ProjectAccountingDescription" />
+          <s:enumeration value="ProjectAccountingEstimateNoTemplate" />
+          <s:enumeration value="ProjectAccountingOfferNoTemplate" />
+          <s:enumeration value="ProjectCustomerReference" />
+          <s:enumeration value="ProjectDescription" />
+          <s:enumeration value="ProjectNo" />
+          <s:enumeration value="ProjectProjectManagerCode" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactEmail" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactLongName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactNo" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactTelNo" />
+          <s:enumeration value="ProjectProjectManagerContactPersonOrganizationName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonPersonBSN" />
+          <s:enumeration value="ProjectProjectManagerContactPersonPersonFullName" />
+          <s:enumeration value="ProjectProjectManagerFunctionDescription" />
+          <s:enumeration value="ProjectProjectManagerIsActive" />
+          <s:enumeration value="Result" />
+          <s:enumeration value="SchemeSystemCode" />
+          <s:enumeration value="SelectedConfirmationReport" />
+          <s:enumeration value="SelectedReport" />
+          <s:enumeration value="SituationCode" />
+          <s:enumeration value="SourceTemplateDescription" />
+          <s:enumeration value="Status" />
+          <s:enumeration value="StepTemplate" />
+          <s:enumeration value="SummaryOfAllMemos" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="TotCost" />
+          <s:enumeration value="TotGross" />
+          <s:enumeration value="TotHours" />
+          <s:enumeration value="TotSales" />
+          <s:enumeration value="TotSalesVAT" />
+          <s:enumeration value="TotVATNone" />
+          <s:enumeration value="VATHighAmount" />
+          <s:enumeration value="VatHighPercentage" />
+          <s:enumeration value="VATLowAmount" />
+          <s:enumeration value="VatLowPercentage" />
+          <s:enumeration value="VisitingAddress" />
+          <s:enumeration value="WorkAddress" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfEstimateFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstimateFilterField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstimateFilterField" type="tns:EstimateFilterField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstimateFilterField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AccountManager" />
+          <s:enumeration value="AccountManagerCode" />
+          <s:enumeration value="AccountManagerContactPersonContactEmail" />
+          <s:enumeration value="AccountManagerContactPersonContactLongName" />
+          <s:enumeration value="AccountManagerContactPersonContactNo" />
+          <s:enumeration value="AccountManagerContactPersonOrganizationName" />
+          <s:enumeration value="AccountManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="AccountManagerContactPersonPersonBSN" />
+          <s:enumeration value="AccountManagerContactPersonPersonFullName" />
+          <s:enumeration value="AccountManagerFunctionDescription" />
+          <s:enumeration value="AccountManagerIsActive" />
+          <s:enumeration value="AccountManagerOfferAmountLead" />
+          <s:enumeration value="AccountManagerOfferAmountOffer" />
+          <s:enumeration value="AccountManagerOfferAmountSuccessfull" />
+          <s:enumeration value="AccountManagerOfferAmountUnsuccessfull" />
+          <s:enumeration value="AccountManagerOfferAvgAmountLead" />
+          <s:enumeration value="AccountManagerOfferAvgAmountOffer" />
+          <s:enumeration value="AccountManagerOfferAvgProbability" />
+          <s:enumeration value="AccountManagerOfferCountLead" />
+          <s:enumeration value="AccountManagerOfferCountSuccessfull" />
+          <s:enumeration value="AccountManagerOfferCountUnsuccessfull" />
+          <s:enumeration value="ActiveSupportAgreementLines" />
+          <s:enumeration value="AllConstructionParts" />
+          <s:enumeration value="ArchivedDateTime" />
+          <s:enumeration value="ArchivedDateTimeAsMonth" />
+          <s:enumeration value="ArchivedDateTimeAsQuarter" />
+          <s:enumeration value="ArchivedDateTimeAsWeek" />
+          <s:enumeration value="ArchivedDateTimeAsYear" />
+          <s:enumeration value="AssignmentDate" />
+          <s:enumeration value="AssignmentDateAsMonth" />
+          <s:enumeration value="AssignmentDateAsQuarter" />
+          <s:enumeration value="AssignmentDateAsWeek" />
+          <s:enumeration value="AssignmentDateAsYear" />
+          <s:enumeration value="AttachedLetter" />
+          <s:enumeration value="Author" />
+          <s:enumeration value="AuthorEmail" />
+          <s:enumeration value="AuthorFormalName" />
+          <s:enumeration value="AuthorFriendlyName" />
+          <s:enumeration value="AuthorFunction" />
+          <s:enumeration value="AverageHourRate" />
+          <s:enumeration value="BillingContact" />
+          <s:enumeration value="BillingContactEmail" />
+          <s:enumeration value="BillingContactFormalName" />
+          <s:enumeration value="BillingContactLegalEntityName" />
+          <s:enumeration value="BillingContactLegalEntityNo" />
+          <s:enumeration value="BillingContactLegalEntityShortName" />
+          <s:enumeration value="BillingContactLetterSalutation" />
+          <s:enumeration value="BillingContactLongName" />
+          <s:enumeration value="BillingContactName" />
+          <s:enumeration value="BillingContactNo" />
+          <s:enumeration value="BillingContactPerson" />
+          <s:enumeration value="BillingContactShortName" />
+          <s:enumeration value="BillingDepartment" />
+          <s:enumeration value="BillingLegalEntity" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ConstructionPartEmptyLines" />
+          <s:enumeration value="ConstructionParts" />
+          <s:enumeration value="Contractee" />
+          <s:enumeration value="ContracteeNo" />
+          <s:enumeration value="ContracteeOrganizationBranche" />
+          <s:enumeration value="ContracteeOrganizationKvKNo" />
+          <s:enumeration value="ContracteeOrganizationName" />
+          <s:enumeration value="ContracteeOrganizationShortName" />
+          <s:enumeration value="CreationDateTime" />
+          <s:enumeration value="CreationDateTimeAsMonth" />
+          <s:enumeration value="CreationDateTimeAsQuarter" />
+          <s:enumeration value="CreationDateTimeAsWeek" />
+          <s:enumeration value="CreationDateTimeAsYear" />
+          <s:enumeration value="CustomerContact" />
+          <s:enumeration value="CustomerContactEmail" />
+          <s:enumeration value="CustomerContactFormalName" />
+          <s:enumeration value="CustomerContactLegalEntityName" />
+          <s:enumeration value="CustomerContactLegalEntityNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactEmail" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactLongName" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactNo" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCountryCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressCountryDescription" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressProvince" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressStreet" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactPostalAddressZipCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCity" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCountryCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressCountryDescription" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressHouseNumber" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressProvince" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressStreet" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationContactVisitingAddressZipCode" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationName" />
+          <s:enumeration value="CustomerContactLegalEntityOrganizationName2" />
+          <s:enumeration value="CustomerContactLegalEntityShortName" />
+          <s:enumeration value="CustomerContactLetterSalutation" />
+          <s:enumeration value="CustomerContactLongName" />
+          <s:enumeration value="CustomerContactName" />
+          <s:enumeration value="CustomerContactNo" />
+          <s:enumeration value="CustomerContactPerson" />
+          <s:enumeration value="CustomerContactShortName" />
+          <s:enumeration value="CustomerDepartment" />
+          <s:enumeration value="CustomerGroup" />
+          <s:enumeration value="CustomerGroupCode" />
+          <s:enumeration value="CustomerGroupOrganizationContactEmail" />
+          <s:enumeration value="CustomerGroupOrganizationContactFormalName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactLegalEntityShortName" />
+          <s:enumeration value="CustomerGroupOrganizationContactLetterSalutation" />
+          <s:enumeration value="CustomerGroupOrganizationContactLongName" />
+          <s:enumeration value="CustomerGroupOrganizationContactName" />
+          <s:enumeration value="CustomerGroupOrganizationContactNo" />
+          <s:enumeration value="CustomerGroupOrganizationContactShortName" />
+          <s:enumeration value="CustomerGroupOrganizationContactVisitingAddressCity" />
+          <s:enumeration value="CustomerLegalEntity" />
+          <s:enumeration value="Debtor" />
+          <s:enumeration value="DebtorBankAccountNo" />
+          <s:enumeration value="DebtorBIC" />
+          <s:enumeration value="DebtorContactName" />
+          <s:enumeration value="DebtorContactNo" />
+          <s:enumeration value="DebtorContactShortName" />
+          <s:enumeration value="DebtorCreditSqueeze" />
+          <s:enumeration value="DebtorFormattedIBAN" />
+          <s:enumeration value="DebtorIBAN" />
+          <s:enumeration value="DebtorNo" />
+          <s:enumeration value="DebtorPaymentMethod" />
+          <s:enumeration value="DebtorPaymentTerm" />
+          <s:enumeration value="DebtorStatus" />
+          <s:enumeration value="DebtorVATCode" />
+          <s:enumeration value="DefaultLabour" />
+          <s:enumeration value="DefaultLabourCode" />
+          <s:enumeration value="DefaultLabourCostType" />
+          <s:enumeration value="DefaultLabourExternalRate" />
+          <s:enumeration value="DefaultLabourInternalRate" />
+          <s:enumeration value="DefaultLabourMonitoring" />
+          <s:enumeration value="DefaultMaterialCostType" />
+          <s:enumeration value="DefaultMaterialCostTypeCode" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultDiscount" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultSurcharge" />
+          <s:enumeration value="DefaultMonitoring" />
+          <s:enumeration value="DefaultMonitoringCode" />
+          <s:enumeration value="DefaultPricingMethod" />
+          <s:enumeration value="DefaultSalesPricingMethod" />
+          <s:enumeration value="DefaultTravelExpense" />
+          <s:enumeration value="DefaultTravelExpenseCode" />
+          <s:enumeration value="DefaultTravelExpenseCostType" />
+          <s:enumeration value="DefaultTravelExpenseExternalRate" />
+          <s:enumeration value="DefaultTravelExpenseInternalRate" />
+          <s:enumeration value="DefaultTravelExpenseMonitoring" />
+          <s:enumeration value="EndUserContact" />
+          <s:enumeration value="EndUserContactEmail" />
+          <s:enumeration value="EndUserContactFormalName" />
+          <s:enumeration value="EndUserContactLegalEntityName" />
+          <s:enumeration value="EndUserContactLegalEntityNo" />
+          <s:enumeration value="EndUserContactLegalEntityShortName" />
+          <s:enumeration value="EndUserContactLetterSalutation" />
+          <s:enumeration value="EndUserContactLongName" />
+          <s:enumeration value="EndUserContactName" />
+          <s:enumeration value="EndUserContactNo" />
+          <s:enumeration value="EndUserContactPerson" />
+          <s:enumeration value="EndUserContactShortName" />
+          <s:enumeration value="EndUserContactVisitingAddress" />
+          <s:enumeration value="EndUserDepartment" />
+          <s:enumeration value="EndUserLegalEntity" />
+          <s:enumeration value="EstimateObject" />
+          <s:enumeration value="EstimateObjectArchitectEmail" />
+          <s:enumeration value="EstimateObjectArchitectFormalName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityName" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityNo" />
+          <s:enumeration value="EstimateObjectArchitectLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectArchitectLetterSalutation" />
+          <s:enumeration value="EstimateObjectArchitectLongName" />
+          <s:enumeration value="EstimateObjectArchitectName" />
+          <s:enumeration value="EstimateObjectArchitectNo" />
+          <s:enumeration value="EstimateObjectArchitectShortName" />
+          <s:enumeration value="EstimateObjectNo" />
+          <s:enumeration value="EstimateObjectPlannerEmail" />
+          <s:enumeration value="EstimateObjectPlannerFormalName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityName" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityNo" />
+          <s:enumeration value="EstimateObjectPlannerLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectPlannerLetterSalutation" />
+          <s:enumeration value="EstimateObjectPlannerLongName" />
+          <s:enumeration value="EstimateObjectPlannerName" />
+          <s:enumeration value="EstimateObjectPlannerNo" />
+          <s:enumeration value="EstimateObjectPlannerShortName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleEmail" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleFormalName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLetterSalutation" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleLongName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleName" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleNo" />
+          <s:enumeration value="EstimateObjectPrimarilyResponsibleShortName" />
+          <s:enumeration value="EstimateObjectReferenceCode" />
+          <s:enumeration value="EstimateObjectWorkAddressContactEmail" />
+          <s:enumeration value="EstimateObjectWorkAddressContactFormalName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityEmail" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityFormalName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityLetterSalutation" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityLongName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLegalEntityShortName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLetterSalutation" />
+          <s:enumeration value="EstimateObjectWorkAddressContactLongName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactName" />
+          <s:enumeration value="EstimateObjectWorkAddressContactNo" />
+          <s:enumeration value="EstimateObjectWorkAddressContactShortName" />
+          <s:enumeration value="EstimateParts" />
+          <s:enumeration value="EstimatePartsLines" />
+          <s:enumeration value="ExternalNo" />
+          <s:enumeration value="FinalizedDate" />
+          <s:enumeration value="FinalizedDateAsMonth" />
+          <s:enumeration value="FinalizedDateAsQuarter" />
+          <s:enumeration value="FinalizedDateAsWeek" />
+          <s:enumeration value="FinalizedDateAsYear" />
+          <s:enumeration value="HasDifferentBillingContact" />
+          <s:enumeration value="HasOffers" />
+          <s:enumeration value="InternalAccountManager" />
+          <s:enumeration value="InternalAccountManagerCode" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactEmail" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactLongName" />
+          <s:enumeration value="InternalAccountManagerContactPersonContactNo" />
+          <s:enumeration value="InternalAccountManagerContactPersonOrganizationName" />
+          <s:enumeration value="InternalAccountManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="InternalAccountManagerContactPersonPersonBSN" />
+          <s:enumeration value="InternalAccountManagerContactPersonPersonFullName" />
+          <s:enumeration value="InternalAccountManagerFunctionDescription" />
+          <s:enumeration value="InternalAccountManagerIsActive" />
+          <s:enumeration value="InvoiceDate" />
+          <s:enumeration value="InvoiceDateAsMonth" />
+          <s:enumeration value="InvoiceDateAsQuarter" />
+          <s:enumeration value="InvoiceDateAsWeek" />
+          <s:enumeration value="InvoiceDateAsYear" />
+          <s:enumeration value="IsArchived" />
+          <s:enumeration value="IsCopiedFromEndUser" />
+          <s:enumeration value="IsCustomerCondition" />
+          <s:enumeration value="IsInDossier" />
+          <s:enumeration value="IsTemplate" />
+          <s:enumeration value="IsVATTransfer" />
+          <s:enumeration value="Language" />
+          <s:enumeration value="LanguageCode" />
+          <s:enumeration value="LastModificationDateTime" />
+          <s:enumeration value="LastModificationDateTimeAsMonth" />
+          <s:enumeration value="LastModificationDateTimeAsQuarter" />
+          <s:enumeration value="LastModificationDateTimeAsWeek" />
+          <s:enumeration value="LastModificationDateTimeAsYear" />
+          <s:enumeration value="LastModificationPerson" />
+          <s:enumeration value="LastModificationPersonEmail" />
+          <s:enumeration value="LastModificationPersonFormalName" />
+          <s:enumeration value="LastModificationPersonLegalEntityName" />
+          <s:enumeration value="LastModificationPersonLegalEntityNo" />
+          <s:enumeration value="LastModificationPersonLegalEntityShortName" />
+          <s:enumeration value="LastModificationPersonLetterSalutation" />
+          <s:enumeration value="LastModificationPersonLongName" />
+          <s:enumeration value="LastModificationPersonName" />
+          <s:enumeration value="LastModificationPersonNo" />
+          <s:enumeration value="LastModificationPersonShortName" />
+          <s:enumeration value="Lines" />
+          <s:enumeration value="LinkedEstimate" />
+          <s:enumeration value="LinkedEstimates" />
+          <s:enumeration value="MaxLevel" />
+          <s:enumeration value="No" />
+          <s:enumeration value="NormSystem" />
+          <s:enumeration value="NotEmptyEstimateParts" />
+          <s:enumeration value="OfferDate" />
+          <s:enumeration value="OfferDateAsMonth" />
+          <s:enumeration value="OfferDateAsQuarter" />
+          <s:enumeration value="OfferDateAsWeek" />
+          <s:enumeration value="OfferDateAsYear" />
+          <s:enumeration value="Offers" />
+          <s:enumeration value="PriceDate" />
+          <s:enumeration value="PriceDateAsMonth" />
+          <s:enumeration value="PriceDateAsQuarter" />
+          <s:enumeration value="PriceDateAsWeek" />
+          <s:enumeration value="PriceDateAsYear" />
+          <s:enumeration value="Probability" />
+          <s:enumeration value="Project" />
+          <s:enumeration value="ProjectAccounting" />
+          <s:enumeration value="ProjectAccountingCode" />
+          <s:enumeration value="ProjectAccountingEstimateNoTemplate" />
+          <s:enumeration value="ProjectAccountingOfferNoTemplate" />
+          <s:enumeration value="ProjectNo" />
+          <s:enumeration value="ProjectProjectManagerCode" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactEmail" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactLongName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonContactNo" />
+          <s:enumeration value="ProjectProjectManagerContactPersonOrganizationName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonOrganizationShortName" />
+          <s:enumeration value="ProjectProjectManagerContactPersonPersonBSN" />
+          <s:enumeration value="ProjectProjectManagerContactPersonPersonFullName" />
+          <s:enumeration value="ProjectProjectManagerFunctionDescription" />
+          <s:enumeration value="ProjectProjectManagerIsActive" />
+          <s:enumeration value="Result" />
+          <s:enumeration value="SchemeSystem" />
+          <s:enumeration value="SchemeSystemCode" />
+          <s:enumeration value="Situation" />
+          <s:enumeration value="SituationCode" />
+          <s:enumeration value="SourceTemplate" />
+          <s:enumeration value="SourceTemplateEstimates" />
+          <s:enumeration value="Status" />
+          <s:enumeration value="StepTemplate" />
+          <s:enumeration value="SupportAgreementLines" />
+          <s:enumeration value="SupportAgreements" />
+          <s:enumeration value="TotCost" />
+          <s:enumeration value="TotGross" />
+          <s:enumeration value="TotHours" />
+          <s:enumeration value="TotSales" />
+          <s:enumeration value="TotSalesVAT" />
+          <s:enumeration value="TotVATNone" />
+          <s:enumeration value="VariantElements" />
+          <s:enumeration value="VATHighAmount" />
+          <s:enumeration value="VatHighPercentage" />
+          <s:enumeration value="VATLowAmount" />
+          <s:enumeration value="VatLowPercentage" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfEstimateKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDefaultView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="view" type="tns:EstimateViewOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="EstimateViewOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Estimate" />
+          <s:enumeration value="EstimateTemplate" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetDefaultViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetDefaultViewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimateXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFilterElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FilterElement" nillable="true" type="tns:FilterElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FilterElement">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ConditionType" type="tns:ConditionTypeOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value1" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value2" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConditionTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="EqualsField" />
+          <s:enumeration value="GreaterThan" />
+          <s:enumeration value="GreaterThanField" />
+          <s:enumeration value="GreaterThanOrEquals" />
+          <s:enumeration value="GreaterThanOrEqualsField" />
+          <s:enumeration value="LesserThan" />
+          <s:enumeration value="LesserThanField" />
+          <s:enumeration value="LesserThanOrEquals" />
+          <s:enumeration value="LesserThanOrEqualsField" />
+          <s:enumeration value="Between" />
+          <s:enumeration value="Outside" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="NotContains" />
+          <s:enumeration value="EqualsNoCase" />
+          <s:enumeration value="ItemInSet" />
+          <s:enumeration value="StartsWith" />
+          <s:enumeration value="EndsWith" />
+          <s:enumeration value="InRange" />
+          <s:enumeration value="NotNull" />
+          <s:enumeration value="Null" />
+          <s:enumeration value="HasChilds" />
+          <s:enumeration value="HasNoChilds" />
+          <s:enumeration value="InAudience" />
+          <s:enumeration value="Approximately" />
+          <s:enumeration value="ApproximatelyField" />
+          <s:enumeration value="InRangeField" />
+          <s:enumeration value="LastWeek" />
+          <s:enumeration value="LastMonth" />
+          <s:enumeration value="NextWeek" />
+          <s:enumeration value="NextMonth" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="NotEqualsField" />
+          <s:enumeration value="ItemNotInSet" />
+          <s:enumeration value="HasUnarchivedChilds" />
+          <s:enumeration value="HasNoUnarchivedChilds" />
+          <s:enumeration value="All" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SelectAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAsJSONResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfEstimateFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimateXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfEstimateFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGridUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimateXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsArrayResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EstimateKeys" type="tns:ArrayOfEstimateKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfEstimateFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sortExpression" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSortOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Add">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:EstimateKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:EstimateKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Set">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:EstimateKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="field" type="tns:EstimateXmlField" />
+            <s:element minOccurs="0" maxOccurs="1" name="newValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfEstimateKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectUsingLayoutAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+            <s:element minOccurs="0" maxOccurs="1" name="layoutName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectUsingLayoutAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectUsingLayoutAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddLines">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="partId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddLinesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddLinesResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lineIds" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PackLines">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="partId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="headerXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PackLinesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PackLinesResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="packId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estimateKey" type="tns:EstimateKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimatePartXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstimatePartXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstimatePartXmlField" type="tns:EstimatePartXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstimatePartXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AuthorEmail" />
+          <s:enumeration value="AuthorFormalName" />
+          <s:enumeration value="AuthorFriendlyName" />
+          <s:enumeration value="AuthorFunction" />
+          <s:enumeration value="AverageHourRate" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="CorrectionFactor" />
+          <s:enumeration value="CreationDateTime" />
+          <s:enumeration value="CreationDateTimeAsMonth" />
+          <s:enumeration value="CreationDateTimeAsQuarter" />
+          <s:enumeration value="CreationDateTimeAsWeek" />
+          <s:enumeration value="CreationDateTimeAsYear" />
+          <s:enumeration value="DefaultLabourCode" />
+          <s:enumeration value="DefaultLabourCostType" />
+          <s:enumeration value="DefaultLabourExternalRate" />
+          <s:enumeration value="DefaultLabourInternalRate" />
+          <s:enumeration value="DefaultLabourMonitoring" />
+          <s:enumeration value="DefaultMaterialCostTypeCode" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultDiscount" />
+          <s:enumeration value="DefaultMaterialCostTypeDefaultSurcharge" />
+          <s:enumeration value="DefaultMonitoringCode" />
+          <s:enumeration value="DefaultTravelExpenseCode" />
+          <s:enumeration value="DefaultTravelExpenseCostType" />
+          <s:enumeration value="DefaultTravelExpenseExternalRate" />
+          <s:enumeration value="DefaultTravelExpenseInternalRate" />
+          <s:enumeration value="DefaultTravelExpenseMonitoring" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="EstimateArchivedDateTime" />
+          <s:enumeration value="EstimateCustomerContactEmail" />
+          <s:enumeration value="EstimateCustomerContactFaxNo" />
+          <s:enumeration value="EstimateCustomerContactFormalName" />
+          <s:enumeration value="EstimateCustomerContactInfoAsXml" />
+          <s:enumeration value="EstimateCustomerContactLegalEntityName" />
+          <s:enumeration value="EstimateCustomerContactLegalEntityNo" />
+          <s:enumeration value="EstimateCustomerContactLegalEntityShortName" />
+          <s:enumeration value="EstimateCustomerContactLetterSalutation" />
+          <s:enumeration value="EstimateCustomerContactLongName" />
+          <s:enumeration value="EstimateCustomerContactMobileNo" />
+          <s:enumeration value="EstimateCustomerContactName" />
+          <s:enumeration value="EstimateCustomerContactNo" />
+          <s:enumeration value="EstimateCustomerContactShortName" />
+          <s:enumeration value="EstimateCustomerContactTelNo" />
+          <s:enumeration value="EstimateDescription" />
+          <s:enumeration value="EstimateNo" />
+          <s:enumeration value="EstimateNormSystemDescription" />
+          <s:enumeration value="EstimateSchemeSystemDescription" />
+          <s:enumeration value="EstimateSituationDescription" />
+          <s:enumeration value="EstimateTotHours" />
+          <s:enumeration value="EstimateTotSales" />
+          <s:enumeration value="IsOptional" />
+          <s:enumeration value="LastOrNewMemo" />
+          <s:enumeration value="No" />
+          <s:enumeration value="NoAndDescription" />
+          <s:enumeration value="ParentEstimatePartDescription" />
+          <s:enumeration value="ParentEstimatePartNo" />
+          <s:enumeration value="PricePeriodCode" />
+          <s:enumeration value="RemainingLevels" />
+          <s:enumeration value="Result" />
+          <s:enumeration value="SalesPricingMethod" />
+          <s:enumeration value="SelectedReport" />
+          <s:enumeration value="SortOrder" />
+          <s:enumeration value="SummaryOfAllMemos" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="Title" />
+          <s:enumeration value="TotCost" />
+          <s:enumeration value="TotGross" />
+          <s:enumeration value="TotHours" />
+          <s:enumeration value="TotHoursPart" />
+          <s:enumeration value="TotSales" />
+          <s:enumeration value="TotSalesContract" />
+          <s:enumeration value="TotSalesVAT" />
+          <s:enumeration value="TotVATNone" />
+          <s:enumeration value="VATHighAmount" />
+          <s:enumeration value="VATLowAmount" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetPartsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPartsResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estimateKey" type="tns:EstimateKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddPartResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="partId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLines">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="partId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfEstimateLineXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstimateLineXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstimateLineXmlField" type="tns:EstimateLineXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstimateLineXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="ActiveSalesConditionBonusDiscount" />
+          <s:enumeration value="ActiveSalesConditionBonusDiscount2" />
+          <s:enumeration value="ActiveSalesConditionCode" />
+          <s:enumeration value="ActiveSalesConditionCustomerGroupCode" />
+          <s:enumeration value="ActiveSalesConditionDescription" />
+          <s:enumeration value="ActiveSalesConditionDiscount1" />
+          <s:enumeration value="ActiveSalesConditionDiscount2" />
+          <s:enumeration value="ActiveSalesConditionDiscount3" />
+          <s:enumeration value="ActiveSalesConditionIsIncludeVat" />
+          <s:enumeration value="ActiveSalesConditionNetPrice" />
+          <s:enumeration value="ActiveSalesConditionSalesOrganizationCode" />
+          <s:enumeration value="ActiveSalesConditionSurcharge" />
+          <s:enumeration value="ActiveSalesConditionSurchargeAmount" />
+          <s:enumeration value="ActiveSalesConditionSurchargeGrossPrice" />
+          <s:enumeration value="ActiveSupportAgreementLineBonusCarrier" />
+          <s:enumeration value="ActiveSupportAgreementLineClaimType" />
+          <s:enumeration value="ActiveSupportAgreementLineCode" />
+          <s:enumeration value="ActiveSupportAgreementLineDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineDiscount" />
+          <s:enumeration value="ActiveSupportAgreementLineDiscountActive" />
+          <s:enumeration value="ActiveSupportAgreementLineDiscountMethod" />
+          <s:enumeration value="ActiveSupportAgreementLineNetPrice" />
+          <s:enumeration value="ActiveSupportAgreementLineNetPriceActive" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactLegalEntityName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactLegalEntityNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactLegalEntityShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementContactTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEndDate" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectAddress" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLegalEntityTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectArchitectTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerAddress" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLegalEntityTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPlannerTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLegalEntityTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectPrimarilyResponsibleTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectReferenceCode" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectResponsibleAddress" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddress" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityEmail" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityFaxNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityFormalName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLegalEntityTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLetterSalutation" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactLongName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactMobileNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactShortName" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementEstimateObjectWorkAddressContactTelNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementNo" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationAgreementsText" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationBarcodePrefix" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationCode" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationCodeAndDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationCurrencyDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationCurrencySymbol" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationGLNCode" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationIsFormal" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSalesOrganizationShortDescription" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementStartDate" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementStatus" />
+          <s:enumeration value="ActiveSupportAgreementLineSupportAgreementSupplierReference" />
+          <s:enumeration value="BasePrice" />
+          <s:enumeration value="Code" />
+          <s:enumeration value="CompoundSurcharge" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ConstructionEstimateCost" />
+          <s:enumeration value="ConstructionEstimateCostPerCP" />
+          <s:enumeration value="ConstructionEstimateGross" />
+          <s:enumeration value="ConstructionEstimateGrossPerCP" />
+          <s:enumeration value="ConstructionEstimateHours" />
+          <s:enumeration value="ConstructionEstimateHoursPerCP" />
+          <s:enumeration value="ConstructionEstimateResult" />
+          <s:enumeration value="ConstructionEstimateResultPerCP" />
+          <s:enumeration value="ConstructionEstimateSales" />
+          <s:enumeration value="ConstructionEstimateSalesPerCP" />
+          <s:enumeration value="ConstructionPartDescription" />
+          <s:enumeration value="ConstructionPartNo" />
+          <s:enumeration value="ConstructionPartQuantity" />
+          <s:enumeration value="ConstructionPartSituationCode" />
+          <s:enumeration value="ConstructionPartSituationDescription" />
+          <s:enumeration value="CostPrice" />
+          <s:enumeration value="CostPricePerUtilizationUnit" />
+          <s:enumeration value="CostTypeCode" />
+          <s:enumeration value="CostTypeDescription" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="Duration" />
+          <s:enumeration value="ElementDescription" />
+          <s:enumeration value="ElementSystemCode" />
+          <s:enumeration value="ElementSystemDescription" />
+          <s:enumeration value="ElementText" />
+          <s:enumeration value="EndPeriod" />
+          <s:enumeration value="EndPeriodAsMonth" />
+          <s:enumeration value="EndPeriodAsQuarter" />
+          <s:enumeration value="EndPeriodAsWeek" />
+          <s:enumeration value="EndPeriodAsYear" />
+          <s:enumeration value="EstimateArchivedDateTime" />
+          <s:enumeration value="EstimateCreationDateTime" />
+          <s:enumeration value="EstimateCustomerContactInfoAsXml" />
+          <s:enumeration value="EstimateCustomerContactLegalEntityName" />
+          <s:enumeration value="EstimateCustomerContactLegalEntityNo" />
+          <s:enumeration value="EstimateCustomerContactName" />
+          <s:enumeration value="EstimateCustomerContactNo" />
+          <s:enumeration value="EstimateDebtorCreditSqueeze" />
+          <s:enumeration value="EstimateDescription" />
+          <s:enumeration value="EstimateLastModificationDateTime" />
+          <s:enumeration value="EstimateNo" />
+          <s:enumeration value="EstimateNormSystemDescription" />
+          <s:enumeration value="EstimatePartCorrectionFactor" />
+          <s:enumeration value="EstimatePartDescription" />
+          <s:enumeration value="EstimatePartNo" />
+          <s:enumeration value="EstimatePartPricePeriod" />
+          <s:enumeration value="EstimatePartResult" />
+          <s:enumeration value="EstimatePartSalesPricingMethod" />
+          <s:enumeration value="EstimatePartTotCost" />
+          <s:enumeration value="EstimatePartTotHours" />
+          <s:enumeration value="EstimatePartTotSales" />
+          <s:enumeration value="EstimatePartTotSalesContract" />
+          <s:enumeration value="EstimateSchemeSystemDescription" />
+          <s:enumeration value="EstimateSituationDescription" />
+          <s:enumeration value="EstimateTotHours" />
+          <s:enumeration value="EstimateTotSales" />
+          <s:enumeration value="ExternalRate" />
+          <s:enumeration value="GrossPrice" />
+          <s:enumeration value="GrossPricePerUtilizationUnit" />
+          <s:enumeration value="GrossPriceVAT" />
+          <s:enumeration value="HasActiveSupportAgreementLine" />
+          <s:enumeration value="HasNorms" />
+          <s:enumeration value="HasSalesCondition" />
+          <s:enumeration value="Hours" />
+          <s:enumeration value="HTMLDescription" />
+          <s:enumeration value="Image" />
+          <s:enumeration value="IsSourceLine" />
+          <s:enumeration value="IsVariant" />
+          <s:enumeration value="IsVariantElement" />
+          <s:enumeration value="ItemActivePurchaseConditionBonusDiscount" />
+          <s:enumeration value="ItemActivePurchaseConditionBonusDiscount2" />
+          <s:enumeration value="ItemActivePurchaseConditionCode" />
+          <s:enumeration value="ItemActivePurchaseConditionDescription" />
+          <s:enumeration value="ItemActivePurchaseConditionGrossDiscount1" />
+          <s:enumeration value="ItemActivePurchaseConditionGrossDiscount2" />
+          <s:enumeration value="ItemActivePurchaseConditionGrossDiscount3" />
+          <s:enumeration value="ItemActivePurchaseConditionIsLeadingStepQuantity" />
+          <s:enumeration value="ItemActivePurchaseConditionNetPrice" />
+          <s:enumeration value="ItemActivePurchaseConditionStepQuantity" />
+          <s:enumeration value="ItemAssignedConditionGroupDescription" />
+          <s:enumeration value="ItemAvailability" />
+          <s:enumeration value="ItemBarcodeItemCode" />
+          <s:enumeration value="ItemBonusDiscount" />
+          <s:enumeration value="ItemBonusDiscount1" />
+          <s:enumeration value="ItemBonusPrice" />
+          <s:enumeration value="ItemBonusPrice1PerUtilizationUnit" />
+          <s:enumeration value="ItemBonusPricePerOrderUnit" />
+          <s:enumeration value="ItemBonusPricePerPriceUnit" />
+          <s:enumeration value="ItemBonusPricePerUtilizationUnit" />
+          <s:enumeration value="ItemCode" />
+          <s:enumeration value="ItemConditionGroupCode" />
+          <s:enumeration value="ItemDeliveryTimeQuantity" />
+          <s:enumeration value="ItemDeliveryTimeUnitCode" />
+          <s:enumeration value="ItemDeliveryTimeUnitDescription" />
+          <s:enumeration value="ItemDescription" />
+          <s:enumeration value="ItemDrawing" />
+          <s:enumeration value="ItemGrossPrice" />
+          <s:enumeration value="ItemGrossPriceInfoPrice" />
+          <s:enumeration value="ItemGrossPriceInfoPriceQuantity" />
+          <s:enumeration value="ItemGrossPricePerOrderUnit" />
+          <s:enumeration value="ItemGrossPricePerOrderUnitVAT" />
+          <s:enumeration value="ItemGrossPricePerPriceUnit" />
+          <s:enumeration value="ItemGrossPricePerUtilizationUnit" />
+          <s:enumeration value="ItemGrossPricePerUtilizationUnitVAT" />
+          <s:enumeration value="ItemGroupCode" />
+          <s:enumeration value="ItemHasPurchaseCondition" />
+          <s:enumeration value="ItemImage" />
+          <s:enumeration value="ItemIsInventory" />
+          <s:enumeration value="ItemIsStockItem" />
+          <s:enumeration value="ItemItemSetCode" />
+          <s:enumeration value="ItemItemSetDescription" />
+          <s:enumeration value="ItemItemSetProjectManagerFriendlyName" />
+          <s:enumeration value="ItemItemSetProjectManagerGroupCode" />
+          <s:enumeration value="ItemItemSetProjectManagerLanguageCode" />
+          <s:enumeration value="ItemItemSetProjectManagerName" />
+          <s:enumeration value="ItemItemSetProjectManagerUserEmail" />
+          <s:enumeration value="ItemItemSetProjectManagerUserFormalName" />
+          <s:enumeration value="ItemItemSetProjectManagerUserFriendlyName" />
+          <s:enumeration value="ItemItemSetProjectManagerUserFunction" />
+          <s:enumeration value="ItemMinOrderQuantity" />
+          <s:enumeration value="ItemModificationCode" />
+          <s:enumeration value="ItemPackagingCode" />
+          <s:enumeration value="ItemPackagingDescription" />
+          <s:enumeration value="ItemPriceOrderRatio" />
+          <s:enumeration value="ItemPriceUnitAbbreviation" />
+          <s:enumeration value="ItemPriceUnitCode" />
+          <s:enumeration value="ItemPriceUnitDescription" />
+          <s:enumeration value="ItemPriceUnitPluralDescription" />
+          <s:enumeration value="ItemProductBrand" />
+          <s:enumeration value="ItemProductClass" />
+          <s:enumeration value="ItemProductCode" />
+          <s:enumeration value="ItemProductDescription" />
+          <s:enumeration value="ItemProductGroupCode" />
+          <s:enumeration value="ItemProductGTIN" />
+          <s:enumeration value="ItemProductHazardClass" />
+          <s:enumeration value="ItemProductIsDangerGood" />
+          <s:enumeration value="ItemProductManufacturerCode" />
+          <s:enumeration value="ItemProductManufacturerDescription" />
+          <s:enumeration value="ItemProductManufacturerGLNCode" />
+          <s:enumeration value="ItemProductModificationCode" />
+          <s:enumeration value="ItemProductRemark" />
+          <s:enumeration value="ItemProductSeries" />
+          <s:enumeration value="ItemProductStatus" />
+          <s:enumeration value="ItemProductUNNumber" />
+          <s:enumeration value="ItemPurchaseCode" />
+          <s:enumeration value="ItemPurchaseDiscount" />
+          <s:enumeration value="ItemPurchaseItemAssignedConditionGroupDescription" />
+          <s:enumeration value="ItemPurchaseItemAvailability" />
+          <s:enumeration value="ItemPurchaseItemBarcodeItemCode" />
+          <s:enumeration value="ItemPurchaseItemBonusDiscount" />
+          <s:enumeration value="ItemPurchaseItemBonusDiscount1" />
+          <s:enumeration value="ItemPurchaseItemBonusPrice" />
+          <s:enumeration value="ItemPurchaseItemBonusPrice1PerUtilizationUnit" />
+          <s:enumeration value="ItemPurchaseItemBonusPricePerOrderUnit" />
+          <s:enumeration value="ItemPurchaseItemBonusPricePerPriceUnit" />
+          <s:enumeration value="ItemPurchaseItemBonusPricePerUtilizationUnit" />
+          <s:enumeration value="ItemPurchaseItemCode" />
+          <s:enumeration value="ItemPurchaseItemConditionGroupCode" />
+          <s:enumeration value="ItemPurchaseItemDeliveryTimeQuantity" />
+          <s:enumeration value="ItemPurchaseItemDeliveryTimeUnitCode" />
+          <s:enumeration value="ItemPurchaseItemDeliveryTimeUnitDescription" />
+          <s:enumeration value="ItemPurchaseItemDescription" />
+          <s:enumeration value="ItemPurchaseItemDrawing" />
+          <s:enumeration value="ItemPurchaseItemGrossPriceInfoPrice" />
+          <s:enumeration value="ItemPurchaseItemGrossPriceInfoPriceQuantity" />
+          <s:enumeration value="ItemPurchaseItemGrossPricePerOrderUnit" />
+          <s:enumeration value="ItemPurchaseItemGrossPricePerOrderUnitVAT" />
+          <s:enumeration value="ItemPurchaseItemGrossPricePerPriceUnit" />
+          <s:enumeration value="ItemPurchaseItemGrossPricePerUtilizationUnit" />
+          <s:enumeration value="ItemPurchaseItemGrossPricePerUtilizationUnitVAT" />
+          <s:enumeration value="ItemPurchaseItemGroupCode" />
+          <s:enumeration value="ItemPurchaseItemHasPurchaseCondition" />
+          <s:enumeration value="ItemPurchaseItemImage" />
+          <s:enumeration value="ItemPurchaseItemIsInventory" />
+          <s:enumeration value="ItemPurchaseItemIsStockItem" />
+          <s:enumeration value="ItemPurchaseItemItemSetCode" />
+          <s:enumeration value="ItemPurchaseItemItemSetDescription" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerFriendlyName" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerGroupCode" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerLanguageCode" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerName" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerUserEmail" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerUserFormalName" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerUserFriendlyName" />
+          <s:enumeration value="ItemPurchaseItemItemSetProjectManagerUserFunction" />
+          <s:enumeration value="ItemPurchaseItemMinOrderQuantity" />
+          <s:enumeration value="ItemPurchaseItemModificationCode" />
+          <s:enumeration value="ItemPurchaseItemPackagingCode" />
+          <s:enumeration value="ItemPurchaseItemPackagingDescription" />
+          <s:enumeration value="ItemPurchaseItemPriceOrderRatio" />
+          <s:enumeration value="ItemPurchaseItemPriceUnitAbbreviation" />
+          <s:enumeration value="ItemPurchaseItemPriceUnitCode" />
+          <s:enumeration value="ItemPurchaseItemPriceUnitDescription" />
+          <s:enumeration value="ItemPurchaseItemPriceUnitPluralDescription" />
+          <s:enumeration value="ItemPurchaseItemProductBrand" />
+          <s:enumeration value="ItemPurchaseItemProductClass" />
+          <s:enumeration value="ItemPurchaseItemProductCode" />
+          <s:enumeration value="ItemPurchaseItemProductDescription" />
+          <s:enumeration value="ItemPurchaseItemProductGroupCode" />
+          <s:enumeration value="ItemPurchaseItemProductGTIN" />
+          <s:enumeration value="ItemPurchaseItemProductHazardClass" />
+          <s:enumeration value="ItemPurchaseItemProductIsDangerGood" />
+          <s:enumeration value="ItemPurchaseItemProductManufacturerCode" />
+          <s:enumeration value="ItemPurchaseItemProductManufacturerDescription" />
+          <s:enumeration value="ItemPurchaseItemProductManufacturerGLNCode" />
+          <s:enumeration value="ItemPurchaseItemProductModificationCode" />
+          <s:enumeration value="ItemPurchaseItemProductRemark" />
+          <s:enumeration value="ItemPurchaseItemProductSeries" />
+          <s:enumeration value="ItemPurchaseItemProductStatus" />
+          <s:enumeration value="ItemPurchaseItemProductUNNumber" />
+          <s:enumeration value="ItemPurchaseItemPurchaseCode" />
+          <s:enumeration value="ItemPurchaseItemPurchaseDiscount" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationAgreementsText" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationBarcodePrefix" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationCode" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationCodeAndDescription" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationCurrencyDescription" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationCurrencySymbol" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationDescription" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationGLNCode" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationIsFormal" />
+          <s:enumeration value="ItemPurchaseItemPurchaseOrganizationShortDescription" />
+          <s:enumeration value="ItemPurchaseItemPurchasePrice" />
+          <s:enumeration value="ItemPurchaseItemPurchasePricePerOrderUnit" />
+          <s:enumeration value="ItemPurchaseItemPurchasePricePerPriceUnit" />
+          <s:enumeration value="ItemPurchaseItemPurchasePricePerUtilizationUnit" />
+          <s:enumeration value="ItemPurchaseItemRemark" />
+          <s:enumeration value="ItemPurchaseItemSalesItemSetTemplateLIKOCode" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationAgreementsText" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationBarcodePrefix" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationCode" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationCodeAndDescription" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationCurrencyDescription" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationCurrencySymbol" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationDescription" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationGLNCode" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationIsFormal" />
+          <s:enumeration value="ItemPurchaseItemSalesOrganizationShortDescription" />
+          <s:enumeration value="ItemPurchaseItemShortDescription1" />
+          <s:enumeration value="ItemPurchaseItemShortDescription2" />
+          <s:enumeration value="ItemPurchaseItemStepQuantity" />
+          <s:enumeration value="ItemPurchaseItemUtilizationOrderRatio" />
+          <s:enumeration value="ItemPurchaseItemUtilizationUnitAbbreviation" />
+          <s:enumeration value="ItemPurchaseItemUtilizationUnitCode" />
+          <s:enumeration value="ItemPurchaseItemUtilizationUnitDescription" />
+          <s:enumeration value="ItemPurchaseItemUtilizationUnitPluralDescription" />
+          <s:enumeration value="ItemPurchaseOrganizationAgreementsText" />
+          <s:enumeration value="ItemPurchaseOrganizationBarcodePrefix" />
+          <s:enumeration value="ItemPurchaseOrganizationCode" />
+          <s:enumeration value="ItemPurchaseOrganizationCodeAndDescription" />
+          <s:enumeration value="ItemPurchaseOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="ItemPurchaseOrganizationCurrencyDescription" />
+          <s:enumeration value="ItemPurchaseOrganizationCurrencySymbol" />
+          <s:enumeration value="ItemPurchaseOrganizationDescription" />
+          <s:enumeration value="ItemPurchaseOrganizationGLNCode" />
+          <s:enumeration value="ItemPurchaseOrganizationIsFormal" />
+          <s:enumeration value="ItemPurchaseOrganizationShortDescription" />
+          <s:enumeration value="ItemPurchasePrice" />
+          <s:enumeration value="ItemPurchasePricePerOrderUnit" />
+          <s:enumeration value="ItemPurchasePricePerPriceUnit" />
+          <s:enumeration value="ItemPurchasePricePerUtilizationUnit" />
+          <s:enumeration value="ItemRemark" />
+          <s:enumeration value="ItemSalesItemSetTemplateLIKOCode" />
+          <s:enumeration value="ItemSalesOrganizationAgreementsText" />
+          <s:enumeration value="ItemSalesOrganizationBarcodePrefix" />
+          <s:enumeration value="ItemSalesOrganizationCode" />
+          <s:enumeration value="ItemSalesOrganizationCodeAndDescription" />
+          <s:enumeration value="ItemSalesOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="ItemSalesOrganizationCurrencyDescription" />
+          <s:enumeration value="ItemSalesOrganizationCurrencySymbol" />
+          <s:enumeration value="ItemSalesOrganizationDescription" />
+          <s:enumeration value="ItemSalesOrganizationGLNCode" />
+          <s:enumeration value="ItemSalesOrganizationIsFormal" />
+          <s:enumeration value="ItemSalesOrganizationShortDescription" />
+          <s:enumeration value="ItemShortDescription1" />
+          <s:enumeration value="ItemShortDescription2" />
+          <s:enumeration value="ItemStepQuantity" />
+          <s:enumeration value="ItemUtilizationOrderRatio" />
+          <s:enumeration value="ItemUtilizationUnitAbbreviation" />
+          <s:enumeration value="ItemUtilizationUnitCode" />
+          <s:enumeration value="ItemUtilizationUnitDescription" />
+          <s:enumeration value="ItemUtilizationUnitPluralDescription" />
+          <s:enumeration value="LabourCode" />
+          <s:enumeration value="LabourCostType" />
+          <s:enumeration value="LabourDescription" />
+          <s:enumeration value="LabourUtilizationUnitDescription" />
+          <s:enumeration value="LastOrNewMemo" />
+          <s:enumeration value="LIKOCode" />
+          <s:enumeration value="LineCost" />
+          <s:enumeration value="LineGross" />
+          <s:enumeration value="LineGroupCode" />
+          <s:enumeration value="LineHours" />
+          <s:enumeration value="LineMinutes" />
+          <s:enumeration value="LineNr" />
+          <s:enumeration value="LineNumber" />
+          <s:enumeration value="LineQuantity" />
+          <s:enumeration value="LineSales" />
+          <s:enumeration value="LineType" />
+          <s:enumeration value="LowestEstimateLineEstimateNo" />
+          <s:enumeration value="LowestSalesPrice" />
+          <s:enumeration value="Margin" />
+          <s:enumeration value="MaterialQuantity" />
+          <s:enumeration value="MaterialStatus" />
+          <s:enumeration value="MinOrderQuantity" />
+          <s:enumeration value="Minutes" />
+          <s:enumeration value="MonitoringCode" />
+          <s:enumeration value="MonitoringDescription" />
+          <s:enumeration value="NormCode" />
+          <s:enumeration value="NormSystemCode" />
+          <s:enumeration value="OrderUnitAbbreviation" />
+          <s:enumeration value="OrderUnitCode" />
+          <s:enumeration value="OrderUnitDescription" />
+          <s:enumeration value="OrderUnitPluralDescription" />
+          <s:enumeration value="ParentResourceCode" />
+          <s:enumeration value="PriceQuantity" />
+          <s:enumeration value="ProductNormCode" />
+          <s:enumeration value="ProductNormNormDescription" />
+          <s:enumeration value="ProductNormNormSearchCode" />
+          <s:enumeration value="PurchaseDiscount" />
+          <s:enumeration value="Quantity" />
+          <s:enumeration value="QuantityBE" />
+          <s:enumeration value="ResourceCode" />
+          <s:enumeration value="SalesDiscount" />
+          <s:enumeration value="SalesOrganizationCode" />
+          <s:enumeration value="SalesOrganizationCodeAndDescription" />
+          <s:enumeration value="SalesPrice" />
+          <s:enumeration value="SalesPriceVAT" />
+          <s:enumeration value="SalesSurcharge" />
+          <s:enumeration value="SalesSurchargeOrDiscount" />
+          <s:enumeration value="ShortDescription1" />
+          <s:enumeration value="SortValue" />
+          <s:enumeration value="SourceDescription" />
+          <s:enumeration value="SourceKey" />
+          <s:enumeration value="SourceType" />
+          <s:enumeration value="StartPeriod" />
+          <s:enumeration value="StartPeriodAsMonth" />
+          <s:enumeration value="StartPeriodAsQuarter" />
+          <s:enumeration value="StartPeriodAsWeek" />
+          <s:enumeration value="StartPeriodAsYear" />
+          <s:enumeration value="StepQuantity" />
+          <s:enumeration value="SummaryOfAllMemos" />
+          <s:enumeration value="TaxAmount" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="TimeUnitAbbreviation" />
+          <s:enumeration value="TimeUnitCode" />
+          <s:enumeration value="TimeUnitDescription" />
+          <s:enumeration value="TimeUnitPluralDescription" />
+          <s:enumeration value="TotBase" />
+          <s:enumeration value="TotCost" />
+          <s:enumeration value="TotGross" />
+          <s:enumeration value="TotHours" />
+          <s:enumeration value="TotMinutes" />
+          <s:enumeration value="TotQuantity" />
+          <s:enumeration value="TotSales" />
+          <s:enumeration value="TotSalesVAT" />
+          <s:enumeration value="TotSurchargeOrDiscount" />
+          <s:enumeration value="TotTaxAmount" />
+          <s:enumeration value="UtilizationOrderRatio" />
+          <s:enumeration value="UtilizationUnitAbbreviation" />
+          <s:enumeration value="UtilizationUnitCode" />
+          <s:enumeration value="UtilizationUnitDescription" />
+          <s:enumeration value="UtilizationUnitPluralDescription" />
+          <s:enumeration value="VATPercentage" />
+          <s:enumeration value="VATType" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetLinesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLinesResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estimateKey" type="tns:EstimateKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="lineId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveLineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estimateKey" type="tns:EstimateKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="lineId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateLineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewAdvancedFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSearchTextResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFacet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedFacetItem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Facet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSelected" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfFacetItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedItem" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacetItem" nillable="true" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Facet" nillable="true" type="tns:Facet" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetViewFacetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFacetResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="facets" type="tns:ArrayOfFacet" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDetailUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDetailUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDetailUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDefaultView" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDefaultViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Select" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGridUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGridUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsArray" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrder" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddSoapIn">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="AddSoapOut">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetSoapIn">
+    <wsdl:part name="parameters" element="tns:Set" />
+  </wsdl:message>
+  <wsdl:message name="SetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAll" />
+  </wsdl:message>
+  <wsdl:message name="SetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectUsingLayoutAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectUsingLayoutAsXml" />
+  </wsdl:message>
+  <wsdl:message name="SelectUsingLayoutAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectUsingLayoutAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddLinesSoapIn">
+    <wsdl:part name="parameters" element="tns:AddLines" />
+  </wsdl:message>
+  <wsdl:message name="AddLinesSoapOut">
+    <wsdl:part name="parameters" element="tns:AddLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PackLinesSoapIn">
+    <wsdl:part name="parameters" element="tns:PackLines" />
+  </wsdl:message>
+  <wsdl:message name="PackLinesSoapOut">
+    <wsdl:part name="parameters" element="tns:PackLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPartsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParts" />
+  </wsdl:message>
+  <wsdl:message name="GetPartsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPartsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPartSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPart" />
+  </wsdl:message>
+  <wsdl:message name="AddPartSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLinesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLines" />
+  </wsdl:message>
+  <wsdl:message name="GetLinesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLineSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveLine" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLineSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLine" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewCount" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSearchText" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSearchTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFacet" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFacetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EstimateServiceSoap">
+    <wsdl:operation name="GetDetailUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage with information about the requested Estimate record.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetDetailUrlSoapIn" />
+      <wsdl:output message="tns:GetDetailUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all records with given keys as an xml.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateKey[] keys; An array of alternative keys of the requested records.&lt;/li&gt;
+&lt;li&gt;in EstimateXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRJ.Estimate"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoSoapIn" />
+      <wsdl:output message="tns:GetInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a list of Estimatekeys that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;out EstimateKey[] keys; The requested EstimateKeys or null when not found.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SearchSoapIn" />
+      <wsdl:output message="tns:SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets the default view for this session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateViewOption view; The select view.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetDefaultViewSoapIn" />
+      <wsdl:output message="tns:SetDefaultViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a JSON string that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;in EstimateXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRJ.Estimate"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string json; The requested information as a json string.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectAsJSONSoapIn" />
+      <wsdl:output message="tns:SelectAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a xml that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;in EstimateXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRJ.Estimate"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectSoapIn" />
+      <wsdl:output message="tns:SelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage for searching Estimate records.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterField[] filterFields; The fields to filter on (or null = no filter).&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filter values to use (or null = no filter)&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetGridUrlSoapIn" />
+      <wsdl:output message="tns:GetGridUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current EstimateView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in EstimateXmlField[] fields; Fields to use.&lt;/li&gt;
+&lt;li&gt;out string xml; xml containing given fields of all records of current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsXmlSoapIn" />
+      <wsdl:output message="tns:GetViewAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current ProductView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out ProductKey[] productsKeys; array of keys of the records in the current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsArraySoapIn" />
+      <wsdl:output message="tns:GetViewAsArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a viewfilter on 1 or more fields eg on Estimateset&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in EstimateFilterField[] filterFields; Fields to filter on.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; Fieldvalues of the fields to filter.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFilterSoapIn" />
+      <wsdl:output message="tns:SetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Set the sort order for this view&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in sortExpression; sort expression for example: code asc, name desc&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSortOrderSoapIn" />
+      <wsdl:output message="tns:SetViewSortOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a record to this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new record, same format as the output of GetInfo or Select.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddSoapIn" />
+      <wsdl:output message="tns:AddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Updates a record with given key and xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the record, same format as the output of GetInfo or Select.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets for a record with given key the data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;in EstimateXmlField[] field; The field to set.&lt;/li&gt;
+&lt;li&gt;in object newValue; The new value.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetSoapIn" />
+      <wsdl:output message="tns:SetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets for multiple records a specified field to a specified value.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in EstimateKey[] keys; The keys of the records to update.&lt;/li&gt;
+&lt;li&gt;in string fieldName; The name of the field to set.&lt;/li&gt;
+&lt;li&gt;in object newValue; The new value.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetAllSoapIn" />
+      <wsdl:output message="tns:SetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an XML string that satisfies the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;in string layoutName; The layout with requested fields.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as an xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectUsingLayoutAsXmlSoapIn" />
+      <wsdl:output message="tns:SelectUsingLayoutAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a lines under this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in partId; id of the estimatepart to use.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new records, same format as the output of GetInfo or Select.&lt;/li&gt;
+&lt;li&gt;out int[] lineIds; a SESSION specific key for creates lines.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddLinesSoapIn" />
+      <wsdl:output message="tns:AddLinesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PackLines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a headerline + lines under this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in partId; id of the estimatepart to use.&lt;/li&gt;
+&lt;li&gt;in string headerXml; The data to header line, same format as the output of GetInfo or Select.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new records, same format as the output of GetInfo or Select.&lt;/li&gt;
+&lt;li&gt;out int lineId; a SESSION specific key for creates headerline.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:PackLinesSoapIn" />
+      <wsdl:output message="tns:PackLinesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets the estimateparts.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in estimateKey estimateKey; The key of the estimate to use.&lt;/li&gt;
+&lt;li&gt;in EstimatePartXmlField[] fields; The requested fields.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested part data as xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetPartsSoapIn" />
+      <wsdl:output message="tns:GetPartsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPart">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a part under this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in estimateKey estimateKey; The key of the estimate to use.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new record, same format as the output of GetInfo or Select.&lt;/li&gt;
+&lt;li&gt;out int partId; a SESSION specific key for this part.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddPartSoapIn" />
+      <wsdl:output message="tns:AddPartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets the elementlines.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in partId; id of the estimatepart to use.&lt;/li&gt;
+&lt;li&gt;in EstimateItemXmlField[] fields; The requested fields.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested line data as xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetLinesSoapIn" />
+      <wsdl:output message="tns:GetLinesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Removes the line with given id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in estimateKey estimateKey; The key of the estimate to use.&lt;/li&gt;
+&lt;li&gt;in lineId; The id of the line to use.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:RemoveLineSoapIn" />
+      <wsdl:output message="tns:RemoveLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Updates the line with given id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in estimateKey estimateKey; The key of the estimate to use.&lt;/li&gt;
+&lt;li&gt;in lineId; The id of the line to use.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:UpdateLineSoapIn" />
+      <wsdl:output message="tns:UpdateLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of records in current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewCountSoapIn" />
+      <wsdl:output message="tns:GetViewCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ResetViewFilterSoapIn" />
+      <wsdl:output message="tns:ResetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets an advanced viewfilter on 1 or more fields.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewAdvancedFilterSoapIn" />
+      <wsdl:output message="tns:SetViewAdvancedFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a search text for this view.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string searchText; Text to search on all relevant fields.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSearchTextSoapIn" />
+      <wsdl:output message="tns:SetViewSearchTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Given the selected facetvalue or null to start and returns the meaningfull facets with their values, as well as the number of items fullfilling these facetvalues&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in string selectedFacetItem; facetItem to start with.&lt;/li&gt;
+&lt;li&gt;out Facet[] facets; relevant facets based on selectedFacetItem.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of items fullfilling the given facets.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFacetSoapIn" />
+      <wsdl:output message="tns:SetViewFacetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EstimateServiceSoap" type="tns:EstimateServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDetailUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/Set" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SelectUsingLayoutAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLines">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/AddLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PackLines">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/PackLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParts">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetParts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPart">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/AddPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/RemoveLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/UpdateLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap:operation soapAction="http://Compano.com/Modules/PRJ/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EstimateServiceSoap12" type="tns:EstimateServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDetailUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/Select" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/Add" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/Set" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SelectUsingLayoutAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLines">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/AddLines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PackLines">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/PackLines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParts">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetParts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPart">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/AddPart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetLines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/RemoveLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/UpdateLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRJ/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EstimateService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+EstimateService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing Estimate information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting Estimate records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving Estimate information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating Estimate information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+    <wsdl:port name="EstimateServiceSoap" binding="tns:EstimateServiceSoap">
+      <soap:address location="http://ttt.online.compano.nl/prjestimate.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EstimateServiceSoap12" binding="tns:EstimateServiceSoap12">
+      <soap12:address location="http://ttt.online.compano.nl/prjestimate.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

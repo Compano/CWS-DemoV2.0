@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Sgbdnl.Ebusiness.Client.Order.Enum" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://accmessageservice.galvano.nl/MessageService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="OrderAddressRole">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="OrganisationAddress" />
+      <xs:enumeration value="DeliveryAddress" />
+      <xs:enumeration value="OrderConfirmationContactPerson" />
+      <xs:enumeration value="InvoiceReceiver" />
+      <xs:enumeration value="InvoicePayer" />
+      <xs:enumeration value="GoodsReceiptContactPerson" />
+      <xs:enumeration value="FieldEmployee" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderAddressRole" nillable="true" type="tns:OrderAddressRole" />
+  <xs:simpleType name="OrderAddressType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="DefaultAddress" />
+      <xs:enumeration value="KnownAlternativeAddress" />
+      <xs:enumeration value="UnknownAlternativeAddress" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderAddressType" nillable="true" type="tns:OrderAddressType" />
+  <xs:simpleType name="ConditionKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="ManualDiscount" />
+      <xs:enumeration value="ManualDiscountPercentage" />
+      <xs:enumeration value="ManualDiscountOverridePercentage" />
+      <xs:enumeration value="OrderMethodDiscountPercentage" />
+      <xs:enumeration value="ShowroomDiscountPercentage" />
+      <xs:enumeration value="ManualSurcharge" />
+      <xs:enumeration value="ExtraServicesCosts" />
+      <xs:enumeration value="TransportationCosts" />
+      <xs:enumeration value="OrderReasonCosts" />
+      <xs:enumeration value="TimeWindowCosts" />
+      <xs:enumeration value="ShippingConditionCosts" />
+      <xs:enumeration value="PaymentDiscount" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ConditionKind" nillable="true" type="tns:ConditionKind" />
+  <xs:simpleType name="AllowanceChargeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Header" />
+      <xs:enumeration value="Line" />
+      <xs:enumeration value="Price" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AllowanceChargeKind" nillable="true" type="tns:AllowanceChargeKind" />
+  <xs:simpleType name="TaxRate">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Low" />
+      <xs:enumeration value="High" />
+      <xs:enumeration value="TransferredServicesEurope" />
+      <xs:enumeration value="TransferredProductsEurope" />
+      <xs:enumeration value="TransferredEurope" />
+      <xs:enumeration value="Transferred" />
+      <xs:enumeration value="HighGermany" />
+      <xs:enumeration value="TransferredToSubcontractorEurope" />
+      <xs:enumeration value="FiscalEntity" />
+      <xs:enumeration value="TransferredToSubcontractor" />
+      <xs:enumeration value="TransferredToSubcontractorBelgium" />
+      <xs:enumeration value="HighBelgium" />
+      <xs:enumeration value="NoneBelgium" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaxRate" nillable="true" type="tns:TaxRate" />
+  <xs:simpleType name="OrderCheckStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="AcceptedWithoutChanges" />
+      <xs:enumeration value="AcceptedWithChanges" />
+      <xs:enumeration value="NotAccepted" />
+      <xs:enumeration value="NotYetProcessed" />
+      <xs:enumeration value="LineAcceptedWithoutChanges" />
+      <xs:enumeration value="LineAcceptedWithChanges" />
+      <xs:enumeration value="LineNotAccepted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderCheckStatus" nillable="true" type="tns:OrderCheckStatus" />
+  <xs:simpleType name="OrderCheckReason">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="DeliveryAddressIncomplete" />
+      <xs:enumeration value="DeliveryMomentChanged" />
+      <xs:enumeration value="QuotationExpired" />
+      <xs:enumeration value="QuotationIdUnknown" />
+      <xs:enumeration value="QuantityChanged" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderCheckReason" nillable="true" type="tns:OrderCheckReason" />
+  <xs:simpleType name="StockType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="StockItem">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SpecialOrder">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Expiring">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StockType" nillable="true" type="tns:StockType" />
+  <xs:simpleType name="DeliveryStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Available" />
+      <xs:enumeration value="Delivery" />
+      <xs:enumeration value="Cancelled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DeliveryStatus" nillable="true" type="tns:DeliveryStatus" />
+  <xs:simpleType name="OrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="ContractQuotationAll" />
+      <xs:enumeration value="ContractOpen" />
+      <xs:enumeration value="ContractClosed" />
+      <xs:enumeration value="QuotationOpen" />
+      <xs:enumeration value="QuotationExpired" />
+      <xs:enumeration value="OrderAll" />
+      <xs:enumeration value="OrderInProgress" />
+      <xs:enumeration value="OrderExpired" />
+      <xs:enumeration value="OrderVerification" />
+      <xs:enumeration value="OrderReadyToShip" />
+      <xs:enumeration value="OrderProcessing" />
+      <xs:enumeration value="OrderDelivered" />
+      <xs:enumeration value="OrderInTransit" />
+      <xs:enumeration value="OrderReturnCompleted" />
+      <xs:enumeration value="OrderReturnInTransit" />
+      <xs:enumeration value="OrderReturnPlanned" />
+      <xs:enumeration value="OrderReturnToBePlanned" />
+      <xs:enumeration value="ContractAll" />
+      <xs:enumeration value="QuotationAll" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderStatus" nillable="true" type="tns:OrderStatus" />
+  <xs:simpleType name="OrderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Contract" />
+      <xs:enumeration value="Quotation" />
+      <xs:enumeration value="OrderAll" />
+      <xs:enumeration value="OrderDelivery" />
+      <xs:enumeration value="OrderPickup" />
+      <xs:enumeration value="OrderReturn" />
+      <xs:enumeration value="OrderRedelivery" />
+      <xs:enumeration value="OrderOnCall" />
+      <xs:enumeration value="OrderDirect" />
+      <xs:enumeration value="OrderOther" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderType" nillable="true" type="tns:OrderType" />
+</xs:schema>

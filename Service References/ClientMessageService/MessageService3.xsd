@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MessageService.Models.Enum" />
+  <xs:complexType name="MessageRequestType">
+    <xs:sequence>
+      <xs:element name="MsgId" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MessageService.Models.Enum" name="MsgFormat" nillable="true" type="q1:MsgFormatType" />
+      <xs:element name="MsgVersion" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageRequestType" nillable="true" type="MessageRequestType" />
+  <xs:complexType name="CustomInfoType">
+    <xs:sequence>
+      <xs:element name="IsTestMessage" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LanguageCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsContentCompressed" nillable="true" type="xs:boolean" />
+      <xs:element name="ApplicationId" nillable="true" type="xs:string" />
+      <xs:element name="VersionId" nillable="true" type="xs:string" />
+      <xs:element name="RelationId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomInfoType" nillable="true" type="CustomInfoType" />
+  <xs:complexType name="MessageRequestResponseType">
+    <xs:sequence>
+      <xs:element name="MessageRequestResult" nillable="true" type="MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageRequestResponseType" nillable="true" type="MessageRequestResponseType" />
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="MsgProperties" nillable="true" type="MessageList" />
+      <xs:element name="MsgContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attachment" nillable="true" type="ArrayOfAttachmentType">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageType" nillable="true" type="MessageType" />
+  <xs:complexType name="MessageList">
+    <xs:sequence>
+      <xs:element name="MsgId" nillable="true" type="xs:string" />
+      <xs:element name="MsgDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MessageService.Models.Enum" name="MsgFormat" nillable="true" type="q2:MsgFormatType" />
+      <xs:element name="MsgVersion" nillable="true" type="xs:string" />
+      <xs:element name="MsgType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageList" nillable="true" type="MessageList" />
+  <xs:complexType name="ArrayOfAttachmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AttachmentType" nillable="true" type="AttachmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAttachmentType" nillable="true" type="ArrayOfAttachmentType" />
+  <xs:complexType name="AttachmentType">
+    <xs:sequence>
+      <xs:element name="URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentType" nillable="true" type="xs:string" />
+      <xs:element name="FileType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element name="AttachedData" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AttachmentType" nillable="true" type="AttachmentType" />
+  <xs:complexType name="MessageResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="MessageType">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MessageResult" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageResponseType" nillable="true" type="MessageResponseType" />
+  <xs:complexType name="AvailableMessagesRequestType">
+    <xs:sequence>
+      <xs:element name="MsgType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AvailableMessagesRequestType" nillable="true" type="AvailableMessagesRequestType" />
+  <xs:complexType name="ArrayOfMessageList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MessageList" nillable="true" type="MessageList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMessageList" nillable="true" type="ArrayOfMessageList" />
+</xs:schema>

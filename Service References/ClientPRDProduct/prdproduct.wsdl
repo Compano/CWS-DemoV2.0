@@ -1,0 +1,2728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Compano.com/Modules/PRD" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Compano.com/Modules/PRD" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+ProductService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing Product information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting Product records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving Product information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating Product information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Compano.com/Modules/PRD">
+      <s:element name="ClearBasket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearBasketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClearBasketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProductXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductXmlField" type="tns:ProductXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProductXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AssignedProductGroupDescription" />
+          <s:enumeration value="CompanyProductCode" />
+          <s:enumeration value="MutationCode" />
+          <s:enumeration value="MutationDate" />
+          <s:enumeration value="ProductGroupCode" />
+          <s:enumeration value="ProductSeries" />
+          <s:enumeration value="ProductType" />
+          <s:enumeration value="AssignedGroupCode" />
+          <s:enumeration value="AssignedGroupDescription" />
+          <s:enumeration value="AssignedGroupDrawing" />
+          <s:enumeration value="AssignedGroupImage" />
+          <s:enumeration value="AssignedGroupIsUsed" />
+          <s:enumeration value="AssignedGroupRemark" />
+          <s:enumeration value="AttachmentCount" />
+          <s:enumeration value="Availability" />
+          <s:enumeration value="BasketQuantity" />
+          <s:enumeration value="BIMStatus" />
+          <s:enumeration value="Brand" />
+          <s:enumeration value="CentralManufacturerCode" />
+          <s:enumeration value="CentralManufacturerCodeAndDescription" />
+          <s:enumeration value="CentralManufacturerDescription" />
+          <s:enumeration value="CentralManufacturerGLNCode" />
+          <s:enumeration value="ClassCode" />
+          <s:enumeration value="ClassCodeAndDescription" />
+          <s:enumeration value="ClassGroup" />
+          <s:enumeration value="ClassGroupCode" />
+          <s:enumeration value="ClassGroupName" />
+          <s:enumeration value="ClassificationInfo" />
+          <s:enumeration value="ClassificationQuality" />
+          <s:enumeration value="ClassificationStatus" />
+          <s:enumeration value="ClassName" />
+          <s:enumeration value="ClassPABNo" />
+          <s:enumeration value="ClassStatus" />
+          <s:enumeration value="ClassVersionNo" />
+          <s:enumeration value="Code" />
+          <s:enumeration value="CodeAndDescription" />
+          <s:enumeration value="CompanyCode" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="CreatorCode" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="DescriptionLine1" />
+          <s:enumeration value="DescriptionLine2" />
+          <s:enumeration value="DescriptionLine3" />
+          <s:enumeration value="DescriptionLine4" />
+          <s:enumeration value="DimensionUnitAbbreviation" />
+          <s:enumeration value="DimensionUnitCode" />
+          <s:enumeration value="DimensionUnitDescription" />
+          <s:enumeration value="DimensionUnitPluralDescription" />
+          <s:enumeration value="Drawing" />
+          <s:enumeration value="Dummy" />
+          <s:enumeration value="EmcsModellingClassDrawing1" />
+          <s:enumeration value="EndDate" />
+          <s:enumeration value="EndDateAsMonth" />
+          <s:enumeration value="EndDateAsQuarter" />
+          <s:enumeration value="EndDateAsWeek" />
+          <s:enumeration value="EndDateAsYear" />
+          <s:enumeration value="Explanation" />
+          <s:enumeration value="GroupCode" />
+          <s:enumeration value="GTIN" />
+          <s:enumeration value="GTINPredecessor" />
+          <s:enumeration value="GTINSuccessor" />
+          <s:enumeration value="HasAddOnProducts" />
+          <s:enumeration value="HasAttachments" />
+          <s:enumeration value="HasDrawing" />
+          <s:enumeration value="HasExistingCode" />
+          <s:enumeration value="HasExistingGTIN" />
+          <s:enumeration value="HasExistingOwnCode" />
+          <s:enumeration value="HasImage" />
+          <s:enumeration value="HasItems" />
+          <s:enumeration value="HasOwnAlternatives" />
+          <s:enumeration value="HasProductClass" />
+          <s:enumeration value="HasSubProducts" />
+          <s:enumeration value="HazardClass" />
+          <s:enumeration value="Height" />
+          <s:enumeration value="Image" />
+          <s:enumeration value="ImportDateTime" />
+          <s:enumeration value="ImportDateTimeAsMonth" />
+          <s:enumeration value="ImportDateTimeAsQuarter" />
+          <s:enumeration value="ImportDateTimeAsWeek" />
+          <s:enumeration value="ImportDateTimeAsYear" />
+          <s:enumeration value="IsCentral" />
+          <s:enumeration value="IsDangerGood" />
+          <s:enumeration value="IsFiltered" />
+          <s:enumeration value="IsMarkedClassified" />
+          <s:enumeration value="IsNormProduct" />
+          <s:enumeration value="IsSubProduct" />
+          <s:enumeration value="ItemCount" />
+          <s:enumeration value="ItemSetAssignedCountriesAsText" />
+          <s:enumeration value="ItemSetCodes" />
+          <s:enumeration value="LastModificationDateTime" />
+          <s:enumeration value="LastModificationDateTimeAsMonth" />
+          <s:enumeration value="LastModificationDateTimeAsQuarter" />
+          <s:enumeration value="LastModificationDateTimeAsWeek" />
+          <s:enumeration value="LastModificationDateTimeAsYear" />
+          <s:enumeration value="Length" />
+          <s:enumeration value="ManufacturerCode" />
+          <s:enumeration value="ManufacturerCodeAndDescription" />
+          <s:enumeration value="ManufacturerDescription" />
+          <s:enumeration value="ManufacturerGLNCode" />
+          <s:enumeration value="ManufacturerProductsType" />
+          <s:enumeration value="ManufacturerURL" />
+          <s:enumeration value="ManufacturerWebSite" />
+          <s:enumeration value="MarkedClassifiedDateTime" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsMonth" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsQuarter" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsWeek" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsYear" />
+          <s:enumeration value="ModellingClassCode" />
+          <s:enumeration value="ModellingClassDrawing1" />
+          <s:enumeration value="ModellingClassDrawing2" />
+          <s:enumeration value="ModellingClassDrawing3" />
+          <s:enumeration value="ModificationCode" />
+          <s:enumeration value="NetWeight" />
+          <s:enumeration value="NormCode" />
+          <s:enumeration value="NormProductCode" />
+          <s:enumeration value="NormProductDescription" />
+          <s:enumeration value="NormProductGTIN" />
+          <s:enumeration value="NormProductManufacturer" />
+          <s:enumeration value="NormProductManufacturerCode" />
+          <s:enumeration value="NormSheetState" />
+          <s:enumeration value="NumberOfFeaturesFilled" />
+          <s:enumeration value="OriginCode" />
+          <s:enumeration value="OriginDescription" />
+          <s:enumeration value="PercOfFeaturesFilled" />
+          <s:enumeration value="PercOfModelFeaturesFilled" />
+          <s:enumeration value="PredecessorCode" />
+          <s:enumeration value="PurchaseProductAvailability" />
+          <s:enumeration value="PurchaseProductBrand" />
+          <s:enumeration value="PurchaseProductClass" />
+          <s:enumeration value="PurchaseProductCode" />
+          <s:enumeration value="PurchaseProductDescription" />
+          <s:enumeration value="PurchaseProductGroupCode" />
+          <s:enumeration value="PurchaseProductGTIN" />
+          <s:enumeration value="PurchaseProductHazardClass" />
+          <s:enumeration value="PurchaseProductIsDangerGood" />
+          <s:enumeration value="PurchaseProductManufacturer" />
+          <s:enumeration value="PurchaseProductManufacturerCode" />
+          <s:enumeration value="PurchaseProductManufacturerDescription" />
+          <s:enumeration value="PurchaseProductManufacturerGLNCode" />
+          <s:enumeration value="PurchaseProductModificationCode" />
+          <s:enumeration value="PurchaseProductRemark" />
+          <s:enumeration value="PurchaseProductSeries" />
+          <s:enumeration value="PurchaseProductStatus" />
+          <s:enumeration value="PurchaseProductUNNumber" />
+          <s:enumeration value="Remark" />
+          <s:enumeration value="ReportURL" />
+          <s:enumeration value="Series" />
+          <s:enumeration value="StartDate" />
+          <s:enumeration value="StartDateAsMonth" />
+          <s:enumeration value="StartDateAsQuarter" />
+          <s:enumeration value="StartDateAsWeek" />
+          <s:enumeration value="StartDateAsYear" />
+          <s:enumeration value="Status" />
+          <s:enumeration value="SubProductCount" />
+          <s:enumeration value="SuccessorCode" />
+          <s:enumeration value="Type" />
+          <s:enumeration value="UNNumber" />
+          <s:enumeration value="Volume" />
+          <s:enumeration value="VolumeUnitAbbreviation" />
+          <s:enumeration value="VolumeUnitCode" />
+          <s:enumeration value="VolumeUnitDescription" />
+          <s:enumeration value="VolumeUnitPluralDescription" />
+          <s:enumeration value="WeightUnitAbbreviation" />
+          <s:enumeration value="WeightUnitCode" />
+          <s:enumeration value="WeightUnitDescription" />
+          <s:enumeration value="WeightUnitPluralDescription" />
+          <s:enumeration value="Width" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetBasketAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketAsArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketAsArrayResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedQuantities" type="tns:ArrayOfDouble" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedRecords" type="tns:ArrayOfProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDouble">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="double" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProductKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductKey" type="tns:ProductKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ManufacturerCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBasketUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="redirectUrlOk" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="redirectUrlCancel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfProductFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProductFilterField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductFilterField" type="tns:ProductFilterField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProductFilterField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AddOnProductBelongsToProducts" />
+          <s:enumeration value="AddOnProducts" />
+          <s:enumeration value="AddOnSelectedProductAddOns" />
+          <s:enumeration value="AddOnSelectedProductProducts" />
+          <s:enumeration value="AllAttachments" />
+          <s:enumeration value="AssignedGroup" />
+          <s:enumeration value="AssignedGroupCode" />
+          <s:enumeration value="AssignedGroupIsUsed" />
+          <s:enumeration value="AttachmentCount" />
+          <s:enumeration value="Availability" />
+          <s:enumeration value="BasketQuantity" />
+          <s:enumeration value="BIMStatus" />
+          <s:enumeration value="Brand" />
+          <s:enumeration value="Calls" />
+          <s:enumeration value="CentralManufacturer" />
+          <s:enumeration value="CentralManufacturerCode" />
+          <s:enumeration value="CentralManufacturerGLNCode" />
+          <s:enumeration value="Class" />
+          <s:enumeration value="ClassCode" />
+          <s:enumeration value="ClassGroup" />
+          <s:enumeration value="ClassGroupCode" />
+          <s:enumeration value="ClassGroupName" />
+          <s:enumeration value="ClassificationQuality" />
+          <s:enumeration value="ClassificationStatus" />
+          <s:enumeration value="ClassName" />
+          <s:enumeration value="ClassPABNo" />
+          <s:enumeration value="ClassStatus" />
+          <s:enumeration value="ClassVersionNo" />
+          <s:enumeration value="Code" />
+          <s:enumeration value="CompanyCode" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="CreatorCode" />
+          <s:enumeration value="CustomerItems" />
+          <s:enumeration value="DimensionUnit" />
+          <s:enumeration value="DimensionUnitAbbreviation" />
+          <s:enumeration value="DimensionUnitCode" />
+          <s:enumeration value="EmcsModellingClass" />
+          <s:enumeration value="EndDate" />
+          <s:enumeration value="EndDateAsMonth" />
+          <s:enumeration value="EndDateAsQuarter" />
+          <s:enumeration value="EndDateAsWeek" />
+          <s:enumeration value="EndDateAsYear" />
+          <s:enumeration value="GroupCode" />
+          <s:enumeration value="GTIN" />
+          <s:enumeration value="GTINPredecessor" />
+          <s:enumeration value="GTINSuccessor" />
+          <s:enumeration value="HasAddOnProducts" />
+          <s:enumeration value="HasAttachments" />
+          <s:enumeration value="HasDrawing" />
+          <s:enumeration value="HasExistingCode" />
+          <s:enumeration value="HasExistingGTIN" />
+          <s:enumeration value="HasExistingOwnCode" />
+          <s:enumeration value="HasImage" />
+          <s:enumeration value="HasItems" />
+          <s:enumeration value="HasOwnAlternatives" />
+          <s:enumeration value="HasProductClass" />
+          <s:enumeration value="HasSubProducts" />
+          <s:enumeration value="HazardClass" />
+          <s:enumeration value="Height" />
+          <s:enumeration value="ImportDateTime" />
+          <s:enumeration value="ImportDateTimeAsMonth" />
+          <s:enumeration value="ImportDateTimeAsQuarter" />
+          <s:enumeration value="ImportDateTimeAsWeek" />
+          <s:enumeration value="ImportDateTimeAsYear" />
+          <s:enumeration value="IsCentral" />
+          <s:enumeration value="IsDangerGood" />
+          <s:enumeration value="IsFiltered" />
+          <s:enumeration value="IsMarkedClassified" />
+          <s:enumeration value="IsNormProduct" />
+          <s:enumeration value="IsSubProduct" />
+          <s:enumeration value="ItemCount" />
+          <s:enumeration value="Items" />
+          <s:enumeration value="ItemSetAssignedCountries" />
+          <s:enumeration value="ItemSetCodes" />
+          <s:enumeration value="ItemSets" />
+          <s:enumeration value="LastModificationDateTime" />
+          <s:enumeration value="LastModificationDateTimeAsMonth" />
+          <s:enumeration value="LastModificationDateTimeAsQuarter" />
+          <s:enumeration value="LastModificationDateTimeAsWeek" />
+          <s:enumeration value="LastModificationDateTimeAsYear" />
+          <s:enumeration value="Length" />
+          <s:enumeration value="Manufacturer" />
+          <s:enumeration value="ManufacturerCode" />
+          <s:enumeration value="ManufacturerGLNCode" />
+          <s:enumeration value="ManufacturerProductsType" />
+          <s:enumeration value="MarkedClassifiedDateTime" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsMonth" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsQuarter" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsWeek" />
+          <s:enumeration value="MarkedClassifiedDateTimeAsYear" />
+          <s:enumeration value="ModellingClass" />
+          <s:enumeration value="ModellingClassCode" />
+          <s:enumeration value="ModellingClasses" />
+          <s:enumeration value="ModificationCode" />
+          <s:enumeration value="NetWeight" />
+          <s:enumeration value="NormCode" />
+          <s:enumeration value="NormProduct" />
+          <s:enumeration value="NormProductCode" />
+          <s:enumeration value="NormProductGTIN" />
+          <s:enumeration value="NormProductItems" />
+          <s:enumeration value="NormProductManufacturer" />
+          <s:enumeration value="NormProductManufacturerCode" />
+          <s:enumeration value="NormSheetState" />
+          <s:enumeration value="NumberOfFeaturesFilled" />
+          <s:enumeration value="Origin" />
+          <s:enumeration value="OriginCode" />
+          <s:enumeration value="OriginDescription" />
+          <s:enumeration value="OwnAlternatives" />
+          <s:enumeration value="PercOfFeaturesFilled" />
+          <s:enumeration value="PercOfModelFeaturesFilled" />
+          <s:enumeration value="PredecessorCode" />
+          <s:enumeration value="ProductFeatures" />
+          <s:enumeration value="ProductModelFeatures" />
+          <s:enumeration value="Products" />
+          <s:enumeration value="PurchaseProduct" />
+          <s:enumeration value="PurchaseProductAvailability" />
+          <s:enumeration value="PurchaseProductBrand" />
+          <s:enumeration value="PurchaseProductClass" />
+          <s:enumeration value="PurchaseProductCode" />
+          <s:enumeration value="PurchaseProductGroupCode" />
+          <s:enumeration value="PurchaseProductGTIN" />
+          <s:enumeration value="PurchaseProductHazardClass" />
+          <s:enumeration value="PurchaseProductIsDangerGood" />
+          <s:enumeration value="PurchaseProductManufacturer" />
+          <s:enumeration value="PurchaseProductManufacturerCode" />
+          <s:enumeration value="PurchaseProductManufacturerGLNCode" />
+          <s:enumeration value="PurchaseProductModificationCode" />
+          <s:enumeration value="PurchaseProducts" />
+          <s:enumeration value="PurchaseProductSeries" />
+          <s:enumeration value="PurchaseProductStatus" />
+          <s:enumeration value="PurchaseProductUNNumber" />
+          <s:enumeration value="SelectedAddOns" />
+          <s:enumeration value="Series" />
+          <s:enumeration value="StartDate" />
+          <s:enumeration value="StartDateAsMonth" />
+          <s:enumeration value="StartDateAsQuarter" />
+          <s:enumeration value="StartDateAsWeek" />
+          <s:enumeration value="StartDateAsYear" />
+          <s:enumeration value="Status" />
+          <s:enumeration value="SubProductBelongsToProducts" />
+          <s:enumeration value="SubProductCount" />
+          <s:enumeration value="SubProducts" />
+          <s:enumeration value="SuccessorCode" />
+          <s:enumeration value="Type" />
+          <s:enumeration value="UNNumber" />
+          <s:enumeration value="Volume" />
+          <s:enumeration value="VolumeUnit" />
+          <s:enumeration value="VolumeUnitAbbreviation" />
+          <s:enumeration value="VolumeUnitCode" />
+          <s:enumeration value="WeightUnit" />
+          <s:enumeration value="WeightUnitAbbreviation" />
+          <s:enumeration value="WeightUnitCode" />
+          <s:enumeration value="Width" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBasketUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBasketCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBasketCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="basketCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:ProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDetailUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfProductKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfProductFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDefaultView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="view" type="tns:ProductViewOption" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ProductViewOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="AddOnSelectorHelper" />
+          <s:enumeration value="CentralProductPickPlace" />
+          <s:enumeration value="LocalProduct" />
+          <s:enumeration value="NormProduct" />
+          <s:enumeration value="Product" />
+          <s:enumeration value="ProductClassification" />
+          <s:enumeration value="ProductEdit" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetDefaultViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetDefaultViewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFilterElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FilterElement" nillable="true" type="tns:FilterElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FilterElement">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ConditionType" type="tns:ConditionTypeOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value1" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value2" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConditionTypeOption">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="EqualsField" />
+          <s:enumeration value="GreaterThan" />
+          <s:enumeration value="GreaterThanField" />
+          <s:enumeration value="GreaterThanOrEquals" />
+          <s:enumeration value="GreaterThanOrEqualsField" />
+          <s:enumeration value="LesserThan" />
+          <s:enumeration value="LesserThanField" />
+          <s:enumeration value="LesserThanOrEquals" />
+          <s:enumeration value="LesserThanOrEqualsField" />
+          <s:enumeration value="Between" />
+          <s:enumeration value="Outside" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="NotContains" />
+          <s:enumeration value="EqualsNoCase" />
+          <s:enumeration value="ItemInSet" />
+          <s:enumeration value="StartsWith" />
+          <s:enumeration value="EndsWith" />
+          <s:enumeration value="InRange" />
+          <s:enumeration value="NotNull" />
+          <s:enumeration value="Null" />
+          <s:enumeration value="HasChilds" />
+          <s:enumeration value="HasNoChilds" />
+          <s:enumeration value="InAudience" />
+          <s:enumeration value="Approximately" />
+          <s:enumeration value="ApproximatelyField" />
+          <s:enumeration value="InRangeField" />
+          <s:enumeration value="LastWeek" />
+          <s:enumeration value="LastMonth" />
+          <s:enumeration value="NextWeek" />
+          <s:enumeration value="NextMonth" />
+          <s:enumeration value="NotEquals" />
+          <s:enumeration value="NotEqualsField" />
+          <s:enumeration value="ItemNotInSet" />
+          <s:enumeration value="HasUnarchivedChilds" />
+          <s:enumeration value="HasNoUnarchivedChilds" />
+          <s:enumeration value="All" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SelectAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAsJSONResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfProductFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfProductFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGridUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGridUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewAsArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewAsArrayResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProductKeys" type="tns:ArrayOfProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterFields" type="tns:ArrayOfProductFilterField" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterValues" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sortExpression" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSortOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSortOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Add">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:ProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:ProductKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Set">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="tns:ProductKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="field" type="tns:ProductXmlField" />
+            <s:element minOccurs="0" maxOccurs="1" name="newValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfProductKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductPropertiesAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductPropertiesAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductPropertiesAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductFeatures">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keys" type="tns:ArrayOfProductKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductFeaturesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductFeaturesResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productKey" type="tns:ProductKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="gtinKey" type="tns:ProductKeyGTIN" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfItemXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProductKeyGTIN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GTIN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemXmlField" type="tns:ItemXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ItemXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AssignedItemGroupDescription" />
+          <s:enumeration value="CompanyItemCode" />
+          <s:enumeration value="ConditionGroupDescription" />
+          <s:enumeration value="ImportDate" />
+          <s:enumeration value="ItemGroupCode" />
+          <s:enumeration value="ItemGroupDescription" />
+          <s:enumeration value="ItemStartDate" />
+          <s:enumeration value="ItemStatus" />
+          <s:enumeration value="ItemType" />
+          <s:enumeration value="MutationCode" />
+          <s:enumeration value="MutationDate" />
+          <s:enumeration value="ProductProductGroupCode" />
+          <s:enumeration value="ProductProductSeries" />
+          <s:enumeration value="ProductProductType" />
+          <s:enumeration value="VatType" />
+          <s:enumeration value="ActionInfo" />
+          <s:enumeration value="ActionToolTip" />
+          <s:enumeration value="ActivePurchaseConditionCodeAndDescription" />
+          <s:enumeration value="ActivePurchaseConditionConditionIndication" />
+          <s:enumeration value="ActivePurchaseConditionDescription" />
+          <s:enumeration value="ActiveSalesConditionBonusDiscount" />
+          <s:enumeration value="ActiveSalesConditionBonusDiscount2" />
+          <s:enumeration value="ActiveSalesConditionCode" />
+          <s:enumeration value="ActiveSalesConditionCustomerGroupCode" />
+          <s:enumeration value="ActiveSalesConditionDescription" />
+          <s:enumeration value="ActiveSalesConditionDiscount1" />
+          <s:enumeration value="ActiveSalesConditionDiscount2" />
+          <s:enumeration value="ActiveSalesConditionDiscount3" />
+          <s:enumeration value="ActiveSalesConditionIsIncludeVat" />
+          <s:enumeration value="ActiveSalesConditionNetPrice" />
+          <s:enumeration value="ActiveSalesConditionSalesOrganizationCode" />
+          <s:enumeration value="ActiveSalesConditionSurcharge" />
+          <s:enumeration value="ActiveSalesConditionSurchargeAmount" />
+          <s:enumeration value="ActiveSalesConditionSurchargeGrossPrice" />
+          <s:enumeration value="AddToBasket" />
+          <s:enumeration value="AlternativesCount" />
+          <s:enumeration value="AlternativeStatus" />
+          <s:enumeration value="AssignedConditionGroupCode" />
+          <s:enumeration value="AssignedConditionGroupCodeAndDescription" />
+          <s:enumeration value="AssignedConditionGroupDescription" />
+          <s:enumeration value="AssignedGroupCode" />
+          <s:enumeration value="AssignedGroupDescription" />
+          <s:enumeration value="AssignedGroupDrawing" />
+          <s:enumeration value="AssignedGroupImage" />
+          <s:enumeration value="AssignedGroupIsUsed" />
+          <s:enumeration value="AssignedGroupRemark" />
+          <s:enumeration value="Availability" />
+          <s:enumeration value="AvailablePricePeriods" />
+          <s:enumeration value="BarcodeItemCode" />
+          <s:enumeration value="BasketQuantity" />
+          <s:enumeration value="BasketReference" />
+          <s:enumeration value="BasketSales" />
+          <s:enumeration value="BestImage" />
+          <s:enumeration value="BonusDiscount" />
+          <s:enumeration value="BonusDiscount1" />
+          <s:enumeration value="BonusPrice" />
+          <s:enumeration value="BonusPrice1PerUtilizationUnit" />
+          <s:enumeration value="BonusPricePerOrderUnit" />
+          <s:enumeration value="BonusPricePerPriceUnit" />
+          <s:enumeration value="BonusPricePerUtilizationUnit" />
+          <s:enumeration value="CBSCode" />
+          <s:enumeration value="ClearanceSurcharge" />
+          <s:enumeration value="Code" />
+          <s:enumeration value="CompanyCode" />
+          <s:enumeration value="ConditionGroupCategoryDescription" />
+          <s:enumeration value="ConditionGroupCode" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="ConsumerSalesPrice" />
+          <s:enumeration value="Count" />
+          <s:enumeration value="CurrencyCurrencyCode" />
+          <s:enumeration value="CurrencyDescription" />
+          <s:enumeration value="CurrencySymbol" />
+          <s:enumeration value="DeepLink" />
+          <s:enumeration value="DeliveryTimeQuantity" />
+          <s:enumeration value="DeliveryTimeUnitAbbreviation" />
+          <s:enumeration value="DeliveryTimeUnitCode" />
+          <s:enumeration value="DeliveryTimeUnitDescription" />
+          <s:enumeration value="DeliveryTimeUnitPluralDescription" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="DescriptionLine1" />
+          <s:enumeration value="DescriptionLine2" />
+          <s:enumeration value="DescriptionLine3" />
+          <s:enumeration value="DescriptionLine4" />
+          <s:enumeration value="DimensionUnitAbbreviation" />
+          <s:enumeration value="DimensionUnitCode" />
+          <s:enumeration value="DimensionUnitDescription" />
+          <s:enumeration value="DimensionUnitPluralDescription" />
+          <s:enumeration value="Drawing" />
+          <s:enumeration value="EndDate" />
+          <s:enumeration value="EndDateAsMonth" />
+          <s:enumeration value="EndDateAsQuarter" />
+          <s:enumeration value="EndDateAsWeek" />
+          <s:enumeration value="EndDateAsYear" />
+          <s:enumeration value="FuturePriceInfoPrice" />
+          <s:enumeration value="FuturePriceInfoPriceQuantity" />
+          <s:enumeration value="FuturePriceInfoPriceUnitAbbreviation" />
+          <s:enumeration value="FuturePriceInfoPriceUnitCode" />
+          <s:enumeration value="FuturePriceInfoPriceUnitDescription" />
+          <s:enumeration value="FuturePriceInfoPriceUnitPluralDescription" />
+          <s:enumeration value="FuturePriceInfoStartDate" />
+          <s:enumeration value="GrossPriceInfoPrice" />
+          <s:enumeration value="GrossPriceInfoPriceQuantity" />
+          <s:enumeration value="GrossPriceInfoPriceUnitAbbreviation" />
+          <s:enumeration value="GrossPriceInfoPriceUnitCode" />
+          <s:enumeration value="GrossPriceInfoPriceUnitDescription" />
+          <s:enumeration value="GrossPriceInfoPriceUnitPluralDescription" />
+          <s:enumeration value="GrossPriceInfoQuantity" />
+          <s:enumeration value="GrossPriceInfoSequenceNo" />
+          <s:enumeration value="GrossPriceInfoStartDate" />
+          <s:enumeration value="GrossPriceInfoTimeUnitCode" />
+          <s:enumeration value="GrossPricePerOrderUnit" />
+          <s:enumeration value="GrossPricePerOrderUnitVAT" />
+          <s:enumeration value="GrossPricePerPriceUnit" />
+          <s:enumeration value="GrossPricePerUtilizationUnit" />
+          <s:enumeration value="GrossPricePerUtilizationUnitVAT" />
+          <s:enumeration value="GrossWeight" />
+          <s:enumeration value="GroupCode" />
+          <s:enumeration value="GTIN" />
+          <s:enumeration value="GTINManufacturer" />
+          <s:enumeration value="GTINPredecessor" />
+          <s:enumeration value="GTINSuccessor" />
+          <s:enumeration value="HasAddOnItems" />
+          <s:enumeration value="HasAlternatives" />
+          <s:enumeration value="HasAttachments" />
+          <s:enumeration value="HasCondition" />
+          <s:enumeration value="HasConditionDiscount" />
+          <s:enumeration value="HasConditionGroup" />
+          <s:enumeration value="HasConditionGroupCategory" />
+          <s:enumeration value="HasDrawing" />
+          <s:enumeration value="HasGroupConditions" />
+          <s:enumeration value="HasImage" />
+          <s:enumeration value="HasMemos" />
+          <s:enumeration value="HasNorms" />
+          <s:enumeration value="HasPriceModifications" />
+          <s:enumeration value="HasProductInfo" />
+          <s:enumeration value="HasPurchaseCondition" />
+          <s:enumeration value="HasSalesCondition" />
+          <s:enumeration value="HasSalesItems" />
+          <s:enumeration value="HasStandardPrice" />
+          <s:enumeration value="Image" />
+          <s:enumeration value="ImagePath" />
+          <s:enumeration value="ImportDateTime" />
+          <s:enumeration value="ImportDateTimeAsMonth" />
+          <s:enumeration value="ImportDateTimeAsQuarter" />
+          <s:enumeration value="ImportDateTimeAsWeek" />
+          <s:enumeration value="ImportDateTimeAsYear" />
+          <s:enumeration value="IsCentral" />
+          <s:enumeration value="IsCurrent" />
+          <s:enumeration value="IsFiltered" />
+          <s:enumeration value="IsGasNedProduct" />
+          <s:enumeration value="IsInventory" />
+          <s:enumeration value="IsNewDataPool" />
+          <s:enumeration value="IsProcessable" />
+          <s:enumeration value="IsPurchaseItem" />
+          <s:enumeration value="IsShowingVAT" />
+          <s:enumeration value="IsStockItem" />
+          <s:enumeration value="IsWebItem" />
+          <s:enumeration value="IsWebShopItem" />
+          <s:enumeration value="ItemModificationDateTime" />
+          <s:enumeration value="ItemModificationDateTimeAsMonth" />
+          <s:enumeration value="ItemModificationDateTimeAsQuarter" />
+          <s:enumeration value="ItemModificationDateTimeAsWeek" />
+          <s:enumeration value="ItemModificationDateTimeAsYear" />
+          <s:enumeration value="ItemPublish" />
+          <s:enumeration value="ItemSetAssignedCountries" />
+          <s:enumeration value="ItemSetCode" />
+          <s:enumeration value="ItemSetCodeAndDescription" />
+          <s:enumeration value="ItemSetCompanyCode" />
+          <s:enumeration value="ItemSetDescription" />
+          <s:enumeration value="ItemSetItemNoTemplate" />
+          <s:enumeration value="ItemSetItemsType" />
+          <s:enumeration value="ItemSetRelationCode" />
+          <s:enumeration value="ItemSetType" />
+          <s:enumeration value="LastModificationDateTime" />
+          <s:enumeration value="LastModificationDateTimeAsMonth" />
+          <s:enumeration value="LastModificationDateTimeAsQuarter" />
+          <s:enumeration value="LastModificationDateTimeAsWeek" />
+          <s:enumeration value="LastModificationDateTimeAsYear" />
+          <s:enumeration value="LastOrNewMemo" />
+          <s:enumeration value="LIKODescription" />
+          <s:enumeration value="LineGrossPrice" />
+          <s:enumeration value="LinePriceQuantity" />
+          <s:enumeration value="LinePurchasePrice" />
+          <s:enumeration value="ListSummary" />
+          <s:enumeration value="Margin" />
+          <s:enumeration value="MaterialStatus" />
+          <s:enumeration value="MinOrderQuantity" />
+          <s:enumeration value="MinOrderQuantityPerUtilizationUnit" />
+          <s:enumeration value="ModificationCode" />
+          <s:enumeration value="NetSalesVAT" />
+          <s:enumeration value="NewGrossPriceInfoEndDate" />
+          <s:enumeration value="NewGrossPriceInfoPrice" />
+          <s:enumeration value="NewGrossPriceInfoPriceQuantity" />
+          <s:enumeration value="NewGrossPriceInfoPriceUnit" />
+          <s:enumeration value="NewGrossPriceInfoPriceUnitCode" />
+          <s:enumeration value="NewGrossPriceInfoQuantity" />
+          <s:enumeration value="NewGrossPriceInfoStartDate" />
+          <s:enumeration value="NewGrossPriceInfoTimeUnit" />
+          <s:enumeration value="NewGrossPriceInfoTimeUnitCode" />
+          <s:enumeration value="NewRetailPriceInfoEndDate" />
+          <s:enumeration value="NewRetailPriceInfoPrice" />
+          <s:enumeration value="NewRetailPriceInfoPriceQuantity" />
+          <s:enumeration value="NewRetailPriceInfoPriceUnit" />
+          <s:enumeration value="NewRetailPriceInfoPriceUnitCode" />
+          <s:enumeration value="NewRetailPriceInfoQuantity" />
+          <s:enumeration value="NewRetailPriceInfoStartDate" />
+          <s:enumeration value="NewRetailPriceInfoTimeUnit" />
+          <s:enumeration value="NewRetailPriceInfoTimeUnitCode" />
+          <s:enumeration value="NewStandardPriceInfoEndDate" />
+          <s:enumeration value="NewStandardPriceInfoPrice" />
+          <s:enumeration value="NewStandardPriceInfoPriceQuantity" />
+          <s:enumeration value="NewStandardPriceInfoPriceUnit" />
+          <s:enumeration value="NewStandardPriceInfoPriceUnitCode" />
+          <s:enumeration value="NewStandardPriceInfoQuantity" />
+          <s:enumeration value="NewStandardPriceInfoStartDate" />
+          <s:enumeration value="NewStandardPriceInfoTimeUnit" />
+          <s:enumeration value="NewStandardPriceInfoTimeUnitCode" />
+          <s:enumeration value="OnDemand" />
+          <s:enumeration value="OrderPrice" />
+          <s:enumeration value="OrderUnitAbbreviation" />
+          <s:enumeration value="OrderUnitCode" />
+          <s:enumeration value="OrderUnitDescription" />
+          <s:enumeration value="OrderUnitPluralDescription" />
+          <s:enumeration value="OriginCode" />
+          <s:enumeration value="OriginDescription" />
+          <s:enumeration value="PackagingCode" />
+          <s:enumeration value="PackagingDescription" />
+          <s:enumeration value="PackagingHeight" />
+          <s:enumeration value="PackagingLength" />
+          <s:enumeration value="PackagingWidth" />
+          <s:enumeration value="PredecessorCode" />
+          <s:enumeration value="PriceCount" />
+          <s:enumeration value="PriceDate" />
+          <s:enumeration value="PriceDateAsMonth" />
+          <s:enumeration value="PriceDateAsQuarter" />
+          <s:enumeration value="PriceDateAsWeek" />
+          <s:enumeration value="PriceDateAsYear" />
+          <s:enumeration value="PriceOrderRatio" />
+          <s:enumeration value="PriceQuantity" />
+          <s:enumeration value="PriceSurcharge" />
+          <s:enumeration value="PriceUnitAbbreviation" />
+          <s:enumeration value="PriceUnitCode" />
+          <s:enumeration value="PriceUnitDescription" />
+          <s:enumeration value="PriceUnitPluralDescription" />
+          <s:enumeration value="ProductAssignedGroupCode" />
+          <s:enumeration value="ProductAssignedGroupDescription" />
+          <s:enumeration value="ProductAssignedGroupDrawing" />
+          <s:enumeration value="ProductAssignedGroupImage" />
+          <s:enumeration value="ProductAssignedGroupIsUsed" />
+          <s:enumeration value="ProductAssignedGroupRemark" />
+          <s:enumeration value="ProductAvailability" />
+          <s:enumeration value="ProductBIMStatus" />
+          <s:enumeration value="ProductBrand" />
+          <s:enumeration value="ProductCentralManufacturerCode" />
+          <s:enumeration value="ProductClass" />
+          <s:enumeration value="ProductClassCode" />
+          <s:enumeration value="ProductClassCodeAndDescription" />
+          <s:enumeration value="ProductClassGroup" />
+          <s:enumeration value="ProductClassGroupCode" />
+          <s:enumeration value="ProductClassGroupName" />
+          <s:enumeration value="ProductClassificationInfo" />
+          <s:enumeration value="ProductClassName" />
+          <s:enumeration value="ProductCode" />
+          <s:enumeration value="ProductCompanyCode" />
+          <s:enumeration value="ProductDescription" />
+          <s:enumeration value="ProductDummy" />
+          <s:enumeration value="ProductGroupCode" />
+          <s:enumeration value="ProductGTIN" />
+          <s:enumeration value="ProductGTINPredecessor" />
+          <s:enumeration value="ProductGTINSuccessor" />
+          <s:enumeration value="ProductImage" />
+          <s:enumeration value="ProductIsMarkedClassified" />
+          <s:enumeration value="ProductLastModificationDateTime" />
+          <s:enumeration value="ProductManufacturer" />
+          <s:enumeration value="ProductManufacturerCode" />
+          <s:enumeration value="ProductManufacturerCodeAndDescription" />
+          <s:enumeration value="ProductManufacturerDescription" />
+          <s:enumeration value="ProductManufacturerGLNCode" />
+          <s:enumeration value="ProductManufacturerURL" />
+          <s:enumeration value="ProductModellingClass" />
+          <s:enumeration value="ProductModellingClassCode" />
+          <s:enumeration value="ProductModificationCode" />
+          <s:enumeration value="ProductNetWeight" />
+          <s:enumeration value="ProductNormProductCode" />
+          <s:enumeration value="ProductNormProductManufacturer" />
+          <s:enumeration value="ProductNormProductManufacturerCode" />
+          <s:enumeration value="ProductOrigin" />
+          <s:enumeration value="ProductOriginCode" />
+          <s:enumeration value="ProductOriginDescription" />
+          <s:enumeration value="ProductPredecessorCode" />
+          <s:enumeration value="ProductPurchaseProductCode" />
+          <s:enumeration value="ProductPurchaseProductGTIN" />
+          <s:enumeration value="ProductPurchaseProductManufacturer" />
+          <s:enumeration value="ProductRemark" />
+          <s:enumeration value="ProductSeries" />
+          <s:enumeration value="ProductStartDate" />
+          <s:enumeration value="ProductStatus" />
+          <s:enumeration value="ProductSuccessorCode" />
+          <s:enumeration value="ProductType" />
+          <s:enumeration value="ProductWeightUnitAbbreviation" />
+          <s:enumeration value="ProductWeightUnitCode" />
+          <s:enumeration value="ProductWeightUnitDescription" />
+          <s:enumeration value="ProductWeightUnitPluralDescription" />
+          <s:enumeration value="PurchaseCode" />
+          <s:enumeration value="PurchaseDiscount" />
+          <s:enumeration value="PurchaseItemAvailability" />
+          <s:enumeration value="PurchaseItemBarcodeItemCode" />
+          <s:enumeration value="PurchaseItemBonusDiscount" />
+          <s:enumeration value="PurchaseItemBonusDiscount1" />
+          <s:enumeration value="PurchaseItemBonusPrice" />
+          <s:enumeration value="PurchaseItemBonusPrice1PerUtilizationUnit" />
+          <s:enumeration value="PurchaseItemBonusPricePerOrderUnit" />
+          <s:enumeration value="PurchaseItemBonusPricePerPriceUnit" />
+          <s:enumeration value="PurchaseItemBonusPricePerUtilizationUnit" />
+          <s:enumeration value="PurchaseItemCode" />
+          <s:enumeration value="PurchaseItemConditionGroupCode" />
+          <s:enumeration value="PurchaseItemDeliveryTimeQuantity" />
+          <s:enumeration value="PurchaseItemDeliveryTimeUnitCode" />
+          <s:enumeration value="PurchaseItemDeliveryTimeUnitDescription" />
+          <s:enumeration value="PurchaseItemDescription" />
+          <s:enumeration value="PurchaseItemDiscount" />
+          <s:enumeration value="PurchaseItemDrawing" />
+          <s:enumeration value="PurchaseItemGrossPriceInfoPrice" />
+          <s:enumeration value="PurchaseItemGrossPriceInfoPriceQuantity" />
+          <s:enumeration value="PurchaseItemGrossPricePerOrderUnit" />
+          <s:enumeration value="PurchaseItemGrossPricePerOrderUnitVAT" />
+          <s:enumeration value="PurchaseItemGrossPricePerPriceUnit" />
+          <s:enumeration value="PurchaseItemGrossPricePerUtilizationUnit" />
+          <s:enumeration value="PurchaseItemGrossPricePerUtilizationUnitVAT" />
+          <s:enumeration value="PurchaseItemGroupCode" />
+          <s:enumeration value="PurchaseItemHasPurchaseCondition" />
+          <s:enumeration value="PurchaseItemImage" />
+          <s:enumeration value="PurchaseItemIsInventory" />
+          <s:enumeration value="PurchaseItemIsStockItem" />
+          <s:enumeration value="PurchaseItemItemSetCode" />
+          <s:enumeration value="PurchaseItemItemSetDescription" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerFriendlyName" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerGroupCode" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerLanguageCode" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerName" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerUserEmail" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerUserFormalName" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerUserFriendlyName" />
+          <s:enumeration value="PurchaseItemItemSetProjectManagerUserFunction" />
+          <s:enumeration value="PurchaseItemMinOrderQuantity" />
+          <s:enumeration value="PurchaseItemModificationCode" />
+          <s:enumeration value="PurchaseItemPackagingCode" />
+          <s:enumeration value="PurchaseItemPackagingDescription" />
+          <s:enumeration value="PurchaseItemPriceOrderRatio" />
+          <s:enumeration value="PurchaseItemPriceUnitAbbreviation" />
+          <s:enumeration value="PurchaseItemPriceUnitCode" />
+          <s:enumeration value="PurchaseItemPriceUnitDescription" />
+          <s:enumeration value="PurchaseItemPriceUnitPluralDescription" />
+          <s:enumeration value="PurchaseItemProductBrand" />
+          <s:enumeration value="PurchaseItemProductClass" />
+          <s:enumeration value="PurchaseItemProductCode" />
+          <s:enumeration value="PurchaseItemProductDescription" />
+          <s:enumeration value="PurchaseItemProductGroupCode" />
+          <s:enumeration value="PurchaseItemProductGTIN" />
+          <s:enumeration value="PurchaseItemProductHazardClass" />
+          <s:enumeration value="PurchaseItemProductIsDangerGood" />
+          <s:enumeration value="PurchaseItemProductManufacturerCode" />
+          <s:enumeration value="PurchaseItemProductManufacturerDescription" />
+          <s:enumeration value="PurchaseItemProductManufacturerGLNCode" />
+          <s:enumeration value="PurchaseItemProductModificationCode" />
+          <s:enumeration value="PurchaseItemProductRemark" />
+          <s:enumeration value="PurchaseItemProductSeries" />
+          <s:enumeration value="PurchaseItemProductStatus" />
+          <s:enumeration value="PurchaseItemProductUNNumber" />
+          <s:enumeration value="PurchaseItemPurchaseCode" />
+          <s:enumeration value="PurchaseItemPurchaseDiscount" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationAgreementsText" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationBarcodePrefix" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationCode" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationCodeAndDescription" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationCurrencyDescription" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationCurrencySymbol" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationDescription" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationGLNCode" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationIsFormal" />
+          <s:enumeration value="PurchaseItemPurchaseOrganizationShortDescription" />
+          <s:enumeration value="PurchaseItemPurchasePerOrderUnit" />
+          <s:enumeration value="PurchaseItemPurchasePerPriceUnit" />
+          <s:enumeration value="PurchaseItemPurchasePerUtilizationUnit" />
+          <s:enumeration value="PurchaseItemPurchasePrice" />
+          <s:enumeration value="PurchaseItemPurchasePricePerOrderUnit" />
+          <s:enumeration value="PurchaseItemPurchasePricePerPriceUnit" />
+          <s:enumeration value="PurchaseItemPurchasePricePerUtilizationUnit" />
+          <s:enumeration value="PurchaseItemRemark" />
+          <s:enumeration value="PurchaseItemSalesItemSetTemplateLIKOCode" />
+          <s:enumeration value="PurchaseItemSalesOrganizationAgreementsText" />
+          <s:enumeration value="PurchaseItemSalesOrganizationBarcodePrefix" />
+          <s:enumeration value="PurchaseItemSalesOrganizationCode" />
+          <s:enumeration value="PurchaseItemSalesOrganizationCodeAndDescription" />
+          <s:enumeration value="PurchaseItemSalesOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="PurchaseItemSalesOrganizationCurrencyDescription" />
+          <s:enumeration value="PurchaseItemSalesOrganizationCurrencySymbol" />
+          <s:enumeration value="PurchaseItemSalesOrganizationDescription" />
+          <s:enumeration value="PurchaseItemSalesOrganizationGLNCode" />
+          <s:enumeration value="PurchaseItemSalesOrganizationIsFormal" />
+          <s:enumeration value="PurchaseItemSalesOrganizationShortDescription" />
+          <s:enumeration value="PurchaseItemShortDescription1" />
+          <s:enumeration value="PurchaseItemShortDescription2" />
+          <s:enumeration value="PurchaseItemStepQuantity" />
+          <s:enumeration value="PurchaseItemUtilizationOrderRatio" />
+          <s:enumeration value="PurchaseItemUtilizationUnitAbbreviation" />
+          <s:enumeration value="PurchaseItemUtilizationUnitCode" />
+          <s:enumeration value="PurchaseItemUtilizationUnitDescription" />
+          <s:enumeration value="PurchaseItemUtilizationUnitPluralDescription" />
+          <s:enumeration value="PurchaseOrganizationAgreementsText" />
+          <s:enumeration value="PurchaseOrganizationBarcodePrefix" />
+          <s:enumeration value="PurchaseOrganizationCode" />
+          <s:enumeration value="PurchaseOrganizationCodeAndDescription" />
+          <s:enumeration value="PurchaseOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="PurchaseOrganizationCurrencyDescription" />
+          <s:enumeration value="PurchaseOrganizationCurrencySymbol" />
+          <s:enumeration value="PurchaseOrganizationDescription" />
+          <s:enumeration value="PurchaseOrganizationGLNCode" />
+          <s:enumeration value="PurchaseOrganizationIsFormal" />
+          <s:enumeration value="PurchaseOrganizationShortDescription" />
+          <s:enumeration value="PurchasePrice" />
+          <s:enumeration value="PurchasePricePerOrderUnit" />
+          <s:enumeration value="PurchasePricePerOrderUnitVAT" />
+          <s:enumeration value="PurchasePricePerPriceUnit" />
+          <s:enumeration value="PurchasePricePerUtilizationUnit" />
+          <s:enumeration value="Remark" />
+          <s:enumeration value="RemarkFirstLine" />
+          <s:enumeration value="RetailPriceInfoPrice" />
+          <s:enumeration value="RetailPriceInfoPriceQuantity" />
+          <s:enumeration value="RetailPriceInfoPriceUnitAbbreviation" />
+          <s:enumeration value="RetailPriceInfoPriceUnitCode" />
+          <s:enumeration value="RetailPriceInfoPriceUnitDescription" />
+          <s:enumeration value="RetailPriceInfoPriceUnitPluralDescription" />
+          <s:enumeration value="RetailPriceInfoStartDate" />
+          <s:enumeration value="RetailPricePerOrderUnit" />
+          <s:enumeration value="RetailPricePerPriceUnit" />
+          <s:enumeration value="RetailPricePerUtilizationUnit" />
+          <s:enumeration value="SalesItemSetTemplateFactor" />
+          <s:enumeration value="SalesItemSetTemplateItemNoTemplate" />
+          <s:enumeration value="SalesItemSetTemplateLIKOCode" />
+          <s:enumeration value="SalesItemSetTemplatePrice" />
+          <s:enumeration value="SalesItemSetTemplateSalesPricingMethod" />
+          <s:enumeration value="SalesItemSetTemplateSurcharge" />
+          <s:enumeration value="SalesOrganizationAgreementsText" />
+          <s:enumeration value="SalesOrganizationBarcodePrefix" />
+          <s:enumeration value="SalesOrganizationCode" />
+          <s:enumeration value="SalesOrganizationCodeAndDescription" />
+          <s:enumeration value="SalesOrganizationCurrencyCurrencyCode" />
+          <s:enumeration value="SalesOrganizationCurrencyDescription" />
+          <s:enumeration value="SalesOrganizationCurrencySymbol" />
+          <s:enumeration value="SalesOrganizationDescription" />
+          <s:enumeration value="SalesOrganizationGLNCode" />
+          <s:enumeration value="SalesOrganizationIsFormal" />
+          <s:enumeration value="SalesOrganizationShortDescription" />
+          <s:enumeration value="SalesPricePerOrderUnit" />
+          <s:enumeration value="SalesPricePerOrderUnitVAT" />
+          <s:enumeration value="SalesPricePurchaseItemOrderUnit" />
+          <s:enumeration value="SalesSurchargePriceVAT" />
+          <s:enumeration value="SearchCode" />
+          <s:enumeration value="ShortDescription1" />
+          <s:enumeration value="ShortDescription2" />
+          <s:enumeration value="SortOrder" />
+          <s:enumeration value="StandardPriceInfoPrice" />
+          <s:enumeration value="StandardPriceInfoPriceQuantity" />
+          <s:enumeration value="StandardPriceInfoPriceUnitAbbreviation" />
+          <s:enumeration value="StandardPriceInfoPriceUnitCode" />
+          <s:enumeration value="StandardPriceInfoPriceUnitDescription" />
+          <s:enumeration value="StandardPriceInfoPriceUnitPluralDescription" />
+          <s:enumeration value="StartDate" />
+          <s:enumeration value="StartDateAsMonth" />
+          <s:enumeration value="StartDateAsQuarter" />
+          <s:enumeration value="StartDateAsWeek" />
+          <s:enumeration value="StartDateAsYear" />
+          <s:enumeration value="Status" />
+          <s:enumeration value="StepQuantity" />
+          <s:enumeration value="StockQuantity" />
+          <s:enumeration value="SuccessorCode" />
+          <s:enumeration value="SummaryOfAllMemos" />
+          <s:enumeration value="TimeUnitAbbreviation" />
+          <s:enumeration value="TimeUnitCode" />
+          <s:enumeration value="TimeUnitDescription" />
+          <s:enumeration value="TimeUnitPluralDescription" />
+          <s:enumeration value="TreeNodeCode" />
+          <s:enumeration value="TreeNodeSequenceNr" />
+          <s:enumeration value="Type" />
+          <s:enumeration value="UseCurrentMarketPrice" />
+          <s:enumeration value="UtilizationOrderRatio" />
+          <s:enumeration value="UtilizationUnitAbbreviation" />
+          <s:enumeration value="UtilizationUnitCode" />
+          <s:enumeration value="UtilizationUnitDescription" />
+          <s:enumeration value="UtilizationUnitPluralDescription" />
+          <s:enumeration value="VATType" />
+          <s:enumeration value="Volume" />
+          <s:enumeration value="WeightUnitAbbreviation" />
+          <s:enumeration value="WeightUnitCode" />
+          <s:enumeration value="WeightUnitDescription" />
+          <s:enumeration value="WeightUnitPluralDescription" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemsResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectUsingLayoutAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+            <s:element minOccurs="0" maxOccurs="1" name="layoutName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectUsingLayoutAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectUsingLayoutAsXmlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productKey" type="tns:ProductKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddLineResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lineId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLines">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productKey" type="tns:ProductKey" />
+            <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfAddOnProductXmlField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAddOnProductXmlField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddOnProductXmlField" type="tns:AddOnProductXmlField" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="AddOnProductXmlField">
+        <s:restriction base="s:string">
+          <s:enumeration value="AddOnBrand" />
+          <s:enumeration value="AddOnClass" />
+          <s:enumeration value="AddOnCode" />
+          <s:enumeration value="AddOnDescription" />
+          <s:enumeration value="AddOnGroupCode" />
+          <s:enumeration value="AddOnGTIN" />
+          <s:enumeration value="AddOnHazardClass" />
+          <s:enumeration value="AddOnIsDangerGood" />
+          <s:enumeration value="AddOnManufacturer" />
+          <s:enumeration value="AddOnManufacturerCode" />
+          <s:enumeration value="AddOnManufacturerDescription" />
+          <s:enumeration value="AddOnManufacturerGLNCode" />
+          <s:enumeration value="AddOnModificationCode" />
+          <s:enumeration value="AddOnRemark" />
+          <s:enumeration value="AddOnSelectorNo" />
+          <s:enumeration value="AddOnSeries" />
+          <s:enumeration value="AddOnStatus" />
+          <s:enumeration value="AddOnType" />
+          <s:enumeration value="AddOnUNNumber" />
+          <s:enumeration value="Amount" />
+          <s:enumeration value="Code" />
+          <s:enumeration value="ConstantNow" />
+          <s:enumeration value="ConstantText" />
+          <s:enumeration value="ConstantToday" />
+          <s:enumeration value="Description" />
+          <s:enumeration value="LineType" />
+          <s:enumeration value="Origin" />
+          <s:enumeration value="Position" />
+          <s:enumeration value="ProductBrand" />
+          <s:enumeration value="ProductClass" />
+          <s:enumeration value="ProductCode" />
+          <s:enumeration value="ProductDescription" />
+          <s:enumeration value="ProductGroupCode" />
+          <s:enumeration value="ProductGTIN" />
+          <s:enumeration value="ProductHazardClass" />
+          <s:enumeration value="ProductIsDangerGood" />
+          <s:enumeration value="ProductListCode" />
+          <s:enumeration value="ProductListDescription" />
+          <s:enumeration value="ProductListManufacturerCode" />
+          <s:enumeration value="ProductListManufacturerDescription" />
+          <s:enumeration value="ProductListManufacturerGLNCode" />
+          <s:enumeration value="ProductManufacturer" />
+          <s:enumeration value="ProductManufacturerCode" />
+          <s:enumeration value="ProductManufacturerDescription" />
+          <s:enumeration value="ProductManufacturerGLNCode" />
+          <s:enumeration value="ProductModificationCode" />
+          <s:enumeration value="ProductRemark" />
+          <s:enumeration value="ProductSeries" />
+          <s:enumeration value="ProductStatus" />
+          <s:enumeration value="ProductUNNumber" />
+          <s:enumeration value="SequenceNo" />
+          <s:enumeration value="Type" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetLinesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLinesResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productKey" type="tns:ProductKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveLineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="productKey" type="tns:ProductKey" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateLineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewCountResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetViewFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetViewFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterElements" type="tns:ArrayOfFilterElement" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewAdvancedFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewAdvancedFilterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewSearchTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewSearchTextResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetViewFacet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionHandle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="selectedFacetItem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Facet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSelected" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfFacetItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedItem" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacetItem" nillable="true" type="tns:FacetItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacetItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFacet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Facet" nillable="true" type="tns:Facet" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetViewFacetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetViewFacetResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="facets" type="tns:ArrayOfFacet" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ClearBasketSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearBasket" />
+  </wsdl:message>
+  <wsdl:message name="ClearBasketSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearBasketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketAsArray" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketAsArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketAsArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBasketCount" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBasketCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDetailUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDetailUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDefaultView" />
+  </wsdl:message>
+  <wsdl:message name="SetDefaultViewSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDefaultViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="SelectAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Select" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGridUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetGridUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGridUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewAsArray" />
+  </wsdl:message>
+  <wsdl:message name="GetViewAsArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewAsArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrder" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSortOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSortOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddSoapIn">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="AddSoapOut">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetSoapIn">
+    <wsdl:part name="parameters" element="tns:Set" />
+  </wsdl:message>
+  <wsdl:message name="SetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAll" />
+  </wsdl:message>
+  <wsdl:message name="SetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductPropertiesAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductPropertiesAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetProductPropertiesAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductPropertiesAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductFeaturesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductFeatures" />
+  </wsdl:message>
+  <wsdl:message name="GetProductFeaturesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductFeaturesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItems" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectUsingLayoutAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectUsingLayoutAsXml" />
+  </wsdl:message>
+  <wsdl:message name="SelectUsingLayoutAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectUsingLayoutAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddLineSoapIn">
+    <wsdl:part name="parameters" element="tns:AddLine" />
+  </wsdl:message>
+  <wsdl:message name="AddLineSoapOut">
+    <wsdl:part name="parameters" element="tns:AddLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLinesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLines" />
+  </wsdl:message>
+  <wsdl:message name="GetLinesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLineSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveLine" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLineSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLine" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViewCount" />
+  </wsdl:message>
+  <wsdl:message name="GetViewCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetViewFilter" />
+  </wsdl:message>
+  <wsdl:message name="ResetViewFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetViewFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilter" />
+  </wsdl:message>
+  <wsdl:message name="SetViewAdvancedFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewAdvancedFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewSearchText" />
+  </wsdl:message>
+  <wsdl:message name="SetViewSearchTextSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewSearchTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapIn">
+    <wsdl:part name="parameters" element="tns:SetViewFacet" />
+  </wsdl:message>
+  <wsdl:message name="SetViewFacetSoapOut">
+    <wsdl:part name="parameters" element="tns:SetViewFacetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ProductServiceSoap">
+    <wsdl:operation name="ClearBasket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Clears the basket&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ClearBasketSoapIn" />
+      <wsdl:output message="tns:ClearBasketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all selected records in the basket as an xml. Does not clear the basket!&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRD.Product"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketAsXmlSoapIn" />
+      <wsdl:output message="tns:GetBasketAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all selected records in the basket as an xml. Does not clear the basket!&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out double[] selectedQuantities; The selected quantities as an array.&lt;/li&gt;
+&lt;li&gt;out ProductKey[] selectedRecords; The keys of the selected records.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketAsArraySoapIn" />
+      <wsdl:output message="tns:GetBasketAsArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage for searching and selecting Product records.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string redirectUrlOk; The url to which the basket returns when the user is finished with selecting items. When null no Ok button will be visible.&lt;/li&gt;
+&lt;li&gt;in string redirectUrlCancel; The url to which the basket returns when the user cancels this session. When null no Cancel button will be visible.&lt;/li&gt;
+&lt;li&gt;in FilterField[] filterFields; The fields to filter on (or null = no filter).&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filter values to use (or null = no filter)&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketUrlSoapIn" />
+      <wsdl:output message="tns:GetBasketUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the number of records in the basket.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;out int basketCount; The number of records in the basket.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBasketCountSoapIn" />
+      <wsdl:output message="tns:GetBasketCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage with information about the requested Product record.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetDetailUrlSoapIn" />
+      <wsdl:output message="tns:GetDetailUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns the given fields of all records with given keys as an xml.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey[] keys; An array of alternative keys of the requested records.&lt;/li&gt;
+&lt;li&gt;in ProductXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRD.Product"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoSoapIn" />
+      <wsdl:output message="tns:GetInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a list of Productkeys that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;out ProductKey[] keys; The requested ProductKeys or null when not found.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SearchSoapIn" />
+      <wsdl:output message="tns:SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets the default view for this session.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductViewOption view; The select view.&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetDefaultViewSoapIn" />
+      <wsdl:output message="tns:SetDefaultViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a JSON string that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;in ProductXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRD.Product"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string json; The requested information as a json string.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectAsJSONSoapIn" />
+      <wsdl:output message="tns:SelectAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns a xml that satisfy the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string[] filterFields; The filterfields to use in the filter.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filtervalues to use.&lt;/li&gt;
+&lt;li&gt;in string[] searchText; The text to filter on.&lt;/li&gt;
+&lt;li&gt;in ProductXmlField[] fields; The requested &lt;a href="../Pages/Xslt.aspx?xslt=entity.xslt&amp;xml=Compano.System.Data.Modeling.MetaInfoRequest&amp;efn=PRD.Product"&gt;fields&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as a xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectSoapIn" />
+      <wsdl:output message="tns:SelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an url for use in an Internet browser. The url will open a webpage for searching Product records.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterField[] filterFields; The fields to filter on (or null = no filter).&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; The filter values to use (or null = no filter)&lt;/li&gt;
+&lt;li&gt;out string url; The requested url.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetGridUrlSoapIn" />
+      <wsdl:output message="tns:GetGridUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current ProductView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in ProductXmlField[] fields; Fields to use.&lt;/li&gt;
+&lt;li&gt;out string xml; xml containing given fields of all records of current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsXmlSoapIn" />
+      <wsdl:output message="tns:GetViewAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Return xml with given fields of all records in current ProductView&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out ProductKey[] productsKeys; array of keys of the records in the current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewAsArraySoapIn" />
+      <wsdl:output message="tns:GetViewAsArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a viewfilter on 1 or more fields eg on Productset&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in ProductFilterField[] filterFields; Fields to filter on.&lt;/li&gt;
+&lt;li&gt;in string[] filterValues; Fieldvalues of the fields to filter.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFilterSoapIn" />
+      <wsdl:output message="tns:SetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Set the sort order for this view&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in sortExpression; sort expression for example: code asc, name desc&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSortOrderSoapIn" />
+      <wsdl:output message="tns:SetViewSortOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a record to this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new record, same format as the output of GetInfo or Select.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddSoapIn" />
+      <wsdl:output message="tns:AddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Updates a record with given key and xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the record, same format as the output of GetInfo or Select.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets for a record with given key the data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey key; The key of the requested record.&lt;/li&gt;
+&lt;li&gt;in ProductXmlField[] field; The field to set.&lt;/li&gt;
+&lt;li&gt;in object newValue; The new value.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetSoapIn" />
+      <wsdl:output message="tns:SetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets for multiple records a specified field to a specified value.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey[] keys; The keys of the records to update.&lt;/li&gt;
+&lt;li&gt;in string fieldName; The name of the field to set.&lt;/li&gt;
+&lt;li&gt;in object newValue; The new value.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetAllSoapIn" />
+      <wsdl:output message="tns:SetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPropertiesAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+ProductProperties for specific item-product.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in itemCode; Code requested item&lt;/li&gt;
+&lt;li&gt;out xml; ProductProperties product linked to requested item&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetProductPropertiesAsXmlSoapIn" />
+      <wsdl:output message="tns:GetProductPropertiesAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductFeatures">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns detail properties for given products as an xml.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey[] keys; An array of alternative keys of the requested records.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as an xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetProductFeaturesSoapIn" />
+      <wsdl:output message="tns:GetProductFeaturesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns item properties for given product as an xml.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in ProductKey key for requested product.&lt;/li&gt;
+&lt;li&gt;in ProductKeyGTIN gtinKey for requested product.&lt;/li&gt;
+&lt;li&gt;in ItemXmlField[] fields; The requested item fields.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as an xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetItemsSoapIn" />
+      <wsdl:output message="tns:GetItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Returns an XML string that satisfies the filter given&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;in string layoutName; The layout with requested fields.&lt;/li&gt;
+&lt;li&gt;out string xml; The requested information as an xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SelectUsingLayoutAsXmlSoapIn" />
+      <wsdl:output message="tns:SelectUsingLayoutAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Adds a line under this table using given xml data.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in productKey productKey; The key of the product to use.&lt;/li&gt;
+&lt;li&gt;in string xml; The data to use for the new record, same format as the output of GetInfo or Select.&lt;/li&gt;
+&lt;li&gt;out int lineId; a SESSION specific key for this line.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddLineSoapIn" />
+      <wsdl:output message="tns:AddLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets the elementlines.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in productKey productKey; The key of the product to use.&lt;/li&gt;
+&lt;li&gt;in AddOnProductXmlField[] fields; The requested fields.&lt;/li&gt;
+&lt;li&gt;string xml; The requested line data as xml.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetLinesSoapIn" />
+      <wsdl:output message="tns:GetLinesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Removes the line with given id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in productKey productKey; The key of the product to use.&lt;/li&gt;
+&lt;li&gt;in id; The id of the line to use.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:RemoveLineSoapIn" />
+      <wsdl:output message="tns:RemoveLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Removes the line with given id.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionHandle; The unique identification of this session.&lt;/li&gt;
+&lt;li&gt;in productKey productKey; The key of the product to use.&lt;/li&gt;
+&lt;li&gt;in id; The id of the line to use.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:UpdateLineSoapIn" />
+      <wsdl:output message="tns:UpdateLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of records in current view.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetViewCountSoapIn" />
+      <wsdl:output message="tns:GetViewCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Reset current viewfilter&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ResetViewFilterSoapIn" />
+      <wsdl:output message="tns:ResetViewFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets an advanced viewfilter on 1 or more fields.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in FilterElement[] filterElements; Elements to filter on.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewAdvancedFilterSoapIn" />
+      <wsdl:output message="tns:SetViewAdvancedFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Sets a search text for this view.&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string searchText; Text to search on all relevant fields.&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewSearchTextSoapIn" />
+      <wsdl:output message="tns:SetViewSearchTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Given the selected facetvalue or null to start and returns the meaningfull facets with their values, as well as the number of items fullfilling these facetvalues&lt;br/&gt;&lt;br/&gt;Parameters:&lt;br/&gt;&lt;ul&gt;
+&lt;li&gt;in string sessionhandle; Handle to current session.&lt;/li&gt;
+&lt;li&gt;in string selectedFacetItem; facetItem to start with.&lt;/li&gt;
+&lt;li&gt;out Facet[] facets; relevant facets based on selectedFacetItem.&lt;/li&gt;
+&lt;li&gt;out int recordCount; Number of items fullfilling the given facets.&lt;/li&gt;
+&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SetViewFacetSoapIn" />
+      <wsdl:output message="tns:SetViewFacetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProductServiceSoap" type="tns:ProductServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClearBasket">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/ClearBasket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetBasketAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetBasketAsArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetBasketUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetBasketCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/Set" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPropertiesAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetProductPropertiesAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductFeatures">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetProductFeatures" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItems">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SelectUsingLayoutAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLine">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/AddLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetLines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/RemoveLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/UpdateLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap:operation soapAction="http://Compano.com/Modules/PRD/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProductServiceSoap12" type="tns:ProductServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ClearBasket">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/ClearBasket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetBasketAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketAsArray">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetBasketAsArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetBasketUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketCount">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetBasketCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetDetailUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultView">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetDefaultView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAsJSON">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SelectAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/Select" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGridUrl">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetGridUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetViewAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewAsArray">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetViewAsArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSortOrder">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetViewSortOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/Add" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/Set" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAll">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPropertiesAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetProductPropertiesAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductFeatures">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetProductFeatures" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItems">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUsingLayoutAsXml">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SelectUsingLayoutAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLine">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/AddLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLines">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetLines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLine">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/RemoveLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/UpdateLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewCount">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/GetViewCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetViewFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/ResetViewFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewAdvancedFilter">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetViewAdvancedFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewSearchText">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetViewSearchText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewFacet">
+      <soap12:operation soapAction="http://Compano.com/Modules/PRD/SetViewFacet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProductService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h5&gt;Introduction&lt;/h5&gt;
+ProductService is a generic webservice from &lt;a href="http://www.compano.com"&gt;Compano B.V.&lt;/a&gt; for accesing Product information.&lt;br/&gt;&lt;br/&gt;
+Which consists of a number of functions for:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt;Selecting Product records using a basket.&lt;/li&gt;
+    &lt;li&gt;Retrieving Product information from underlying memory database.&lt;/li&gt;
+    &lt;li&gt;Updating Product information in underlying memory database.&lt;/li&gt;
+&lt;/ol&gt;&lt;br/&gt;
+A session on this site consists of:&lt;br/&gt;&lt;br/&gt;
+&lt;ol&gt;
+    &lt;li&gt; Starting a session, using the &lt;b&gt;Login&lt;/b&gt; function on the &lt;b&gt;Application&lt;/b&gt; class.&lt;/li&gt;
+    &lt;li&gt; Now you can use one of the functions defined on this class&lt;/li&gt;
+    &lt;li&gt; Ending a session, using the &lt;b&gt;Logout&lt;/b&gt; function.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Errorhandling&lt;/h5&gt;
+All services will return a string with an errormessage or an empty string when function is completed successfully.&lt;br/&gt;&lt;br/&gt;
+&lt;h5&gt;Support&lt;/h5&gt;
+For questions regarding these webservices or to apply for an &lt;b&gt;test account&lt;/b&gt; please contact Henk Koops e-mail hkoops@compano.com.&lt;br/&gt;&lt;br/&gt;
+© &lt;a href="http://www.compano.nl"&gt;Compano B.V.&lt;/a&gt; 2007-2013</wsdl:documentation>
+    <wsdl:port name="ProductServiceSoap" binding="tns:ProductServiceSoap">
+      <soap:address location="http://ttt.online.compano.nl/prdproduct.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProductServiceSoap12" binding="tns:ProductServiceSoap12">
+      <soap12:address location="http://ttt.online.compano.nl/prdproduct.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

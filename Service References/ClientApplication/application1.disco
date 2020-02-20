@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://ttt.online.compano.nl/application.asmx?wsdl" docRef="https://ttt.online.compano.nl/application.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://ttt.online.compano.nl/application.asmx" xmlns:q1="http://compano.com/system.data" binding="q1:ApplicationWebServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://ttt.online.compano.nl/application.asmx" xmlns:q2="http://compano.com/system.data" binding="q2:ApplicationWebServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

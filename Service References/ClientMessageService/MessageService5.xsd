@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="https://www.ketenstandaard.nl/WS/MessageService/3.0" elementFormDefault="qualified" targetNamespace="https://www.ketenstandaard.nl/WS/MessageService/3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://ws.oosterberg.nl/messageservice30/MessageService.svc?xsd=xsd1" />
+  <xs:element name="MessageRequest" nillable="true" type="MessageRequestType" />
+  <xs:element name="CustomInfo" nillable="true" type="CustomInfoType" />
+  <xs:element name="MessageRequestResponse" nillable="true" type="MessageRequestResponseType" />
+  <xs:element name="MessageResponse" nillable="true" type="MessageResponseType" />
+  <xs:element name="AvailableMessagesRequest" nillable="true" type="AvailableMessagesRequestType" />
+  <xs:element name="AvailableMessagesResponse" nillable="true" type="ArrayOfMessageList" />
+  <xs:element name="Message" nillable="true" type="MessageType" />
+</xs:schema>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.wasco.nl/WWC/WascoCustomerServices.asmx?wsdl" docRef="http://www.wasco.nl/WWC/WascoCustomerServices.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.wasco.nl/WWC/WascoCustomerServices.asmx" xmlns:q1="http://WWC/WascoCustomerServices/" binding="q1:WascoCustomerServicesSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.wasco.nl/WWC/WascoCustomerServices.asmx" xmlns:q2="http://WWC/WascoCustomerServices/" binding="q2:WascoCustomerServicesSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
