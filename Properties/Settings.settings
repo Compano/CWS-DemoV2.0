@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="tmpWorkDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\CWSdemo\temp\</Value>
+      <Value Profile="(Default)">c:\cwsdemo\temp\</Value>
     </Setting>
     <Setting Name="tmpExportDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\CWSdemo\export\</Value>
+      <Value Profile="(Default)">c:\cwsdemo\export\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

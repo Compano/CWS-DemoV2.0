@@ -25,7 +25,7 @@ namespace Demo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\CWSdemo\\temp\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\cwsdemo\\temp\\")]
         public string tmpWorkDir {
             get {
                 return ((string)(this["tmpWorkDir"]));
@@ -37,7 +37,7 @@ namespace Demo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\CWSdemo\\export\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\cwsdemo\\export\\")]
         public string tmpExportDir {
             get {
                 return ((string)(this["tmpExportDir"]));

@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Linq;
 using System.Collections;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace Demo
 {
@@ -30,16 +31,41 @@ namespace Demo
             Variables.url = "https://test.online.compano.nl/MessageService.asmx";
             Variables.username = "webservices";
             Variables.password = "test";
-           
-            var resourceSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentUICulture, true, true);
-            var caseArray = resourceSet.OfType<DictionaryEntry>()
-                .Select((item, i) => new { item.Key, item.Value })
-                .ToArray();
-            
-            // Populate combobox with cases
-            AddToCombo(caseArray, comboBox1);           
-            comboBox1.ValueMember = "Key";
+
+            //get data from XML case settings file
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"..\casedata.xml");
+            //doc.LoadXml(@"...\Cases\casedata.xml");
+            XmlNodeList elemList = doc.GetElementsByTagName("Case");
+            for (int i = 0; i < elemList.Count; i++)
+            {
+                string attrID = elemList[i].Attributes["id"].Value;
+                string attrVal = elemList[i].ChildNodes.Item(0).InnerText.Trim();
+                string caseActive = elemList[i].ChildNodes.Item(1).InnerText.Trim();
+                //string attrDescshort = elemList[i].Attributes["description"].Value;
+                //string attrDesclong = elemList[i].Attributes["description"].Value;
+                string attrDescshort = elemList[i].ChildNodes.Item(2).InnerText.Trim();
+                string attrDesclong = elemList[i].ChildNodes.Item(3).InnerText.Trim();
+                string hasParameters = elemList[i].ChildNodes.Item(4).InnerText.Trim();
+                dictionary.Add(attrVal, attrDescshort);
+            }
+
+            comboBox1.DataSource = new BindingSource(dictionary, null);
+            comboBox1.ValueMember = "Value";
             comboBox1.DisplayMember = "Key";
+
+
+
+            //var resourceSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentUICulture, true, true);
+            //var caseArray = resourceSet.OfType<DictionaryEntry>()
+            //    .Select((item, i) => new { item.Key, item.Value })
+            //    .ToArray();
+            
+            //// Populate combobox with cases
+            //AddToCombo(caseArray, comboBox1);           
+            //comboBox1.ValueMember = "Key";
+            //comboBox1.DisplayMember = "Key";
 
             txtConsole.AppendText("Temporary work folder is: " + Properties.Settings.Default.tmpWorkDir.ToString() + Environment.NewLine);
             txtConsole.AppendText("Temporary export folder is: " + Properties.Settings.Default.tmpExportDir.ToString() + Environment.NewLine);
