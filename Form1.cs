@@ -28,7 +28,7 @@ namespace Demo
 
             // Initial caseID set to 'case01'
             Variables.caseID = "case01";
-            Variables.url = "https://test.online.compano.nl/MessageService.asmx";
+            Variables.url = "http://www.online.compano.nl/";
             Variables.username = "webservices";
             Variables.password = "test";
 
@@ -36,19 +36,16 @@ namespace Demo
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
             XmlDocument doc = new XmlDocument();
             doc.Load(@"..\casedata.xml");
-            //doc.LoadXml(@"...\Cases\casedata.xml");
             XmlNodeList elemList = doc.GetElementsByTagName("Case");
             for (int i = 0; i < elemList.Count; i++)
             {
-                string attrID = elemList[i].Attributes["id"].Value;
+             //   string attrID = elemList[i].Attributes["id"].Value;
                 string attrVal = elemList[i].ChildNodes.Item(0).InnerText.Trim();
                 string caseActive = elemList[i].ChildNodes.Item(1).InnerText.Trim();
-                //string attrDescshort = elemList[i].Attributes["description"].Value;
-                //string attrDesclong = elemList[i].Attributes["description"].Value;
-                string attrDescshort = elemList[i].ChildNodes.Item(2).InnerText.Trim();
+             //   string attrDescshort = elemList[i].ChildNodes.Item(2).InnerText.Trim();
                 string attrDesclong = elemList[i].ChildNodes.Item(3).InnerText.Trim();
-                string hasParameters = elemList[i].ChildNodes.Item(4).InnerText.Trim();
-                dictionary.Add(attrVal, attrDescshort);
+             //   string hasParameters = elemList[i].ChildNodes.Item(4).InnerText.Trim();
+                dictionary.Add(attrVal, attrDesclong);
             }
 
             comboBox1.DataSource = new BindingSource(dictionary, null);
@@ -56,12 +53,11 @@ namespace Demo
             comboBox1.DisplayMember = "Key";
 
 
-
             //var resourceSet = Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentUICulture, true, true);
             //var caseArray = resourceSet.OfType<DictionaryEntry>()
             //    .Select((item, i) => new { item.Key, item.Value })
             //    .ToArray();
-            
+
             //// Populate combobox with cases
             //AddToCombo(caseArray, comboBox1);           
             //comboBox1.ValueMember = "Key";
@@ -90,11 +86,11 @@ namespace Demo
             {
                 txtConsole.AppendText("Starting " + comboBox1.Text + " on " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:tt") + Environment.NewLine + "===================START===================" + Environment.NewLine);
 
-                if (comboBox1.Text == "Case 01") { Cases.Case02.Execute(); }
-                if (comboBox1.Text == "Case 02") { Cases.Case03.Execute(); }
-                if (comboBox1.Text == "Case 03") { Cases.Case04.Execute(); }
-                if (comboBox1.Text == "Case 04") { Cases.Case05.Execute(); }
-                if (comboBox1.Text == "Case 05") { Cases.Case01.Execute(); }
+                if (comboBox1.Text == "Case 01") { Cases.Case01.Execute(); }
+                if (comboBox1.Text == "Case 02") { Cases.Case02.Execute(); }
+                if (comboBox1.Text == "Case 03") { Cases.Case03.Execute(); }
+                if (comboBox1.Text == "Case 04") { Cases.Case04.Execute(); }
+                if (comboBox1.Text == "Case 05") { Cases.Case05.Execute(); }
                 //if (comboBox1.Text == "Case 06") { Cases.Case06.Execute(); }
                 //if (comboBox1.Text == "Case 07") { Cases.Case07.Execute(); }
                 //if (comboBox1.Text == "Case 08") { Cases.Case08.Execute(); }
@@ -192,5 +188,9 @@ namespace Demo
             if (chkShowXML.Checked == false) { Variables.showXMLdata = false; }
         }
 
+        private void tbWebserviceURL_TextChanged(object sender, EventArgs e)
+        {
+            Variables.url = tbWebserviceURL.Text;
+        }
     }
 }

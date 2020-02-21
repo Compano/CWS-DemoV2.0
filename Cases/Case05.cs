@@ -44,9 +44,9 @@ namespace Demo.Cases
 
                 // Create estimatePart
                 var newPartXml = @"<prjestimatepart>
-                                                  <no>II</no>
-                                                  <description>Onderdeel</description>
-                                                  </prjestimatepart>";
+                                    <no>II</no>
+                                    <description>Onderdeel</description>
+                                   </prjestimatepart>";
                 var partId = 0;
                 result = Client.PRJEstimate.AddPart(sessionHandle, estimateKey, newPartXml, out partId);
                 TestCase.ShowResult(result, "AddPart");
@@ -68,11 +68,11 @@ namespace Demo.Cases
                 {
                     // Add item
                     newXml = @"<prditem>
-                                        <code>35100055</code>
-                                        <salesorganization>REX</salesorganization>
-                                        <itemset>REX</itemset>
-                                        <description>Description new item '35100055'</description>
-                                      </prditem>";
+                                    <code>35100055</code>
+                                    <salesorganization>REX</salesorganization>
+                                    <itemset>REX</itemset>
+                                    <description>Description new item '35100055'</description>
+                                </prditem>";
                     result = Client.PRDItem.Add(sessionHandle, newXml, out itemKey);
                     TestCase.ShowResult(result, "AddItem");
 
@@ -178,24 +178,9 @@ namespace Demo.Cases
 
                 updateXml = "<prditem><Origin>NL</Origin></prditem>";
 
-     /*      Client.Init("http://localhost:53133/");
+    
 
-                var sessionHandle = "";
-                var result = "";
-
-                result = Client.Application.Login("Piet Bakker", "Test", "CWS-Demo", out sessionHandle);
-                TestCase.ShowResult(result, "Login");
-
-                var estimateKey = new EstimateKey() { No = "CA170004" };
-
-                var updateXml = "<prjestimate><Description>TEST UPDATE</Description></prjestimate>";
-
-                result = Client.PRJEstimate.Update(sessionHandle, estimateKey, updateXml);
-
-                var updateLineXml = "<prjestimateline><udf_upc_specialitemcode>TEST UPDATE 123</udf_upc_specialitemcode></prjestimateline>";
-
-                var recordId = 6237;
-                result = Client.PRJEstimate.UpdateLine(sessionHandle, estimateKey, recordId, updateLineXml);
+                
 
                 */
 

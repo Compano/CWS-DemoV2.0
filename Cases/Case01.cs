@@ -20,7 +20,10 @@ namespace Demo.Cases
 
             try
             {
-                
+
+                TestCase.ShowResult("BasketURL changed to http://online.compano.nl/", true);
+                Variables.url = "http://online.compano.nl/";
+
                 Client.Init(Variables.url);
                 result = Client.Application.Login(Variables.username.ToString(), Variables.password.ToString(), Variables.companyname.ToString(), out sessionHandle);
                 TestCase.ShowResult(result, "Login");
@@ -31,8 +34,7 @@ namespace Demo.Cases
 
             catch (Exception ex)
             {
-                _Form1.txtConsole.AppendText("Er is een foutmelding opgetreden:");
-                _Form1.txtConsole.AppendText(ex.Message);
+                _Form1.txtConsole.AppendText("Er is een onbekende foutmelding opgetreden: " + ex.Message + Environment.NewLine);
                 process.Close();
             }
 

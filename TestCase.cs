@@ -25,11 +25,23 @@ namespace Demo
             ShowResult(testDescription.PadRight(60, '.') + (result ? "Ok" : "Error"));
         }
 
-        const string Crlf = "\r\n";
-
         public static void ShowResult(string result, string testDescription)
         {
-            ShowResult(testDescription.PadRight(60, '.') + (result.Length == 0 ? "Ok" : Crlf + result));
+            try
+            {
+                ShowResult(testDescription.PadRight(60, '.') + (result.Length == 0 ? "Ok" : Environment.NewLine + result));
+            }
+            catch (Exception ex)
+            {
+                _Form1.txtConsole.AppendText("Er is onbekende een foutmelding opgetreden: " + ex.Message + Environment.NewLine);
+
+            }
+
+            finally
+            {
+                
+            }
+
         }
 
         public static void ShowResult(string result, string testDescription, bool testResult)
@@ -67,11 +79,13 @@ namespace Demo
                         warning = " output changed!";
                     }
                 }
-                using (var writer = File.CreateText(path))
+                
+                    using (var writer = File.CreateText(path))
                     writer.Write(xml);
             }
-
-            ShowResult(testDescription.PadRight(60, '.') + (result.Length == 0 ? "Ok" : result) + warning);
+            
+                ShowResult(testDescription.PadRight(60, '.') + (result.Length == 0 ? "Ok" : result) + warning);
+            
         }
 
         static string RemoveAllWhiteSpace(string text)

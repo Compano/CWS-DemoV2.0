@@ -13,13 +13,16 @@ namespace Demo.Cases
     {
         internal static void Execute()
         {
-            Client.Init("http://www.online.compano.nl/");
 
             string sessionHandle, result;
 
-            int counter = 0;
+            Client.Init(Variables.url);
+            
+            result = Client.Application.Login(Variables.username.ToString(), Variables.password.ToString(), Variables.companyname.ToString(), out sessionHandle);
+            TestCase.ShowResult(result, "Login");
 
-            result = Client.Application.Login("webservices", "test", "CWS-Demo", out sessionHandle);
+            int counter = 0;
+      
             TestCase.ShowResult(result, "Login");
 
             DownloadInfo[] files = new DownloadInfo[] { };
@@ -36,7 +39,6 @@ namespace Demo.Cases
                 // result = Client.PRDItemSet.DeleteDownload(sessionHandle, files[0].FileName);
 
                 counter = counter + 1;
-
 
             }
             else

@@ -239,6 +239,7 @@ namespace Demo
             this.tbWebserviceURL.Name = "tbWebserviceURL";
             this.tbWebserviceURL.Size = new System.Drawing.Size(804, 20);
             this.tbWebserviceURL.TabIndex = 9;
+            this.tbWebserviceURL.TextChanged += new System.EventHandler(this.tbWebserviceURL_TextChanged);
             // 
             // label5
             // 

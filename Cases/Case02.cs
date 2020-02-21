@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Drawing;
+using System.Xml.Linq;
 
 namespace Demo.Cases
 {
@@ -24,7 +25,6 @@ namespace Demo.Cases
 
                 _Form1.txtConsole.AppendText("BasketURL changed to http://online.compano.nl/" + Environment.NewLine);
                 Variables.url = "http://online.compano.nl/";
-
                 Client.Init(Variables.url);
       
                 result = Client.Application.Login(Variables.username.ToString(), Variables.password.ToString(), Variables.companyname.ToString(), out sessionHandle);
@@ -53,7 +53,7 @@ namespace Demo.Cases
                     if (DateTime.Compare(DateTime.Now, pollTimeoutTime) <= 0) //AANPASSEN! of scherm gesloten door gebruker zonder items te selecterem
                     {
                         // Wait twenty seconds!
-                        Thread.Sleep(30000);
+                        Thread.Sleep(20000);
 
                         result = Client.PRDItem.GetBasketAsArray(sessionHandle, out selectedQuantities, out selectedItems);
                     }
@@ -78,7 +78,13 @@ namespace Demo.Cases
                 var itemFields = new ClientPRDItem.ItemXmlField[] { ClientPRDItem.ItemXmlField.SalesOrganizationCode, ClientPRDItem.ItemXmlField.Code, ClientPRDItem.ItemXmlField.GrossPricePerUtilizationUnit, ClientPRDItem.ItemXmlField.PurchasePricePerUtilizationUnit };
 
                 result = Client.PRDItem.GetInfo(sessionHandle, selectedItems, itemFields, out xml);
-                _Form1.txtConsole.AppendText(xml + Environment.NewLine);
+
+                if (Variables.showXMLdata == true)
+                {
+                    TestCase.ShowResult(result, "Result XML: " + Environment.NewLine + XDocument.Parse(xml).ToString() + Environment.NewLine);
+                }
+     
+                //_Form1.txtConsole.AppendText(xml + Environment.NewLine);
 
 
                 TestCase.ShowResult(result, "GetBasketAsXml");
